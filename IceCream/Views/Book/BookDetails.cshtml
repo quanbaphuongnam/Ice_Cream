@@ -1,0 +1,104 @@
+﻿@model IceCream.Models.Book
+
+@{
+    ViewData["Title"] = "BookDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="banner_area">
+    <div class="container">
+        <div class="banner_text">
+            <br /><br />
+            <h3>Book Details</h3>
+            <ul>
+                <li><a asp-controller="book" asp-action="allbook">Book</a></li>
+                <li><a asp-controller="book" asp-action="bookdetails" asp-route-id="@ViewBag.book.BookId">Book Details</a></li>
+            </ul>
+        </div>
+    </div>
+</section>
+<!--================End Main Header Area =================-->
+<!--================Product Details Area =================-->
+<section class="product_details_area p_100">
+    <div class="container">
+        <div class="row product_d_price">
+            <div class="col-lg-6">
+                <div class="product_img"><img class="img-fluid" src="~/img/books/@ViewBag.book.BookPhoto" alt=""></div>
+            </div>
+            <div class="col-lg-6">
+                <div class="product_details_text">
+                    <h4>@ViewBag.book.BookName</h4>
+                    <p>@ViewBag.book.InvoiceDetailAccounts</p>
+                    <h5>Price :<span>$@ViewBag.book.BookPrice</span></h5>
+                    <div class="quantity_box">
+                        <label for="quantity">Quantity : @ViewBag.book.BookQuantity</label>
+                        <input type="number" min="1" max="@ViewBag.book.BookQuantity" id="quantity" placeholder="1">
+                    </div>
+                    <a class="pink_more" asp-controller="cart" asp-action="buy" asp-route-id="@ViewBag.book.BookId">Add to Cart</a>
+                </div>
+            </div>
+        </div>
+        <div class="product_tab_area">
+            <nav>
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Descripton</a>
+                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Specification</a>
+                    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Review (0)</a>
+                </div>
+            </nav>
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                    <p>@ViewBag.book.BookDescription</p>
+                    <p>Year: @ViewBag.book.BookYear</p>
+                    <p>Created: @ViewBag.book.BookCreated</p>
+                    <p>Update: @ViewBag.book.BookUpdate</p>
+                </div>
+                <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                  
+                </div>
+                <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                    <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================End Product Details Area =================-->
+<!--================Similar Product Area =================-->
+<section class="similar_product_area p_100">
+    <div class="container">
+        <div class="main_title">
+            <h2>Similar Books</h2>
+        </div>
+        <div class="row similar_product_inner">
+            @{
+                var counter = 1;
+            }
+            @foreach (var book in ViewBag.books)
+            {
+                if (counter <= 4)
+                {
+                    <div class="col-lg-3 col-md-4 col-6">
+                        <div class="cake_feature_item">
+                            <div class="cake_img">
+                                <img src="~/img/books/@book.BookPhoto" width="250" height="360" alt="">
+                            </div>
+                            <div class="cake_text">
+                                <br />
+                                <p style="color: #f52c2c; font-family: Impact, fantasy; font-size: 40px ">$@book.BookPrice</p>
+                                <h3>@book.BookName</h3>
+                                <a asp-controller="book" asp-action="bookdetails" asp-route-id="@book.BookId" class="custom-btn btn-5">Add cart</a>
+                            </div>
+                        </div>
+                    </div>
+                    counter++;
+                }
+            }
+        </div>
+    </div>
+</section>
+<!--================End Similar Product Area =================-->
+<!--================Newsletter Area =================-->
+
+<!--================End Newsletter Area =================-->

@@ -1,0 +1,118 @@
+﻿@using IceCream.Models
+@using Microsoft.AspNetCore.Http;
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+@inject IHttpContextAccessor HttpContextAccessor
+
+@{
+    ViewData["Title"] = "Cart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="banner_area">
+    <div class="container">
+        <div class="banner_text">
+            <br /><br />
+            <h3>Cart</h3>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="cart.html">Cart</a></li>
+            </ul>
+        </div>
+    </div>
+</section>
+<!--================End Main Header Area =================-->
+<!--================Cart Table Area =================-->
+@if (@HttpContextAccessor.HttpContext.Session.GetString("cart") != null)
+{
+    <section class="cart_table_area p_100">
+        <div class="container">
+            @{
+                int total = 0;
+                <div class="table-responsive">
+                    <form method="post" asp-controller="cart" asp-action="update">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Preview</th>
+                                    <th scope="col">Product</th>
+                                    <th scope="col">Price</th>
+                                    <th scope="col">Quantity</th>
+                                    <th scope="col">Total</th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in ViewBag.cart)
+                                {
+                                    string txt_class = "quantity_" + item.book.BookId;
+                                    total += item.quantity * item.book.BookPrice;
+                                    <tr>
+                                        <td>
+                                            <img src="~/img/books/@item.book.BookPhoto" width="130" height="200" alt="">
+                                        </td>
+                                        <td>@item.book.BookName</td>
+                                        <td>$@item.book.BookPrice</td>
+                                        <td>
+                                            <input type="number" min="1" name="quantity" value="@item.quantity" style=" width:60px" />
+                                            <input type="submit" value="update" />
+                                        </td>
+                                        <td>$@(item.quantity * item.book.BookPrice)</td>
+                                        <td><a asp-controller="cart" asp-action="remove" asp-route-id="@item.book.BookId">X</a></td>
+                                    </tr>
+                                }
+                                <tr>
+                                    <td>
+                                        <form class="form-inline">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" placeholder="Coupon code">
+                                            </div>
+                                            <button type="submit" class="btn">Apply Coupon</button>
+                                        </form>
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>
+                                        <a class="pest_btn" asp-controller="book" asp-action="allbook">Continue Shopping</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+                <div class="row cart_total_inner">
+                    <div class="col-lg-7"></div>
+                    <div class="col-lg-5">
+                        <div class="cart_total_text">
+                            <div class="cart_head">
+                                Cart Total
+                            </div>
+                            <div class="sub_total">
+                                <h5>Sub Total <span>$@total</span></h5>
+                            </div>
+                            <div class="total">
+                                <h4>Total <span>$@total</span></h4>
+                            </div>
+                            <div class="cart_footer">
+                                <a class="pest_btn" asp-controller="cart" asp-action="checkout">Proceed to Checkout</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </section>
+}
+else
+{
+    <p class="alert" style="padding: 50px; text-align: center; margin:100px auto; font-size: 50px">
+        Cart is empty  &nbsp;
+        <a class="pest_btn" asp-controller="book" asp-action="allbook"> Continue Shopping</a>
+    </p>
+
+}
+<!--================End Cart Table Area =================-->
+<!--================Newsletter Area =================-->
+
+

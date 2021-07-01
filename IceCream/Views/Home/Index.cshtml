@@ -1,0 +1,478 @@
+﻿@model IceCream.Models.Formula
+@using Microsoft.AspNetCore.Http;
+
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="main_slider_area">
+    <div id="main_slider4" class="rev_slider" data-version="5.3.1.6">
+        <ul>
+            <li data-index="rs-1587" data-transition="fade" data-slotamount="default" data-hideafterloop="0" data-hideslideonmobile="off" data-easein="default" data-easeout="default" data-masterspeed="300" data-thumb="~/img/home-slider/slider-9.jpg" data-rotate="0" data-saveperformance="off" data-title="Creative" data-param1="01" data-param2="" data-param3="" data-param4="" data-param5="" data-param6="" data-param7="" data-param8="" data-param9="" data-param10="" data-description="">
+                <!-- MAIN IMAGE -->
+                <img src="~/img/home-slider/slider-9.jpg" alt="" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="5" class="rev-slidebg" data-no-retina>
+
+                <!-- LAYER NR. 1 -->
+                <div class="slider_text_box">
+                    <div class="tp-caption tp-resizeme first_text pink"
+                         data-x="['right','right','left','15','15','15']" data-hoffset="['-150','0','15','15','15','0']"
+                         data-y="['top','top','top','top']"
+                         data-voffset="['320','320','320','245','200']"
+                         data-fontsize="['60','60','60','40','30']"
+                         data-lineheight="['76','76','76','50','40']"
+                         data-width="['780','740','780','780','700','400']"
+                         data-height="none"
+                         data-whitespace="normal"
+                         data-type="text"
+                         data-responsive_offset="on"
+                         data-frames="[{&quot;delay&quot;:10,&quot;speed&quot;:1500,&quot;frame&quot;:&quot;0&quot;,&quot;from&quot;:&quot;y:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;&quot;,&quot;mask&quot;:&quot;x:0px;y:0px;s:inherit;e:inherit;&quot;,&quot;to&quot;:&quot;o:1;&quot;,&quot;ease&quot;:&quot;Power2.easeInOut&quot;},{&quot;delay&quot;:&quot;wait&quot;,&quot;speed&quot;:1500,&quot;frame&quot;:&quot;999&quot;,&quot;to&quot;:&quot;y:[175%];&quot;,&quot;mask&quot;:&quot;x:inherit;y:inherit;s:inherit;e:inherit;&quot;,&quot;ease&quot;:&quot;Power2.easeInOut&quot;}]"
+                         data-textAlign="['left','left','left','left']">Quality Cream ... <br /> with sweet, eggs & breads</div>
+
+                    <div class="tp-caption tp-resizeme secand_text black"
+                         data-x="['right','right','left','15','15','15']"
+                         data-hoffset="['0','110','15','15','15','0']"
+                         data-y="['top','top','top','top']" data-voffset="['485','485','485','360','300','290']"
+                         data-fontsize="['20','20','20','20','16']"
+                         data-lineheight="['28','28','28','28']"
+                         data-width="['620','620','620','620','500','400']"
+                         data-height="none"
+                         data-whitespace="normal"
+                         data-type="text"
+                         data-responsive_offset="on"
+                         data-transform_idle="o:1;"
+                         data-frames="[{&quot;delay&quot;:10,&quot;speed&quot;:1500,&quot;frame&quot;:&quot;0&quot;,&quot;from&quot;:&quot;y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;&quot;,&quot;mask&quot;:&quot;x:0px;y:[100%];s:inherit;e:inherit;&quot;,&quot;to&quot;:&quot;o:1;&quot;,&quot;ease&quot;:&quot;Power2.easeInOut&quot;},{&quot;delay&quot;:&quot;wait&quot;,&quot;speed&quot;:1500,&quot;frame&quot;:&quot;999&quot;,&quot;to&quot;:&quot;y:[175%];&quot;,&quot;mask&quot;:&quot;x:inherit;y:inherit;s:inherit;e:inherit;&quot;,&quot;ease&quot;:&quot;Power2.easeInOut&quot;}]">
+                        Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit quia consequuntur magni dolores eos qui ratione
+                    </div>
+
+                    <div class="tp-caption tp-resizeme slider_button"
+                         data-x="['right','right','left','15','15','15']" data-hoffset="['0','0','15','0','0','0']"
+                         data-y="['top','top','top','top']" data-voffset="['575','575','575','450','390']"
+                         data-fontsize="['14','14','14','14']"
+                         data-lineheight="['46','46','46','46']"
+                         data-width="['620','740','620','620','300']"
+                         data-height="none"
+                         data-whitespace="normal"
+                         data-type="text"
+                         data-responsive_offset="on"
+                         data-frames="[{&quot;delay&quot;:10,&quot;speed&quot;:1500,&quot;frame&quot;:&quot;0&quot;,&quot;from&quot;:&quot;y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;&quot;,&quot;mask&quot;:&quot;x:0px;y:[100%];s:inherit;e:inherit;&quot;,&quot;to&quot;:&quot;o:1;&quot;,&quot;ease&quot;:&quot;Power2.easeInOut&quot;},{&quot;delay&quot;:&quot;wait&quot;,&quot;speed&quot;:1500,&quot;frame&quot;:&quot;999&quot;,&quot;to&quot;:&quot;y:[175%];&quot;,&quot;mask&quot;:&quot;x:inherit;y:inherit;s:inherit;e:inherit;&quot;,&quot;ease&quot;:&quot;Power2.easeInOut&quot;}]">
+                        <a class="main_btn" href="#">See now</a>
+                    </div>
+                </div>
+            </li>
+            <li data-index="rs-1588" data-transition="fade" data-slotamount="default" data-hideafterloop="0" data-hideslideonmobile="off" data-easein="default" data-easeout="default" data-masterspeed="300" data-thumb="~/img/home-slider/slider-10.jpg" data-rotate="0" data-saveperformance="off" data-title="Creative" data-param1="01" data-param2="" data-param3="" data-param4="" data-param5="" data-param6="" data-param7="" data-param8="" data-param9="" data-param10="" data-description="">
+                <!-- MAIN IMAGE -->
+                <img src="~/img/home-slider/slider-10.jpg" alt="" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="5" class="rev-slidebg" data-no-retina>
+                <!-- LAYERS -->
+                <!-- LAYERS -->
+                <!-- LAYER NR. 1 -->
+                <div class="slider_text_box">
+                    <div class="tp-caption tp-resizeme first_text pink"
+                         data-x="['right','right','right','15','0']" data-hoffset="['-150','-150','-150','0']"
+                         data-y="['top','top','top','top']"
+                         data-voffset="['320','320','320','320','130']"
+                         data-fontsize="['60','60','60','40','30']"
+                         data-lineheight="['76','76','76','50','40']"
+                         data-width="['780','780','780','400']"
+                         data-height="none"
+                         data-whitespace="normal"
+                         data-type="text"
+                         data-responsive_offset="on"
+                         data-frames="[{&quot;delay&quot;:10,&quot;speed&quot;:1500,&quot;frame&quot;:&quot;0&quot;,&quot;from&quot;:&quot;y:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;&quot;,&quot;mask&quot;:&quot;x:0px;y:0px;s:inherit;e:inherit;&quot;,&quot;to&quot;:&quot;o:1;&quot;,&quot;ease&quot;:&quot;Power2.easeInOut&quot;},{&quot;delay&quot;:&quot;wait&quot;,&quot;speed&quot;:1500,&quot;frame&quot;:&quot;999&quot;,&quot;to&quot;:&quot;y:[175%];&quot;,&quot;mask&quot;:&quot;x:inherit;y:inherit;s:inherit;e:inherit;&quot;,&quot;ease&quot;:&quot;Power2.easeInOut&quot;}]"
+                         data-textAlign="['left','left','left','left']">Cake Bakery ... <br /> make delicious products</div>
+
+                    <div class="tp-caption tp-resizeme secand_text black"
+                         data-x="['right','right','right','15','0']"
+                         data-hoffset="['0','0','0','0']"
+                         data-y="['top','top','top','top']" data-voffset="['485','485','485','485','225']"
+                         data-fontsize="['20','20','20','20','16']"
+                         data-lineheight="['28','28','28','28']"
+                         data-width="['620','620','620','620','300']"
+                         data-height="none"
+                         data-whitespace="normal"
+                         data-type="text"
+                         data-responsive_offset="on"
+                         data-transform_idle="o:1;"
+                         data-frames="[{&quot;delay&quot;:10,&quot;speed&quot;:1500,&quot;frame&quot;:&quot;0&quot;,&quot;from&quot;:&quot;y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;&quot;,&quot;mask&quot;:&quot;x:0px;y:[100%];s:inherit;e:inherit;&quot;,&quot;to&quot;:&quot;o:1;&quot;,&quot;ease&quot;:&quot;Power2.easeInOut&quot;},{&quot;delay&quot;:&quot;wait&quot;,&quot;speed&quot;:1500,&quot;frame&quot;:&quot;999&quot;,&quot;to&quot;:&quot;y:[175%];&quot;,&quot;mask&quot;:&quot;x:inherit;y:inherit;s:inherit;e:inherit;&quot;,&quot;ease&quot;:&quot;Power2.easeInOut&quot;}]">
+                        Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit quia consequuntur magni dolores eos qui ratione
+                    </div>
+
+                    <div class="tp-caption tp-resizeme slider_button"
+                         data-x="['right','right','right','15','0']" data-hoffset="['0','0','0','0']"
+                         data-y="['top','top','top','top']" data-voffset="['575','575','575','575','330']"
+                         data-fontsize="['14','14','14','14']"
+                         data-lineheight="['46','46','46','46']"
+                         data-width="['620','620','620','620','300']"
+                         data-height="none"
+                         data-whitespace="normal"
+                         data-type="text"
+                         data-responsive_offset="on"
+                         data-frames="[{&quot;delay&quot;:10,&quot;speed&quot;:1500,&quot;frame&quot;:&quot;0&quot;,&quot;from&quot;:&quot;y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;&quot;,&quot;mask&quot;:&quot;x:0px;y:[100%];s:inherit;e:inherit;&quot;,&quot;to&quot;:&quot;o:1;&quot;,&quot;ease&quot;:&quot;Power2.easeInOut&quot;},{&quot;delay&quot;:&quot;wait&quot;,&quot;speed&quot;:1500,&quot;frame&quot;:&quot;999&quot;,&quot;to&quot;:&quot;y:[175%];&quot;,&quot;mask&quot;:&quot;x:inherit;y:inherit;s:inherit;e:inherit;&quot;,&quot;ease&quot;:&quot;Power2.easeInOut&quot;}]">
+                        <a class="main_btn" href="#">See now</a>
+                    </div>
+                </div>
+            </li>
+            <li data-index="rs-1589" data-transition="fade" data-slotamount="default" data-hideafterloop="0" data-hideslideonmobile="off" data-easein="default" data-easeout="default" data-masterspeed="300" data-thumb="~/img/home-slider/slider-11.jpg" data-rotate="0" data-saveperformance="off" data-title="Creative" data-param1="01" data-param2="" data-param3="" data-param4="" data-param5="" data-param6="" data-param7="" data-param8="" data-param9="" data-param10="" data-description="">
+                <!-- MAIN IMAGE -->
+                <img src="~/img/home-slider/slider-11.jpg" alt="" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="5" class="rev-slidebg" data-no-retina>
+                <!-- LAYERS -->
+                <!-- LAYERS -->
+                <!-- LAYER NR. 1 -->
+                <div class="slider_text_box">
+                    <div class="tp-caption tp-resizeme first_text pink"
+                         data-x="['right','right','right','15','0']" data-hoffset="['-150','-150','-150','0']"
+                         data-y="['top','top','top','top']"
+                         data-voffset="['320','320','320','320','130']"
+                         data-fontsize="['60','60','60','40','30']"
+                         data-lineheight="['76','76','76','50','40']"
+                         data-width="['780','780','780','400']"
+                         data-height="none"
+                         data-whitespace="normal"
+                         data-type="text"
+                         data-responsive_offset="on"
+                         data-frames="[{&quot;delay&quot;:10,&quot;speed&quot;:1500,&quot;frame&quot;:&quot;0&quot;,&quot;from&quot;:&quot;y:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;&quot;,&quot;mask&quot;:&quot;x:0px;y:0px;s:inherit;e:inherit;&quot;,&quot;to&quot;:&quot;o:1;&quot;,&quot;ease&quot;:&quot;Power2.easeInOut&quot;},{&quot;delay&quot;:&quot;wait&quot;,&quot;speed&quot;:1500,&quot;frame&quot;:&quot;999&quot;,&quot;to&quot;:&quot;y:[175%];&quot;,&quot;mask&quot;:&quot;x:inherit;y:inherit;s:inherit;e:inherit;&quot;,&quot;ease&quot;:&quot;Power2.easeInOut&quot;}]"
+                         data-textAlign="['left','left','left','left']">Cake theme ... <br /> made with care and love</div>
+
+                    <div class="tp-caption tp-resizeme secand_text black"
+                         data-x="['right','right','right','15','0']"
+                         data-hoffset="['0','0','0','0']"
+                         data-y="['top','top','top','top']" data-voffset="['485','485','485','485','225']"
+                         data-fontsize="['20','20','20','20','16']"
+                         data-lineheight="['28','28','28','28']"
+                         data-width="['620','620','620','620','300']"
+                         data-height="none"
+                         data-whitespace="normal"
+                         data-type="text"
+                         data-responsive_offset="on"
+                         data-transform_idle="o:1;"
+                         data-frames="[{&quot;delay&quot;:10,&quot;speed&quot;:1500,&quot;frame&quot;:&quot;0&quot;,&quot;from&quot;:&quot;y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;&quot;,&quot;mask&quot;:&quot;x:0px;y:[100%];s:inherit;e:inherit;&quot;,&quot;to&quot;:&quot;o:1;&quot;,&quot;ease&quot;:&quot;Power2.easeInOut&quot;},{&quot;delay&quot;:&quot;wait&quot;,&quot;speed&quot;:1500,&quot;frame&quot;:&quot;999&quot;,&quot;to&quot;:&quot;y:[175%];&quot;,&quot;mask&quot;:&quot;x:inherit;y:inherit;s:inherit;e:inherit;&quot;,&quot;ease&quot;:&quot;Power2.easeInOut&quot;}]">
+                        Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit quia consequuntur magni dolores eos qui ratione
+                    </div>
+
+                    <div class="tp-caption tp-resizeme slider_button"
+                         data-x="['right','right','right','15','0']" data-hoffset="['0','0','0','0']"
+                         data-y="['top','top','top','top']" data-voffset="['575','575','575','575','330']"
+                         data-fontsize="['14','14','14','14']"
+                         data-lineheight="['46','46','46','46']"
+                         data-width="['620','620','620','620','300']"
+                         data-height="none"
+                         data-whitespace="normal"
+                         data-type="text"
+                         data-responsive_offset="on"
+                         data-frames="[{&quot;delay&quot;:10,&quot;speed&quot;:1500,&quot;frame&quot;:&quot;0&quot;,&quot;from&quot;:&quot;y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;&quot;,&quot;mask&quot;:&quot;x:0px;y:[100%];s:inherit;e:inherit;&quot;,&quot;to&quot;:&quot;o:1;&quot;,&quot;ease&quot;:&quot;Power2.easeInOut&quot;},{&quot;delay&quot;:&quot;wait&quot;,&quot;speed&quot;:1500,&quot;frame&quot;:&quot;999&quot;,&quot;to&quot;:&quot;y:[175%];&quot;,&quot;mask&quot;:&quot;x:inherit;y:inherit;s:inherit;e:inherit;&quot;,&quot;ease&quot;:&quot;Power2.easeInOut&quot;}]">
+                        <a class="main_btn" href="#">See now</a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</section>
+<!--================End Slider Area =================-->
+
+<section class="our_bakery_area p_100">
+    <div class="container">
+        <div class="our_bakery_text">
+            <h2 id="textcolor">Our store chain </h2>
+            <h6>We have more than 10 stores across the country and are constantly expanding the branches of the store</h6>
+            <p>From chocolate to sherbet and everything in between, there’s an ice cream flavor for all of us. It is impossible to resist a good scoop of our favorite gelato, no wonder why new ice cream brands are always emerging in the market. After all, we can’t buy happiness, but we can buy ice cream, and that is pretty much the same thing.</p>
+        </div>
+        <div class="row our_bakery_image">
+            <div class="col-lg-4 col-sm-6">
+                <img class="img-fluid" src="~/img/banner/store1.jpg" alt="">
+            </div>
+            <div class="col-lg-4 col-sm-6">
+                <img class="img-fluid" src="~/img/banner/store2.jpg" alt="">
+            </div>
+            <div class="col-lg-4 col-sm-6">
+                <img class="img-fluid" src="~/img/banner/store3.jpg" alt="">
+            </div>
+        </div>
+    </div>
+</section><!--================Special Recipe Area =================-->
+<section class="bakery_video_area">
+    <div class="container">
+        <div class="video_inner">
+            <h3>Introduce our store</h3>
+            <p>Here is the video introducing our store, if you have questions please contact us</p>
+            <div class="media">
+                <div class="d-flex">
+                    <a class="popup-youtube" href="https://www.youtube.com/watch?v=FZuIch-Eq1s"><i class="flaticon-play-button"></i></a>
+                </div>
+                <div class="media-body">
+                    <h5>Watch intro video <br />about us</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================Welcome Area =================-->
+<section class="welcome_bakery_area">
+    <div class="container">
+        <div class="welcome_bakery_inner p_100">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="main_title">
+                        <h2 id="textcolor">Welcome to Ice Cream</h2>
+                        <p>You didn’t think we would let summer slip away without an ice cream layout bundle, did you? So our fellow ice cream lovers, without further ado, let’s explore the layout pack.</p>
+                    </div>
+                    <div class="welcome_left_text">
+                        <p>We’re here to add a little extra sweetness to your day. The Ice Cream Shop is a virtual restaurant and new way to order your favorite ice cream brands right to your front door. Available on all your favorite delivery apps including Postmates, DoorDash, Uber Eats, and GrubHub, The Ice Cream Shop features fan-favorite products from beloved ice cream brands Ben & Jerry’s, Talenti, Magnum, Breyers and Good Humor.</p>
+                        <a class="pink_btn" href="#">Know more about us</a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="welcome_img">
+                        <img class="img-fluid" src="~/img/cake-feature/welcome-right.jpg" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="cake_feature_inner">
+            <div class="main_title">
+                <h2 id="textcolor">Free formulas available</h2>
+                <h5> To see more formulas than you need to become our member</h5>
+            </div>
+            <div class="cake_feature_slider owl-carousel">
+                 
+                @*@foreach (var newrecipe in ViewBag.newrecipes)
+                {
+                    <div class="item">
+                        <div class="cake_feature_item">
+                            <div class="cake_img">
+                                <img src="~/img/recipe/@newrecipe.ForCover" width="270" height="226" alt="">
+                                <span style=" position: absolute; top: -13px; right: -13px; width: 121px; height: 121px; z-index: 100; overflow: hidden; " wfd-id="428"><img src="~/img/new-icon.png"></span>
+                            </div>
+                            <div class="cake_text">
+                                @if (@HttpContextAccessor.HttpContext.Session.GetString("username") == null)
+                                {
+                                    <h4>@newrecipe.ForCondition</h4>
+                                }
+                                <br /><div style=" font-size: 14px ;text-align:right">by: <a href="#">@newrecipe.ForContributors</a>&ensp; </div>
+                                <h3> @newrecipe.ForName</h3>
+
+                                <a class="custom-btn btn-8" asp-controller="recipe" asp-action="recipedetail">See now</a>
+                            </div>
+                        </div>
+                    </div>
+                }*@
+            </div>
+        </div>
+    </div>
+</section>
+<!--================End Welcome Area =================-->
+<section class="special_recipe_area">
+    <div class="container">
+        <div class="special_recipe_slider owl-carousel">
+            <div class="item">
+                <div class="media">
+                    <div class="d-flex">
+                        <img src="~/img/index-cream.png" alt="">
+                    </div>
+                    <div class="media-body">
+                        <h4>Modern, responsive, and eye-catching design</h4>
+
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="media">
+                    <div class="d-flex">
+                        <img src="~/img/index-cream1.png" alt="">
+                    </div>
+                    <div class="media-body">
+                        <h4>Dedicated page to showcase your mouth-watering delicacies</h4>
+                        <p>Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi equatur uis autem vel eum.</p>
+                        <a class="w_view_btn" href="#">View Details</a>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="media">
+                    <div class="d-flex">
+                        <img src="~/img/index-cream2.png" alt="">
+                    </div>
+                    <div class="media-body">
+                        <h4>Professional company introduction with a FAQ segment</h4>
+
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="media">
+                    <div class="d-flex">
+                        <img src="~/img/index-cream.png" alt="">
+                    </div>
+                    <div class="media-body">
+                        <h4>Special Recipe</h4>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================End Special Recipe Area =================-->
+<!--================New Arivals Area =================-->
+<section class="new_arivals_area p_100">
+    <div class="container">
+        <div class="single_pest_title">
+            <h2 id="textcolor">Individuals with the greatest contribution</h2>
+        </div>
+        <div class="row arivals_inner">
+            <div class="col-lg-6 col-sm-7">
+                <div class="arivals_chocolate">
+                    <div class="arivals_pic">
+                        <img class="img-fluid" src="~/img/avatar/avatardefault.jpg" width="370" height="382" alt="">S
+                        <span style=" position: absolute; top: -13px; right: -13px; width: 121px; height: 121px; z-index: 100; overflow: hidden; " wfd-id="428"><img src="~/img/best1.png" width="100" height="150"></span>
+
+                    </div>
+                    <div class="arivals_text">
+                        <h4> Nam vjp pro</h4>
+                        <button class="custom-btn btn-15">32 - post</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="arivals_slider owl-carousel">
+                    <div class="item">
+                        <div class="cake_feature_item">
+                            <div class="cake_img">
+                                <img src="img/avatar/avatardefault.jpg" alt="">
+                            </div>
+                            <h3>Đại gà</h3>
+                            <button class="custom-btn btn-15">2 - post</button>
+
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="cake_feature_item">
+                            <div class="cake_img">
+                                <img src="img/avatar/avatardefault.jpg" alt="">
+                            </div>
+                            <h3>Đại gà</h3>
+                            <button class="custom-btn btn-15">6 - post</button>
+
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="cake_feature_item">
+                            <div class="cake_img">
+                                <img src="img/avatar/avatardefault.jpg" alt="">
+                            </div>
+                            <h3>Đại gà</h3>
+                            <button class="custom-btn btn-15">7 - post</button>
+
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="cake_feature_item">
+                            <div class="cake_img">
+                                <img src="img/avatar/avatardefault.jpg" alt="">
+                            </div>
+                            <h3>Đại gà</h3>
+                            <button class="custom-btn btn-15">8 - post</button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================End New Arivals Area =================-->
+<!--================Client Says Area =================-->
+<section class="client_says_area p_100">
+    <div class="container">
+        <div class="client_says_inner">
+            <div class="c_says_title">
+                <h2>What Our Client Says</h2>
+            </div>
+            <div class="client_says_slider owl-carousel">
+                <div class="item">
+                    <div class="media">
+                        <div class="d-flex">
+                            <img src="~/img/client/client-1.png" alt="">
+
+                        </div>
+                        <div class="media-body">
+                            <p>I wanted to follow up on feedback from the Ice Cream brand and sales teams on the excellent work that you and your team did at the brand. Your team’s professionalism and willingness to do whatever it takes with minimal interruption was recognized by everyone. My hats off to you for an outstanding job. You and your company are great partners and I enjoy working with you</p>
+                            <h5>- ANDREW MARKS</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="media">
+                        <div class="d-flex">
+                            <img src="~/img/client/client-2.png" alt="">
+                        </div>
+                        <div class="media-body">
+                            <p>Exhibit Systems is always responsive to any question I have, they keep me informed and they understand who we are and what we’re trying to do. I firmly believe that. And, any time that I make contact with them, they let me know they’ve received it and they let me know what the next step is.</p>
+                            <h5>- CHRIS KLINGE</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="media">
+                        <div class="d-flex">
+                            <img src="~/img/client/client-1.png" alt="">
+                        </div>
+                        <div class="media-body">
+                            <p>This is a useful community, not only where to share attractive formulas, but also providing good ice cream formula books.</p>
+                            <h5>- KELLI GIBSON</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================End Client Says Area =================-->
+<!--================Latest News Area =================-->
+<section class="latest_news_area p_100">
+    <div class="container">
+        <div class="main_title">
+            <h2 id="textcolor">Latest Blog</h2>
+            <h5>Recipe: Blondies + BBAB for life </h5>
+        </div>
+        <div class="row latest_news_inner">
+            <div class="col-lg-4 col-md-6">
+                <div class="l_news_image">
+                    <div class="l_news_img">
+                        <img class="img-fluid" src="~/img/blog/blog3.jpg" alt="">
+                    </div>
+                    <div class="l_news_hover">
+                        <a href="https://jenis.com/blog/recipe-blondies/"><h5>August 29, 2019 by Beth Stallings</h5></a>
+                        <a href="https://jenis.com/blog/recipe-blondies/"><h4>Forget brownies. These blondies have way more fun...</h4></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="l_news_item">
+                    <div class="l_news_img">
+                        <img class="img-fluid" src="~/img/blog/blog2.png" alt="">
+                    </div>
+                    <div class="l_news_text">
+                        <a href="https://news.baskinrobbins.com/blog/baskin-robbins-non-dairy-strawberry-streusel"><h5>Oct 15, 2016</h5></a>
+                        <a href="https://news.baskinrobbins.com/blog/baskin-robbins-non-dairy-strawberry-streusel"><h4>The Story Behind Baskin-Robbins’ New Non-Dairy Strawberry Streusel</h4></a>
+                        <p>Here at Baskin-Robbins, we’re once again dipping into the plant-based dessert category with the launch of a new oatmilk-based Flavor of the Month, Non-Dairy Strawberry Streusel. Keep reading for....</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="l_news_item">
+                    <div class="l_news_img">
+                        <img class="img-fluid" src="~/img/blog/blog1.jpg" alt="">
+                    </div>
+                    <div class="l_news_text">
+                        <a href="https://jenis.com/blog/outlander-inspired-ice-cream/"><h5>Oct 15, 2016</h5></a>
+                        <a href="https://jenis.com/blog/outlander-inspired-ice-cream/"><h4>Meet our Outlander-inspired ice cream </h4></a>
+                        <p>If you follow Jeni, then you know she’s fallen hard down the Outlander wormhole (she may or may not have a life-size Jamie Fraser cutout in her office)—and happily pulled many in the office down with her. So, when Starz asked us to create an ice cream to celebrate the show’s Season 5 premiere ....</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================End Latest News Area =================-->
+<!--================Newsletter Area =================-->

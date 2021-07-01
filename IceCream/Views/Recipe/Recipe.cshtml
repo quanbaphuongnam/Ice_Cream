@@ -1,0 +1,272 @@
+﻿@model IceCream.Models.BigModel.AllFormula
+@using Microsoft.AspNetCore.Http;
+
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+    ViewData["Title"] = "Recipe";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="banner_area">
+    <div class="container">
+        <div class="banner_text">
+            <br /><br />
+            <h3>All Recipe</h3>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#">Recipe</a></li>
+            </ul>
+        </div>
+    </div>
+</section>
+<!--================End Main Header Area =================-->
+<!--================Product Area =================-->
+<section class="product_area p_100">
+    <div class="container">
+        <div class="row product_inner_row">
+            <div class="col-lg-9">
+                <div class="row m0 product_task_bar">
+                    <div class="product_task_inner">
+                        <div class="float-left">
+                            <a class="active" href="#"><i class="fa fa-th-large" aria-hidden="true"></i></a>
+                            <a href="#"><i class="fa fa-th-list" aria-hidden="true"></i></a>
+                            <span>Showing 1 - 10 of 55 results</span>
+                        </div>
+                        <div class="float-right">
+                            <button id="contact" onclick="location.href='#';" class="custom-btn btn-12"><span>Create!</span><span>New post</span></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row product_item_inner">
+                    @foreach (var newrecipe in ViewBag.newrecipes)
+                    {
+                        <div class="col-lg-4 col-md-4 col-6">
+                            <div class="cake_feature_item">
+                                <div class="cake_img">
+                                    <img src="~/img/recipe/@newrecipe.ForCover" width="270" height="226" alt="">
+                                    <span style=" position: absolute; top: -13px; right: -13px; width: 121px; height: 121px; z-index: 100; overflow: hidden; " wfd-id="428"><img src="~/img/new-icon.png"></span>
+                                </div>
+                                <div class="cake_text">
+                                    @if (@HttpContextAccessor.HttpContext.Session.GetString("username") == null)
+                                    {
+                                        <h4>@newrecipe.ForCondition</h4>
+                                    }
+
+                                    @if (@HttpContextAccessor.HttpContext.Session.GetString("username") == @newrecipe.AccUsername)
+                                    {
+                                        <br /><div style=" font-size: 14px ;text-align:right">
+                                            by: <a href="#">
+                                                You
+                                            </a>&ensp;
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <br /><div style=" font-size: 14px ;text-align:right">by: <a href="#">@newrecipe.AccUsername</a>&ensp;
+                                        </div>
+                                    } 
+
+
+                                    <h3>@newrecipe.ForName</h3>
+                                    <a class="custom-btn btn-8" asp-controller="recipe" asp-action="recipedetail" asp-route-id="@newrecipe.ForId">See now</a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    @foreach (var recipe in (IEnumerable<dynamic>)ViewBag.recipes)
+                    {
+                        <div class="col-lg-4 col-md-4 col-6">
+                            <div class="cake_feature_item">
+                                <div class="cake_img">
+                                    <img src="~/img/recipe/@recipe.ForCover" width="270" height="226" alt="">
+
+                                </div>
+                                <div class="cake_text">
+
+                                    @if (@HttpContextAccessor.HttpContext.Session.GetString("username") == @recipe.AccUsername)
+                                    {
+                                        <br /><div style=" font-size: 14px ;text-align:right">
+                                            by: <a href="#">
+                                                You
+                                            </a>&ensp;
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <br /><div style=" font-size: 14px ;text-align:right">by: <a href="#">@recipe.AccUsername</a>&ensp;
+</div>
+                                    }
+                                    <h3>@recipe.ForName</h3>
+                                    <a class="custom-btn btn-8" asp-controller="recipe" asp-action="recipedetail" asp-route-id="@recipe.ForId">See now</a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+
+                </div>
+                <div class="product_pagination">
+                    <div class="left_btn">
+                        <a href="#"><i class="lnr lnr-arrow-left"></i> New posts</a>
+                    </div>
+                    <div class="middle_list">
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item active"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item"><a class="page-link" href="#">...</a></li>
+                                <li class="page-item"><a class="page-link" href="#">12</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="right_btn"><a href="#">Older posts <i class="lnr lnr-arrow-right"></i></a></div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="product_left_sidebar">
+                    <aside class="left_sidebar search_widget">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Enter Search Keywords">
+                            <div class="input-group-append">
+                                <button class="btn" type="button"><i class="icon icon-Search"></i></button>
+                            </div>
+                        </div>
+                    </aside>
+                    <aside class="left_sidebar p_catgories_widget">
+                        <div class="p_w_title">
+                            <h3 id="textcolor">Popular flavor</h3>
+                        </div>
+                        <ul class="list_style">
+                            @foreach (var savour in ViewBag.savours)
+                            {
+                                <li><a href="#">@savour.SavName</a></li>
+
+                            }
+
+
+
+
+                        </ul>
+                    </aside>
+                    @*<aside class="left_sidebar p_price_widget">
+                            <div class="p_w_title">
+                                <h3>Filter By Price</h3>
+                            </div>
+                            <div class="filter_price">
+                                <div id="slider-range"></div>
+                                <label for="amount">Price range:</label>
+                                <input type="text" id="amount" readonly />
+                                <a href="#">Filter</a>
+                            </div>
+                        </aside>*@
+                    <aside class="left_sidebar p_sale_widget">
+                        <div class="p_w_title">
+                            <h3>Top Sale Products</h3>
+                        </div>
+                        @foreach (var newrecipe in ViewBag.newrecipes)
+                        {
+                            <div class="media">
+                                <div class="d-flex">
+                                    <img src="~/img/product/sale-product/s-product-4.jpg" alt="">
+                                </div>
+                                <div class="media-body">
+                                    <a href="#">
+                                        <h4>
+                                            @newrecipe.ForName
+                                        </h4>
+                                    </a>
+                                    <ul class="list_style">
+                                        <li><a href="#"><i class="fa fa-star-o"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-star-o"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-star-o"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-star-o"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-star-o"></i></a></li>
+                                    </ul>
+                                    <h5>@newrecipe.ForCondition</h5>
+                                </div>
+                            </div>
+                        }
+                    </aside>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================End Product Area =================-->
+<!--================Newsletter Area =================-->
+
+
+
+<!--
+This is the Popup Contact Form we use at:
+http://notnatural.co
+
+Examples for submitting the form data can be found at:
+https://bit.ly/responsive-popup-contact-form
+
+Popup Contact Form based on:
+https://codepen.io/jhnwlsn/pen/vulgn by John Wilson
+https://codyhouse.co/gem/simple-confirmation-popup/
+-->
+
+
+
+<div class="cd-popup contact" role="alert">
+    <form  method="post"  asp-controller="recipe" asp-action="postrecipe" enctype="multipart/form-data" id="contactform" class="contact-form">
+        <div class="cd-popup-container" style="">
+            <p style="">
+                <a href="" class="cd-popup-close cd-close-button">
+                    <i class="fa fa-times" style="pointer-events:none;"></i>
+                </a>
+            </p>
+            <h4 style="text-align:left; "> <strong>Recipe Name</strong> </h4>
+            <div class="name">
+
+                <input class="input" type="text" asp-for="Formula.ForName" id="name" />
+            </div>
+
+            <div class="message">
+                <h4 style="text-align:left; "> <strong>Recipe Detail</strong> </h4>
+                <textarea id="message" type="text" asp-for="Formula.ForDescription"></textarea>
+            </div>
+
+            <div class="message">
+                <h4 style="text-align:left; "> <strong>Recipe Cover</strong> </h4>
+                <input style="padding: 0px 0px 8px 0px !important;" type="file" name="filecover" />
+            </div>
+          
+            <input hidden type="number" asp-for="Formula.ForContributors" value="@HttpContextAccessor.HttpContext.Session.GetInt32("account")" />
+
+            <div class="message">
+                <h4 style="text-align:left; "><strong>Photo process implementation</strong></h4>
+                <input style="padding: 0px 0px 8px 0px !important;" type="file" name="filecovers"/>
+            </div>
+            <br>
+            <div style="text-align:left">
+                <input type="checkbox" id="human" name="human" />
+                <label for="human">I am a human and not a robot.</label>
+            </div>
+            <br>
+            <div class="submit">
+                <p class="user-message" id="contactblurb">We will review your formula as soon as possible!</p>
+                <input type="submit" name="submit" id="submit" value="Send" />
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="cd-popup notification" role="alert">
+    <div class="cd-popup-container">
+        <a href="" class="cd-popup-close cd-close-button"><i class="fa fa-times" style="pointer-events:none;"></i></a>
+        <p>
+            <h3 id="notification-text">Thank you for sending a new recipe for us, we will review your formula as soon as possible!</h3>
+        </p>
+    </div>
+</div>
+
+
+<script src="~/js/jspost/jquery.min.js"></script>
+
+
+

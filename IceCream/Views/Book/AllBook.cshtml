@@ -1,0 +1,143 @@
+﻿@model IceCream.Models.Book
+@{
+    ViewData["Title"] = "AllBook";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="banner_area">
+    <div class="container">
+        <div class="banner_text">
+            <br />
+            <br />
+            <h3>Our Book</h3>
+            <ul>
+                <li><a asp-controller="home" asp-action="index">Home</a></li>
+                <li><a asp-controller="book" asp-action="allbook">Order book</a></li>
+            </ul>
+        </div>
+    </div>
+</section>
+<!--================End Main Header Area =================-->
+<!--================Blog Main Area =================-->
+<section class="our_cakes_area p_100">
+    <div class="container">
+     
+
+
+        <div class="book">
+            <div class="gap"></div>
+            <div class="pages">
+                <div class="page"></div>
+                <div class="page"></div>
+                <div class="page"></div>
+                <div class="page"></div>
+                <div class="page"></div>
+                <div class="page"></div>
+            </div>
+            <div class="flips">
+                <div class="flip flip1">
+                    <div class="flip flip2">
+                        <div class="flip flip3">
+                            <div class="flip flip4">
+                                <div class="flip flip5">
+                                    <div class="flip flip6">
+                                        <div class="flip flip7"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="main_title">
+            <h2>Our Book</h2>
+            <h5>
+
+                With several friends who are absolute ice cream fanatics, I thought it was about time to check out some ice cream recipe books! Trust me, your sweet tooth will thank me.
+            </h5>
+
+        </div>
+        <div class="cake_feature_row row">
+            @foreach (var book in ViewBag.books)
+            {
+                <div class="col-lg-3 col-md-4 col-6">
+                    <div class="cake_feature_item">
+                        <div class="cake_img">
+                            <img src="~/img/books/@book.BookPhoto" width="250" height="360" alt="">
+                        </div>
+                        <div class="cake_text">
+                            <br />
+                            <p style="color: #f52c2c; font-family: Impact, fantasy; font-size: 40px ">$@book.BookPrice</p>
+                            <h3>@book.BookName</h3>
+                            <a asp-controller="book" asp-action="bookdetails" asp-route-id="@book.BookId" class="custom-btn btn-5">Add cart</a>
+                        </div>
+                    </div>
+                </div>
+            }
+
+
+
+        </div>
+    </div>
+</section>
+<!--================End Blog Main Area =================-->
+<!--================Special Recipe Area =================-->
+<section class="special_recipe_area">
+    <div class="container">
+        <div class="special_recipe_slider owl-carousel">
+            <div class="item">
+                <div class="media">
+                    <div class="d-flex">
+                        <img src="img/recipe/recipe-1.png" alt="">
+                    </div>
+                    <div class="media-body">
+                        <h4>Special Recipe</h4>
+                        <p>Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi equatur uis autem vel eum.</p>
+                        <a class="w_view_btn" href="#">View Details</a>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="media">
+                    <div class="d-flex">
+                        <img src="img/recipe/recipe-1.png" alt="">
+                    </div>
+                    <div class="media-body">
+                        <h4>Special Recipe</h4>
+                        <p>Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi equatur uis autem vel eum.</p>
+                        <a class="w_view_btn" href="#">View Details</a>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="media">
+                    <div class="d-flex">
+                        <img src="img/recipe/recipe-1.png" alt="">
+                    </div>
+                    <div class="media-body">
+                        <h4>Special Recipe</h4>
+                        <p>Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi equatur uis autem vel eum.</p>
+                        <a class="w_view_btn" href="#">View Details</a>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="media">
+                    <div class="d-flex">
+                        <img src="img/recipe/recipe-1.png" alt="">
+                    </div>
+                    <div class="media-body">
+                        <h4>Special Recipe</h4>
+                        <p>Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi equatur uis autem vel eum.</p>
+                        <a class="w_view_btn" href="#">View Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================End Special Recipe Area =================-->
+<!--================Newsletter Area =================-->
+
+<!--================End Newsletter Area =================-->
