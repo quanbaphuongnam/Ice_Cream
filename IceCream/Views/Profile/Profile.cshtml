@@ -1,8 +1,9 @@
-﻿
-@{
-    ViewData["Title"] = "Profile";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+﻿@model IceCream.Models.Account
+@using Microsoft.AspNetCore.Http;
+
+@inject IHttpContextAccessor HttpContextAccessor
+@{ ViewData["Title"] = "Profile";
+                Layout = "~/Views/Shared/_Layout.cshtml"; }
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -19,7 +20,7 @@
         </div>
     </div>
 </section>
-
+@foreach (var profile in ViewBag.profile) {
 <div class="container emp-profile">
     <form method="post">
         <div class="row">
@@ -27,15 +28,15 @@
                 <div class="profile-img">
                     <img src="~/img/avatar/avatardefault.jpg" alt="" />
                     <div class="file btn btn-lg btn-primary">
-                        
-                        Change Photo 
+
+                        Change Photo
                     </div>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="profile-head">
                     <h5>
-                        Nam Pro player
+                        @profile.AccFullname
                     </h5>
                     <h6>
                         Member vip 8++
@@ -139,7 +140,7 @@
                             </div>
                         </div>
                         <hr width="100%" align="center" />
-                        
+
                         <div class="row">
                             <div class="col-md-6">
                                 <img src="~/img/cake-feature/arivals-2.jpg" height="100" width="200" alt="Alternate Text" />
@@ -157,4 +158,4 @@
         </div>
     </form>
 </div>
-
+}
