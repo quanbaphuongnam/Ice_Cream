@@ -1,4 +1,5 @@
 ﻿using Amazon.Runtime.Internal;
+using IceCream.Models;
 using IceCream.Paypal;
 using IceCream.Services;
 using Microsoft.AspNetCore.Http;
@@ -37,14 +38,25 @@ namespace IceCream.Areas.Admin.Controllers
             return View();
         }
         [Route("signupsuccess")]
-        public IActionResult Success([FromQuery(Name = "tx")] string tx)
+        public IActionResult Success([FromQuery(Name = "tx")] string tx,Account acc)
         {
             var result = PDTHolder.Success(tx, configuration, Request);
             Debug.WriteLine("Customer info:");
             Debug.WriteLine("First Name: " + result.PayerFirstName);
             Debug.WriteLine("LastName: " + result.PayerLastName);
             Debug.WriteLine("Email: " + result.PayerEmail);
+            HttpContext.Session.SetString("result", result.PayerEmail);
+            if (HttpContext.Session.GetString("result") != null)
+            {
 
+                acc.AccPassword = BCrypt.Net.BCrypt.HashString(acc.AccPassword);
+                account.Create(acc);
+                HttpContext.Session.Remove("result");
+            }
+            else
+            {
+                Debug.WriteLine("ko thành công");
+            }
             return View("signupsuccess");
         }
 

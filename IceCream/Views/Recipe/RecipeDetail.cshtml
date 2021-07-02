@@ -1,4 +1,4 @@
-﻿@model IceCream.Models.BigModel.RecipeDetailModels
+﻿@model IceCream.Models.FeedbackFormula
 @using Microsoft.AspNetCore.Http;
 
 @inject IHttpContextAccessor HttpContextAccessor
@@ -23,191 +23,201 @@
 <!--================End Main Header Area =================-->
 <!--================Blog Main Area =================-->
 <section class="main_blog_area p_100">
-
-    <div class="container">
-        <div class="row blog_area_inner">
-            <div class="col-lg-9">
+    @{int idFor = 0;
+<div class="container">
+    <div class="row blog_area_inner">
+        <div class="col-lg-9">
                 <div class="main_blog_inner single_blog_inner">
+
                     @foreach (var recipedetails in (IEnumerable<dynamic>)ViewBag.recipedetails)
                     {
-                        <div class="blog_item">
-                            <div class="blog_img">
+                        idFor = @recipedetails.ForId;
+                <div class="blog_item">
+                    <div class="blog_img">
 
-                                <img class="img-fluid" src="~/img/recipe/@recipedetails.ForCover"
-                                     width="840" height="500" alt="">
+                        <img class="img-fluid" src="~/img/recipe/@recipedetails.ForCover"
+                             width="840" height="500" alt="">
 
 
+                    </div>
+                    <div class="blog_text">
+                        <div class="blog_time">
+                            <div class="float-left">
+                                <a href="#">@recipedetails.ForCreated.ToString("dd/MM/yyyy")</a>
                             </div>
-                            <div class="blog_text">
-                                <div class="blog_time">
-                                    <div class="float-left">
-                                        <a href="#">@recipedetails.ForCreated.ToString("dd/MM/yyyy")</a>
-                                    </div>
-                                    <div class="float-right">
-                                        <ul class="list_style">
-                                            <li><a href="#">By :  @recipedetails.AccUsername</a></li>
-                                            <li><a href="#">bekery, sweet</a></li>
-                                            <li><a href="#">Comments:  </a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <a href="#"><h4>@recipedetails.ForName</h4></a>
-                                <pre style=" overflow-x: auto; white-space: pre-wrap; white-space: -moz-pre-wrap; white-space: -pre-wrap; white-space: -o-pre-wrap; word-wrap: break-word;">@recipedetails.ForDescription</pre>
+                            <div class="float-right">
+                                <ul class="list_style">
+                                    <li><a href="#">By :  @recipedetails.AccUsername</a></li>
+                                    <li><a href="#">bekery, sweet</a></li>
+                                    <li><a href="#">Comments:  </a></li>
+                                </ul>
                             </div>
                         </div>
-                        @*<div class="two_column_text">
-                <h3 class="b_single_text">Two Column Text Sample</h3>
-                <div class="row">
-                    <div class="col-lg-6">
-                        <p>Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est.</p>
+                        <a href="#"><h4>@recipedetails.ForName</h4></a>
+                        <pre style=" overflow-x: auto; white-space: pre-wrap; white-space: -moz-pre-wrap; white-space: -pre-wrap; white-space: -o-pre-wrap; word-wrap: break-word;">@recipedetails.ForDescription</pre>
                     </div>
-                    <div class="col-lg-6">
-                        <p>Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est.</p>
-                    </div>
-                </div>
-            </div>*@
-                        @*<div class="single_element_text">
-                <pre style=" overflow-x: auto; white-space: pre-wrap; white-space: -moz-pre-wrap; white-space: -pre-wrap; white-space: -o-pre-wrap; word-wrap: break-word;">@recipedetail.ForDescription</pre>
-            </div>*@
-                    }
+                </div> @*<div class="two_column_text">
+        <h3 class="b_single_text">Two Column Text Sample</h3>
+        <div class="row">
+            <div class="col-lg-6">
+                <p>Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est.</p>
+            </div>
+            <div class="col-lg-6">
+                <p>Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est.</p>
+            </div>
+        </div>
+    </div>*@ @*<div class="single_element_text">
+        <pre style=" overflow-x: auto; white-space: pre-wrap; white-space: -moz-pre-wrap; white-space: -pre-wrap; white-space: -o-pre-wrap; word-wrap: break-word;">@recipedetail.ForDescription</pre>
+    </div>*@}
                     <div class="s_comment_list">
 
                         <h3 class="cm_title_br">Comments </h3>
                         <div class="s_comment_list_inner">
                             @foreach (var recipedetailfeedback in (IEnumerable<dynamic>)ViewBag.recipedetailfeedback)
                             {
-                                <div class="media">
-                                    <div class="d-flex">
-                                        @if (@recipedetailfeedback.AccAvatar == null)
-                                        {
-                                            <img src="~/img/avatar/avatardefault.jpg" width="70" height="70" alt="">
-                                        }
-                                        else
-                                        {
-                                            <img src="~/img/avatar/@recipedetailfeedback.AccAvatar" width="70" height="70" alt="">
-                                        }
+                <div class="media">
+                    <div class="d-flex">
+                        @if (@recipedetailfeedback.AccAvatar == null)
+                        {
+                <img src="~/img/avatar/avatardefault.jpg" width="70" height="70" alt=""> }
+            else
+            {
+                <img src="~/img/avatar/@recipedetailfeedback.AccAvatar" width="70" height="70" alt="">}
 
-                                    </div>
-                                    <div class="media-body">
-                                        <p></p>
-                                        <a href="#"><h4>@recipedetailfeedback.AccUsername</h4></a>
-                                        <p>@recipedetailfeedback.Content</p>
-                                        <div class="date_rep">
-                                            <a href="#">@recipedetailfeedback.Created.ToString("dd/MM/yyyy")</a>
+                    </div>
+                    <div class="media-body">
+                        <p></p>
+                        <a href="#"><h4>@recipedetailfeedback.AccUsername</h4></a>
+                        <p>@recipedetailfeedback.Content</p>
+                        <div class="date_rep">
+                            <a href="#">@recipedetailfeedback.Created.ToString("dd/MM/yyyy")</a>
 
 
-                                        </div>
-                                    </div>
-                                </div>
-                            }
                         </div>
                     </div>
-                    <div class="s_comment_area">
-                        <h3 class="cm_title_br">Leave a Comment</h3>
+                </div>}
+
+
+                        </div>
+                    </div>
+                    @if(@HttpContextAccessor.HttpContext.Session.GetString("username") ==null)
+                    {
+                  <div class="s_comment_area">
+                        <h3 class="cm_title_br">Leave a Comment  </h3>
+                        <div class="s_comment_inner">
+                            <form >
+                                <div class="form-group col-md-6">
+                                    <span class="label label-default">You must be Login</span>
+                                        </div>
+                            </form>
+                        </div>
+                    </div>
+                    }else{
+     <div class="s_comment_area">
+                        <h3 class="cm_title_br">Leave a Comment @idFor </h3>
                         <div class="s_comment_inner">
                             <form method="post" asp-controller="recipe" asp-action="feedbackrecipe" enctype="multipart/form-data" class="row contact_us_form" id="contactForm" novalidate="novalidate">
                                 <div class="form-group col-md-6">
                                     <span class="label label-default">Comment as  @HttpContextAccessor.HttpContext.Session.GetString("username") </span>
                                 </div>
-                                
-                                    <input hidden type="number" asp-for="FeedbackFormula.FormulaId" value="FeedbackFormula.FormulaId" />
-                               
-                                    <input hidden type="number" asp-for="FeedbackFormula.AccId" value="Account.AccId" />
-                                    <div class="form-group col-md-12">
-                                        <textarea type="number" asp-for="FeedbackFormula.Content" class="form-control" name="message" id="message" rows="1" placeholder="Wrtie message"></textarea>
-                                    </div>
-                                    <div class="form-group col-md-12">
-                                        <button type="submit" value="submit" class="btn order_s_btn form-control">Submit now</button>
-                                    </div>
-                                </form>
+                                <input hidden type="number" asp-for="FormulaId" value="@idFor" />
+                                <input hidden type="number" asp-for="AccId" value="@HttpContextAccessor.HttpContext.Session.GetInt32("account")" />
+                                <div class="form-group col-md-12">
+                                    <textarea type="text" asp-for="Content" class="form-control"id="message" rows="1" placeholder="Wrtie message"></textarea>
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <button type="submit" value="submit" class="btn order_s_btn form-control">Submit now</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
+                    }
+               
                 </div>
-            </div>
-            <div class="col-lg-3">
-                <div class="right_sidebar_area">
-                    <aside class="r_widget search_widget">
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Enter Search Keywords">
-                            <div class="input-group-append">
-                                <button class="btn" type="button"><i class="icon icon-Search"></i></button>
+        </div>
+        <div class="col-lg-3">
+            <div class="right_sidebar_area">
+                <aside class="r_widget search_widget">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Enter Search Keywords">
+                        <div class="input-group-append">
+                            <button class="btn" type="button"><i class="icon icon-Search"></i></button>
+                        </div>
+                    </div>
+                </aside>
+                <aside class="r_widget categories_widget">
+                    <div class="r_title">
+                        <h3>Categories</h3>
+                    </div>
+                    <ul class="list_style">
+                        <li><a href="#">Chocolates<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+                        <li><a href="#">Summer Caket<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+                        <li><a href="#">Ice Cream<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+                        <li><a href="#">Lollipop<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+                        <li><a href="#">Sweet<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+                        <li><a href="#">Bakery<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+                    </ul>
+                </aside>
+                <aside class="r_widget recent_widget">
+                    <div class="r_title">
+                        <h3>Recent News</h3>
+                    </div>
+                    <div class="recent_w_inner">
+                        <div class="media">
+                            <div class="d-flex">
+                                <img src="img/blog/recent-post/r-post-1.jpg" alt="">
+                            </div>
+                            <div class="media-body">
+                                <a href="#"><h4>A very bad quack might jinx zippy fowls ...</h4></a>
+                                <a href="#"><p>08 Feb 2018</p></a>
                             </div>
                         </div>
-                    </aside>
-                    <aside class="r_widget categories_widget">
-                        <div class="r_title">
-                            <h3>Categories</h3>
-                        </div>
-                        <ul class="list_style">
-                            <li><a href="#">Chocolates<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
-                            <li><a href="#">Summer Caket<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
-                            <li><a href="#">Ice Cream<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
-                            <li><a href="#">Lollipop<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
-                            <li><a href="#">Sweet<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
-                            <li><a href="#">Bakery<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
-                        </ul>
-                    </aside>
-                    <aside class="r_widget recent_widget">
-                        <div class="r_title">
-                            <h3>Recent News</h3>
-                        </div>
-                        <div class="recent_w_inner">
-                            <div class="media">
-                                <div class="d-flex">
-                                    <img src="img/blog/recent-post/r-post-1.jpg" alt="">
-                                </div>
-                                <div class="media-body">
-                                    <a href="#"><h4>A very bad quack might jinx zippy fowls ...</h4></a>
-                                    <a href="#"><p>08 Feb 2018</p></a>
-                                </div>
+                        <div class="media">
+                            <div class="d-flex">
+                                <img src="img/blog/recent-post/r-post-2.jpg" alt="">
                             </div>
-                            <div class="media">
-                                <div class="d-flex">
-                                    <img src="img/blog/recent-post/r-post-2.jpg" alt="">
-                                </div>
-                                <div class="media-body">
-                                    <a href="#"><h4>Big Steps to change management succes...</h4></a>
-                                    <a href="#"><p>08 Feb 2018</p></a>
-                                </div>
-                            </div>
-                            <div class="media">
-                                <div class="d-flex">
-                                    <img src="img/blog/recent-post/r-post-3.jpg" alt="">
-                                </div>
-                                <div class="media-body">
-                                    <a href="#"><h4>A paradisematic country, where roasted parts...</h4></a>
-                                    <a href="#"><p>08 Feb 2018</p></a>
-                                </div>
-                            </div>
-                            <div class="media">
-                                <div class="d-flex">
-                                    <img src="img/blog/recent-post/r-post-4.jpg" alt="">
-                                </div>
-                                <div class="media-body">
-                                    <a href="#"><h4>A wonderful serenity has taken possession...</h4></a>
-                                    <a href="#"><p>08 Feb 2018</p></a>
-                                </div>
+                            <div class="media-body">
+                                <a href="#"><h4>Big Steps to change management succes...</h4></a>
+                                <a href="#"><p>08 Feb 2018</p></a>
                             </div>
                         </div>
-                    </aside>
-                    <aside class="r_widget tags_widget">
-                        <div class="r_title">
-                            <h3>Tags</h3>
+                        <div class="media">
+                            <div class="d-flex">
+                                <img src="img/blog/recent-post/r-post-3.jpg" alt="">
+                            </div>
+                            <div class="media-body">
+                                <a href="#"><h4>A paradisematic country, where roasted parts...</h4></a>
+                                <a href="#"><p>08 Feb 2018</p></a>
+                            </div>
                         </div>
-                        <ul class="list_style">
-                            <li><a href="#">Baking Tips</a></li>
-                            <li><a href="#">Bakery</a></li>
-                            <li><a href="#">Recipe</a></li>
-                            <li><a href="#">Baking Tool</a></li>
-                            <li><a href="#">Cakes</a></li>
-                            <li><a href="#">Chocolates</a></li>
-                        </ul>
-                    </aside>
-                </div>
+                        <div class="media">
+                            <div class="d-flex">
+                                <img src="img/blog/recent-post/r-post-4.jpg" alt="">
+                            </div>
+                            <div class="media-body">
+                                <a href="#"><h4>A wonderful serenity has taken possession...</h4></a>
+                                <a href="#"><p>08 Feb 2018</p></a>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+                <aside class="r_widget tags_widget">
+                    <div class="r_title">
+                        <h3>Tags</h3>
+                    </div>
+                    <ul class="list_style">
+                        <li><a href="#">Baking Tips</a></li>
+                        <li><a href="#">Bakery</a></li>
+                        <li><a href="#">Recipe</a></li>
+                        <li><a href="#">Baking Tool</a></li>
+                        <li><a href="#">Cakes</a></li>
+                        <li><a href="#">Chocolates</a></li>
+                    </ul>
+                </aside>
             </div>
         </div>
     </div>
-
+</div> }
 </section>
 <!--================End Blog Main Area =================-->
 <!--================Newsletter Area =================-->

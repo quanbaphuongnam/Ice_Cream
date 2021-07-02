@@ -16,6 +16,7 @@ namespace IceCream.Services
 
         public FeedbackFormula CreateFeedbackFormula(FeedbackFormula fbFormula)
         {
+            fbFormula.Created = DateTime.Now;
             db.FeedbackFormulas.Add(fbFormula);
             db.SaveChanges();
             return fbFormula;

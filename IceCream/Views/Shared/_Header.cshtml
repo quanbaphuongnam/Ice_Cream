@@ -1,4 +1,5 @@
-﻿@using Microsoft.AspNetCore.Http;
+﻿@model IceCream.Models.Account
+@using Microsoft.AspNetCore.Http;
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 @inject IHttpContextAccessor HttpContextAccessor
 <div class="box_menu_four">
@@ -35,56 +36,95 @@
                         <ul class="dropdown-menu">
                             @if (@HttpContextAccessor.HttpContext.Session.GetString("username") != null)
                             {
-                                <li><a asp-controller="profile" asp-action="profile">@HttpContextAccessor.HttpContext.Session.GetString("username")</a></li>
+                <li><a asp-controller="profile" asp-action="profile">@HttpContextAccessor.HttpContext.Session.GetString("username")</a></li>
                                 <li><a asp-controller="cart" asp-action="cart">Cart (@HttpContextAccessor.HttpContext.Session.GetInt32("jsoncart"))</a></li>
-                                <li><a asp-controller="account" asp-action="logout">Log out</a></li>
-                            }
-                            else
-                            {
+                                                <li><a asp-controller="account" asp-action="logout">Log out</a></li>
+ }
+                                            else
+                                            {
                                 <li><a class="popup-with-zoom-anim" href="#test-login">Login</a></li>
-                                <li><a asp-controller="cart" asp-action="index">Cart (@HttpContextAccessor.HttpContext.Session.GetInt32("jsoncart"))</a></li>
-                            }
+                                                <li><a asp-controller="cart" asp-action="index">Cart (@HttpContextAccessor.HttpContext.Session.GetInt32("jsoncart"))</a></li>
+}
                         </ul>
                     </li>
-                   
+
                     <li class="search_icon"><a class="popup-with-zoom-anim" href="#test-search"><i class="icon icon-Search"></i></a></li>
                 </ul>
             </div>
         </nav>
     </div>
 </div>
-
+@*----------------------------------------------------------------------------------------------------------*@
 <div class="login_area zoom-anim-dialog mfp-hide" id="test-login">
     <div class="login_box_inner">
         <h2>Sign in/up</h2>
         <div class="containerr" id="containerr">
             <div class="form-containerr sign-up-containerr">
-                <form action="@ViewBag.postUrl" method="post">
-                    <input type="hidden" name="upload" value="1" />
-                    <input type="hidden" name="return" value="@ViewBag.returnUrl" />
-                    <input type="hidden" name="cmd" value="_cart" />
-                    <input type="hidden" name="business" value="@ViewBag.business" />
-                    @{ var index = 1;}
+                @*<form asp-controller="home" asp-action="add" action="@ViewBag.postUrl" method="post">
+                        <input type="hidden" name="upload" value="1" />
+                        <input type="hidden" name="return" value="@ViewBag.returnUrl" />
+                        <input type="hidden" name="cmd" value="_cart" />
+                        <input type="hidden" name="business" value="@ViewBag.business" />
+                        @{ var index = 1;}
+                        <h1>Create Account</h1>
+                        <input type="text" asp-for="AccUsername" placeholder="Username" />
+                        <input type="email" asp-for="AccEmail" placeholder="Email" />
+                        <input type="password" asp-for="AccPassword" placeholder="Password" />
+                        <input type="password" placeholder="Confirm Password" />
+
+                        <select class="check-select" id="check-select">
+                            <option value="15"> 15$ / month</option>
+                            <option value="150" selected> 150$ / year</option>
+                        </select>
+                        <input type="hidden" name="item_number_@index" value="1" />
+                        <input type="hidden" name="item_name_@index" value="Gói 15" />
+                        <input type="hidden" name="amount_@index" value="15" />
+                        <input type="hidden" name="quantity_@index" value="1" />
+                        <img src="~/img/paypal.png" width="150" height="50" alt="paypal " />
+                        <button type="submit">Sign Up</button>
+                    </form>*@
+                <form asp-controller="account" asp-action="add" method="post">
+
                     <h1>Create Account</h1>
-                    <input type="text" placeholder="Username" />
-                    <input type="email" placeholder="Email" />
-                    <input type="password" placeholder="Password" />
+                    <input type="text" asp-for="AccUsername" placeholder="Username" />
+                    <input type="email" asp-for="AccEmail" placeholder="Email" />
+                    <input type="password" asp-for="AccPassword" placeholder="Password" />
                     <input type="password" placeholder="Confirm Password" />
 
-                    <select class="check-select" id="check-select">
-                        <option value="15"> 15$ / month</option>
-
-                        <option value="150" selected> 150$ / year</option>
-
-                    </select>
-                    <input type="hidden" name="item_number_@index" value="1" />
-                    <input type="hidden" name="item_name_@index" value="Gói 15" />
-                    <input type="hidden" name="amount_@index" value="15" />
-                    <input type="hidden" name="quantity_@index" value="1" />
-                    <img src="~/img/paypal.png" width="150" height="50" alt="paypal " />
                     <button type="submit">Sign Up</button>
+
                 </form>
+                @if (@HttpContextAccessor.HttpContext.Session.GetString("acc") != null)
+                {
+                    <script>
+                            (async () => {
+
+                            const { value: fruit } = await Swal.fire({
+                                title: 'Select field validation',
+                                input: 'select',
+                                inputOptions: {
+                                    '15': 'Month',
+                                    '150': 'Year',
+                                },
+                                inputPlaceholder: 'Select a service',
+                                showCancelButton: true,
+                                inputValidator: (value) => {
+                                    return new Promise((resolve) => {
+                                        if (value === '15' || value === '150') {
+                                            resolve()
+                                        } else {
+                                            resolve('You need to select oranges :)')
+                                        }
+                                    })
+                                }
+                            })
+                                if (fruit) {
+                                    Swal.fire(`You selected: ${fruit}`)
+                                }
+                        })()</script>
+                }
             </div>
+
             <div class="form-containerr sign-in-containerr">
                 <form method="post" asp-controller="account" asp-action="login" id="formLogin">
                     <h1>Sign in</h1>
@@ -96,31 +136,31 @@
                 </form>
                 @if (@HttpContextAccessor.HttpContext.Session.GetString("msg") == "f")
                 {
-                    <script type="text/javascript">
-                        Swal.fire({
+    <script type="text/javascript">
+        Swal.fire({
 
-                            icon: 'error',
-                            title: 'Login Fail',
-                            text: ' Incorrect username or password',
-                            showConfirmButton: false,
-                            timer: 2000
-                        })
-                    </script>
-                    HttpContextAccessor.HttpContext.Session.Remove("msg");
-                }
-                else if (@HttpContextAccessor.HttpContext.Session.GetString("msg") == "s")
-                {
-                    <script type="text/javascript">
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Login succesfull',
-                            text: ' Welcome to IceCream',
-                            showConfirmButton: false,
-                            timer: 1500
-                        })
-                    </script>
-                    HttpContextAccessor.HttpContext.Session.Remove("msg");
-                }
+            icon: 'error',
+            title: 'Login Fail',
+            text: ' Incorrect username or password',
+            showConfirmButton: false,
+            timer: 2000
+        })
+    </script>
+ HttpContextAccessor.HttpContext.Session.Remove("msg");
+}
+else if (@HttpContextAccessor.HttpContext.Session.GetString("msg") == "s")
+{
+<script type="text/javascript">
+    Swal.fire({
+        icon: 'success',
+        title: 'Login succesfull',
+        text: ' Welcome to IceCream',
+        showConfirmButton: false,
+        timer: 1500
+    })
+</script>
+HttpContextAccessor.HttpContext.Session.Remove("msg");
+}
             </div>
             <div class="overlay-containerr">
                 <div class="overlay">

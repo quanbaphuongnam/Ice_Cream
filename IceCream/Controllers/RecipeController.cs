@@ -178,7 +178,7 @@ namespace IceCream.Controllers
         [Route("feedbackrecipe")]
         public IActionResult FeedbackRecipe(FeedbackFormula fbFormula)
         {
-            fbFormula.Created = DateTime.Now;
+
             recipeService.CreateFeedbackFormula(fbFormula);
 
             return RedirectToAction("recipe");

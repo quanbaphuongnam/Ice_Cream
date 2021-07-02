@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -40,18 +41,17 @@ namespace IceCream.Controllers
         [Route("add")]
         public IActionResult Add()
         {
+          
             return RedirectToAction("index", "home", new Account());
         }
         [HttpPost]
         [Route("add")]
         public IActionResult Add(Account acc)
         {
-           
-            acc.AccPassword = BCrypt.Net.BCrypt.HashString(acc.AccPassword);
-            account.Create(acc);
-            return RedirectToAction("index", "home", new Account());
+            HttpContext.Session.SetString("acc", JsonConvert.SerializeObject(acc));
+            Debug.WriteLine(JsonConvert.DeserializeObject(HttpContext.Session.GetString("acc")));
+            return RedirectToAction("index", "home");
         }
-
         [HttpGet]
         [Route("login")]
         public IActionResult Login()
