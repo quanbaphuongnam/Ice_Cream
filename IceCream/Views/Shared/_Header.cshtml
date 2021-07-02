@@ -3,7 +3,6 @@
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 @inject IHttpContextAccessor HttpContextAccessor
 
-<h1>aaaaaaaaaaaaaaaaaa</h1>
 <div class="box_menu_four">
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -62,69 +61,33 @@
         <h2>Sign in/up</h2>
         <div class="containerr" id="containerr">
             <div class="form-containerr sign-up-containerr">
-                @*<form asp-controller="home" asp-action="add" action="@ViewBag.postUrl" method="post">
-                        <input type="hidden" name="upload" value="1" />
-                        <input type="hidden" name="return" value="@ViewBag.returnUrl" />
-                        <input type="hidden" name="cmd" value="_cart" />
-                        <input type="hidden" name="business" value="@ViewBag.business" />
-                        @{ var index = 1;}
-                        <h1>Create Account</h1>
-                        <input type="text" asp-for="AccUsername" placeholder="Username" />
-                        <input type="email" asp-for="AccEmail" placeholder="Email" />
-                        <input type="password" asp-for="AccPassword" placeholder="Password" />
-                        <input type="password" placeholder="Confirm Password" />
+                <form asp-controller="account" asp-action="add" method="post">
+                    <h1>Create Account</h1>
+                    <input type="text" asp-for="AccUsername" placeholder="Username" />
+                    <span asp-validation-for="AccUsername"></span>
+                    <input type="email" asp-for="AccEmail" placeholder="Email" />
+                    <span asp-validation-for="AccEmail"></span>
+                    <input type="password" asp-for="AccPassword" placeholder="Password" />
+                    <span asp-validation-for="AccPassword"></span>
+                    <input type="password" placeholder="Confirm Password" />
 
-                        <select class="check-select" id="check-select">
-                            <option value="15"> 15$ / month</option>
-                            <option value="150" selected> 150$ / year</option>
-                        </select>
-                        <input type="hidden" name="item_number_@index" value="1" />
-                        <input type="hidden" name="item_name_@index" value="Gói 15" />
-                        <input type="hidden" name="amount_@index" value="15" />
-                        <input type="hidden" name="quantity_@index" value="1" />
-                        <img src="~/img/paypal.png" width="150" height="50" alt="paypal " />
-                        <button type="submit">Sign Up</button>
-                    </form>*@
+                    <button type="submit" onclick="signup">Sign Up</button>
+                </form>
                 <form asp-controller="account" asp-action="add" method="post">
 
                     <h1>Create Account</h1>
                     <input type="text" asp-for="AccUsername" placeholder="Username" />
                     <input type="email" asp-for="AccEmail" placeholder="Email" />
-                    <input type="password" asp-for="AccPassword" placeholder="Password" />
-                    <input type="password" placeholder="Confirm Password" />
+                    <input type="password" placeholder="Password" id="pass" />
+                    <input type="password" asp-for="AccPassword" placeholder="Confirm Password" onchange="myFunction(this.value)"/>
 
-                    <button type="submit">Sign Up</button>
-
-                </form>
-                @if (@HttpContextAccessor.HttpContext.Session.GetString("acc") != null)
-                {
+                    <button type="submit" >Sign Up</button>
                     <script>
-                            (async () => {
-
-                            const { value: fruit } = await Swal.fire({
-                                title: 'Select field validation',
-                                input: 'select',
-                                inputOptions: {
-                                    '15': 'Month',
-                                    '150': 'Year',
-                                },
-                                inputPlaceholder: 'Select a service',
-                                showCancelButton: true,
-                                inputValidator: (value) => {
-                                    return new Promise((resolve) => {
-                                        if (value === '15' || value === '150') {
-                                            resolve()
-                                        } else {
-                                            resolve('You need to select oranges :)')
-                                        }
-                                    })
-                                }
-                            })
-                                if (fruit) {
-                                    Swal.fire(`You selected: ${fruit}`)
-                                }
-                        })()</script>
-                }
+                        function myFunction(val) {
+                            alert("The input value has changed. The new value is: " + val);
+                        }
+                    </script>
+                </form>
             </div>
 
             <div class="form-containerr sign-in-containerr">

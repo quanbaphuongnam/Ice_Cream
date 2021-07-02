@@ -49,8 +49,7 @@ namespace IceCream.Controllers
         public IActionResult Add(Account acc)
         {
             HttpContext.Session.SetString("acc", JsonConvert.SerializeObject(acc));
-            Debug.WriteLine(JsonConvert.DeserializeObject(HttpContext.Session.GetString("acc")));
-            return RedirectToAction("index", "home");
+            return RedirectToAction("paypal", "home");
         }
         [HttpGet]
         [Route("login")]

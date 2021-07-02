@@ -5,6 +5,7 @@ using IceCream.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -38,27 +39,29 @@ namespace IceCream.Areas.Admin.Controllers
             return View();
         }
         [Route("signupsuccess")]
-        public IActionResult Success([FromQuery(Name = "tx")] string tx,Account acc)
+        public IActionResult Success([FromQuery(Name = "tx")] string tx)
         {
             var result = PDTHolder.Success(tx, configuration, Request);
             Debug.WriteLine("Customer info:");
             Debug.WriteLine("First Name: " + result.PayerFirstName);
             Debug.WriteLine("LastName: " + result.PayerLastName);
             Debug.WriteLine("Email: " + result.PayerEmail);
-            HttpContext.Session.SetString("result", result.PayerEmail);
-            if (HttpContext.Session.GetString("result") != null)
-            {
-
-                acc.AccPassword = BCrypt.Net.BCrypt.HashString(acc.AccPassword);
-                account.Create(acc);
-                HttpContext.Session.Remove("result");
-            }
-            else
-            {
-                Debug.WriteLine("ko thành công");
-            }
+            Debug.WriteLine(JsonConvert.DeserializeObject(HttpContext.Session.GetString("acc")));
+            Debug.WriteLine("thành công");
+            Account acc = JsonConvert.DeserializeObject<Account>(HttpContext.Session.GetString("acc"));
+            acc.AccPassword = BCrypt.Net.BCrypt.HashString(acc.AccPassword);
+            account.Create(acc);
+            HttpContext.Session.Remove("acc");
             return View("signupsuccess");
         }
 
+        [Route("paypal")]
+        public IActionResult Success()
+        {
+            ViewBag.postUrl = configuration["PayPal:PostUrl"];
+            ViewBag.business = configuration["PayPal:Business"];
+            ViewBag.returnUrl = configuration["PayPal:ReturnUrl"];
+            return View("Paypal");
+        }
     }
 }

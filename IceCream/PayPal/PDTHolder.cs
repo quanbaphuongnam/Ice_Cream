@@ -29,9 +29,9 @@ namespace IceCream.Paypal
 
         private static string authToken, txToken, query, strResponse;
 
-        public static PDTHolder Success(string tx, IConfiguration configuration,HttpRequest httpRequest)
+        public static PDTHolder Success(string tx, IConfiguration configuration, HttpRequest httpRequest)
         {
-          
+
             PayPalConfig payPalConfig = PayPalService.getPayPalConfig(configuration);
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
             authToken = payPalConfig.AuthToken;
@@ -50,7 +50,7 @@ namespace IceCream.Paypal
             stOut.Close();
             StreamReader stIn = new StreamReader(req.GetResponse().GetResponseStream());
             strResponse = stIn.ReadToEnd();
-            stIn.Close(); 
+            stIn.Close();
             if (strResponse.StartsWith("SUCCESS"))
                 return PDTHolder.Parse(strResponse);
             return null;
