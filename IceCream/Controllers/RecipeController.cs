@@ -35,42 +35,77 @@ namespace IceCream.Controllers
         [Route("recipe")]
         [Route("")]
    
-        public IActionResult Index()
+        public IActionResult Index(string searchString)
         {
+          
+         
+            //--------------------
             ViewBag.savours = savourService.FindAllSavour();
-            ViewBag.recipes = from f in db.Formulas
-                              join a in db.Accounts on f.ForContributors equals a.AccId
-                              select new AllRecipe
-                              {
-                                  AccId = a.AccId,
-                                  AccUsername = a.AccUsername,
-                                  ForId = f.ForId,
-                                  ForCover = f.ForCover,
-                                  ForName = f.ForName,
-                                  ForDescription = f.ForDescription,
-                                  ForCondition = f.ForCondition,
-                                  ForStatus = f.ForStatus,
-                                  ForCreated = f.ForCreated
-                                  //ConLai = (x.Soluong - y.Soluong)
-                              };
 
             ViewBag.newrecipes = (from f in db.Formulas
-                                 join a in db.Accounts on f.ForContributors equals a.AccId
-                                 
+                                  join a in db.Accounts on f.ForContributors equals a.AccId
+                                  where (f.ForStatus == 1)
                                   select new AllRecipe
-                                 {
-                                     AccId = a.AccId,
-                                     AccUsername = a.AccUsername,
-                                     ForId = f.ForId,
-                                     ForCover = f.ForCover,
-                                     ForName = f.ForName,
-                                     ForDescription = f.ForDescription,
-                                     ForCondition = f.ForCondition,
-                                     ForStatus = f.ForStatus,
-                                     ForCreated = f.ForCreated
-                              
+                                  {
+                                      AccId = a.AccId,
+                                      AccUsername = a.AccUsername,
+                                      ForId = f.ForId,
+                                      ForCover = f.ForCover,
+                                      ForName = f.ForName,
+                                      ForDescription = f.ForDescription,
+                                      ForCondition = f.ForCondition,
+                                      ForStatus = f.ForStatus,
+                                      ForCreated = f.ForCreated
+
                                       //ConLai = (x.Soluong - y.Soluong)
-                                  }).OrderByDescending(f => f.ForId).Take(6);
+                                  }).OrderByDescending(f => f.ForId).Take(3);
+
+            if (!String.IsNullOrEmpty(searchString))
+                {
+
+                ViewBag.recipes = from f in db.Formulas
+                                  join a in db.Accounts on f.ForContributors equals a.AccId
+                                  where (f.ForStatus == 1 && f.ForName.Contains(searchString) || a.AccUsername.Contains(searchString))
+                                  select new AllRecipe
+                                  {
+                                      AccId = a.AccId,
+                                      AccUsername = a.AccUsername,
+                                      ForId = f.ForId,
+                                      ForCover = f.ForCover,
+                                      ForName = f.ForName,
+                                      ForDescription = f.ForDescription,
+                                      ForCondition = f.ForCondition,
+                                      ForStatus = f.ForStatus,
+                                      ForCreated = f.ForCreated
+                                      //ConLai = (x.Soluong - y.Soluong)
+                                  };
+            }
+            else
+            {
+                
+                ViewBag.recipes = from f in db.Formulas
+                                  join a in db.Accounts on f.ForContributors equals a.AccId
+                                  where (f.ForStatus == 1)
+                                  select new AllRecipe
+                                  {
+                                      AccId = a.AccId,
+                                      AccUsername = a.AccUsername,
+                                      ForId = f.ForId,
+                                      ForCover = f.ForCover,
+                                      ForName = f.ForName,
+                                      ForDescription = f.ForDescription,
+                                      ForCondition = f.ForCondition,
+                                      ForStatus = f.ForStatus,
+                                      ForCreated = f.ForCreated
+                                      //ConLai = (x.Soluong - y.Soluong)
+                                  };
+
+                
+            }
+               
+           
+            //-------------------
+           
             return View("recipe");
         }
         [Route("recipedetail/{id}")]
@@ -120,6 +155,7 @@ namespace IceCream.Controllers
                                          ForCreated = f.ForCreated,
                                          //ConLai = (x.Soluong - y.Soluong)
                                      });
+            ViewBag.SLfb = db.FeedbackFormulas.Where(fb => fb.FormulaId == id).Count();
             return View("recipedetail");
         }
 

@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -32,8 +34,7 @@ namespace IceCream.Controllers
         public IActionResult Index(int id)
         {
 
-            if (HttpContext.Session.GetInt32("account") == id)
-            {
+            
                 ViewBag.profile = from a in db.Accounts
                                   where a.AccId == id
                                   select a;
@@ -53,7 +54,7 @@ namespace IceCream.Controllers
                                                     ForCondition = f.ForCondition,
                                                     ForStatus = f.ForStatus,
                                                     ForCreated = f.ForCreated,
-                                                   
+                                                  
                                                     //ConLai = (x.Soluong - y.Soluong)
 
                                                 }).ToList();
@@ -77,16 +78,67 @@ namespace IceCream.Controllers
                                                     Content = fb.Content,
                                                     Created = fb.Created,
                                                     FeedbackStatus = fb.FeedbackStatus
-                                                    //ConLai = (x.Soluong - y.Soluong)
+                                                    
+
 
                                                 }).ToList();
-            }
-            else
-            {
-                return View("~/Views/Home/Page404.cshtml");
-            }
-           
+
+            ViewBag.SLct = db.Formulas.Where(f => f.ForContributors == id && f.ForStatus == 1).Count();
+            ViewBag.SLfb = db.FeedbackFormulas.Where(fb => fb.AccId == id).Count();
+            //ViewBag.donvi = db.Formulas.GroupBy(s => s.MaDV)
+            //    .Select(g => new {
+            //        g.FirstOrDefault().TenDV,
+            //        g.FirstOrDefault().NHANVIENs.Count
+            //    });
+
+
             return View("profile");
         }
-    }
+        [HttpGet]
+        [Route("editprofile/{id}")]
+        public IActionResult EditProfile(int id)
+        {
+            return View("profile", profileService.FindByIdProfile(id));
+        }
+        [HttpPost]
+        [Route("editprofile/{id}")]
+
+        public IActionResult EditProfile(Account account, IFormFile fileavatar)
+        {
+            //if (HttpContext.Session.GetInt32("account") == id)
+            //{
+            var currentProfile = profileService.FindByIdProfile(account.AccId)
+            ;
+            Debug.WriteLine("ID" + account.AccId);
+
+            currentProfile.AccId = account.AccId;
+                if (fileavatar != null)
+                {
+                    string fileName = Guid.NewGuid().ToString();
+                    var ext = fileavatar.ContentType.Split(new char[] { '/' })[1];
+                    var path = Path.Combine(webHostEnvironment.WebRootPath, "img/avatar", fileName + "." + ext);
+                    using (var fileStream = new FileStream(path, FileMode.Create))
+                    {
+                        fileavatar.CopyTo(fileStream);
+                    }
+                account.AccAvatar = fileName + "." + ext;
+
+                }
+                else
+                {
+                account.AccAvatar = "avatardefault.jpg";
+                }
+                
+                profileService.EditAcccount(account);
+                return RedirectToAction("profile");
+                
+         }
+        
+            //else
+            //{
+            //    return View("~/Views/Home/Page404.cshtml");
+            //}
+            
+        
+     }
 }

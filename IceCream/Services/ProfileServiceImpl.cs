@@ -15,7 +15,16 @@ namespace IceCream.Services
             db = _db;
         }
 
+        public Account EditAcccount(Account account)
+        {
+            db.Entry(account).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            db.SaveChanges();
+            return account;
+        }
 
-     
+        public Account FindByIdProfile(int id)
+        {
+             return db.Accounts.SingleOrDefault(p => p.AccId == id);
+        }
     }
 }
