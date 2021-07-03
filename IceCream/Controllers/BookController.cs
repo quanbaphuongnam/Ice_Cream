@@ -39,7 +39,7 @@ namespace IceCream.Controllers
             var book = bookService.Find(id);
             if (book == null)
             {
-                return NotFound();
+                return View("~/Views/Home/Page404.cshtml");
             }
             ViewBag.books = bookService.FindAllBook();
             ViewBag.book = book;

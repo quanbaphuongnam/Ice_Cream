@@ -32,12 +32,12 @@ namespace IceCream.Areas.Admin.Controllers
      
         public IActionResult Index()
         {
-        
             ViewBag.postUrl = configuration["PayPal:PostUrl"];
             ViewBag.business = configuration["PayPal:Business"];
             ViewBag.returnUrl = configuration["PayPal:ReturnUrl"];
             return View();
         }
+
         [Route("signupsuccess")]
         public IActionResult Success([FromQuery(Name = "tx")] string tx)
         {
@@ -56,7 +56,7 @@ namespace IceCream.Areas.Admin.Controllers
         }
 
         [Route("paypal")]
-        public IActionResult Success()
+        public IActionResult Paypal()
         {
             ViewBag.postUrl = configuration["PayPal:PostUrl"];
             ViewBag.business = configuration["PayPal:Business"];
