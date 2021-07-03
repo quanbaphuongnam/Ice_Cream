@@ -9,5 +9,7 @@ namespace IceCream.Services
     public interface ProfileService
     {
         //public Account FindProfile(int id);
+        Account FindByIdProfile(int id);
+        Account EditAcccount(Account account);
     }
 }

@@ -49,7 +49,7 @@
                                 <ul class="list_style">
                                     <li><a href="#">By :  @recipedetails.AccUsername</a></li>
                                     <li><a href="#">bekery, sweet</a></li>
-                                    <li><a href="#">Comments:  </a></li>
+                                    <li><a href="#">Comments:  @ViewBag.SLfb </a></li>
                                 </ul>
                             </div>
                         </div>
@@ -71,7 +71,7 @@
     </div>*@}
                     <div class="s_comment_list">
 
-                        <h3 class="cm_title_br">Comments </h3>
+                        <h3 class="cm_title_br">Comments (@ViewBag.SLfb)</h3>
                         <div class="s_comment_list_inner">
                             @foreach (var recipedetailfeedback in (IEnumerable<dynamic>)ViewBag.recipedetailfeedback)
                             {

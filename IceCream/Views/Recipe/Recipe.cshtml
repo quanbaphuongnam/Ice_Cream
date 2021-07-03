@@ -33,75 +33,108 @@
                             <span>Showing 1 - 10 of 55 results</span>
                         </div>
                         <div class="float-right">
-                            <button id="contact" onclick="location.href='#';" class="custom-btn btn-12"><span>Create!</span><span>New post</span></button>
+                            @if (@HttpContextAccessor.HttpContext.Session.GetString("username") != null)
+                            {
+
+                        <button id="contact" onclick="location.href='#';" class="custom-btn btn-12"><span>Create!</span><span>New post</span></button>}
+
                         </div>
                     </div>
                 </div>
                 <div class="row product_item_inner">
                     @foreach (var newrecipe in ViewBag.newrecipes)
                     {
-                        <div class="col-lg-4 col-md-4 col-6">
-                            <div class="cake_feature_item">
-                                <div class="cake_img">
-                                    <img src="~/img/recipe/@newrecipe.ForCover" width="270" height="226" alt="">
-                                    <span style=" position: absolute; top: -13px; right: -13px; width: 121px; height: 121px; z-index: 100; overflow: hidden; " wfd-id="428"><img src="~/img/new-icon.png"></span>
-                                </div>
+                <div class="col-lg-4 col-md-4 col-6">
+                    <div class="cake_feature_item">
+                        <div class="cake_img">
+                            <img src="~/img/recipe/@newrecipe.ForCover" width="270" height="226" alt="">
+                            <span style=" position: absolute; top: -13px; right: -13px; width: 121px; height: 121px; z-index: 100; overflow: hidden; " wfd-id="428"><img src="~/img/new-icon.png"></span>
+                        </div>
+                        <div>
+                            <div>
                                 <div class="cake_text">
-                                    @if (@HttpContextAccessor.HttpContext.Session.GetString("username") == null)
+                                    @if (@HttpContextAccessor.HttpContext.Session.GetString("username") != null)
                                     {
-                                        <h4>@newrecipe.ForCondition</h4>
-                                    }
+                    <div>
 
-                                    @if (@HttpContextAccessor.HttpContext.Session.GetString("username") == @newrecipe.AccUsername)
+                        <br /><div style=" font-size: 14px ;text-align:right">
+                            by: <a href="#">@newrecipe.AccUsername</a>&ensp;
+                        </div>@*}*@
+                        <h3>@newrecipe.ForName</h3>
+                        <a class="custom-btn btn-8" asp-controller="recipe" asp-action="recipedetail" asp-route-id="@newrecipe.ForId">See now</a>
+                    </div> }
+                                    else if (newrecipe.ForCondition == "mem")
                                     {
-                                        <br /><div style=" font-size: 14px ;text-align:right">
-                                            by: <a href="#">
-                                                You
-                                            </a>&ensp;
-                                        </div>
-                                    }
-                                    else
-                                    {
-                                        <br /><div style=" font-size: 14px ;text-align:right">by: <a href="#">@newrecipe.AccUsername</a>&ensp;
-                                        </div>
-                                    } 
+                    <div>
+                        <h4>@newrecipe.ForCondition</h4>
+                        <br /><div style=" font-size: 14px ;text-align:right">
+                            by: <a href="#">@newrecipe.AccUsername</a>&ensp;
+                        </div>
+                        <h3>@newrecipe.ForName</h3>
+                        <a class="custom-btn btn-8">Just Member</a>
+                    </div>
+                }
+                else
+                {
+                    <div>
+                        <h4>@newrecipe.ForCondition</h4>
+                        <br /><div style=" font-size: 14px ;text-align:right">
+                            by: <a href="#">@newrecipe.AccUsername</a>&ensp;
+                        </div>
+                        <h3>@newrecipe.ForName</h3>
+                        <a class="custom-btn btn-8" asp-controller="recipe" asp-action="recipedetail" asp-route-id="@newrecipe.ForId">See now</a>
+                    </div>
 
-
-                                    <h3>@newrecipe.ForName</h3>
-                                    <a class="custom-btn btn-8" asp-controller="recipe" asp-action="recipedetail" asp-route-id="@newrecipe.ForId">See now</a>
+                }
                                 </div>
                             </div>
                         </div>
-                    }
+                    </div>
+                </div>}
+                    <hr style="height:30px">
                     @foreach (var recipe in (IEnumerable<dynamic>)ViewBag.recipes)
                     {
-                        <div class="col-lg-4 col-md-4 col-6">
-                            <div class="cake_feature_item">
-                                <div class="cake_img">
-                                    <img src="~/img/recipe/@recipe.ForCover" width="270" height="226" alt="">
 
-                                </div>
-                                <div class="cake_text">
+                <div class="col-lg-4 col-md-4 col-6">
+                    <div class="cake_feature_item">
+                        <div class="cake_img">
+                            <img src="~/img/recipe/@recipe.ForCover" width="270" height="226" alt="">
 
-                                    @if (@HttpContextAccessor.HttpContext.Session.GetString("username") == @recipe.AccUsername)
-                                    {
-                                        <br /><div style=" font-size: 14px ;text-align:right">
-                                            by: <a href="#">
-                                                You
-                                            </a>&ensp;
-                                        </div>
-                                    }
-                                    else
-                                    {
-                                        <br /><div style=" font-size: 14px ;text-align:right">by: <a href="#">@recipe.AccUsername</a>&ensp;
-</div>
-                                    }
-                                    <h3>@recipe.ForName</h3>
-                                    <a class="custom-btn btn-8" asp-controller="recipe" asp-action="recipedetail" asp-route-id="@recipe.ForId">See now</a>
-                                </div>
-                            </div>
                         </div>
-                    }
+                        <div class="cake_text">
+                            @if (@HttpContextAccessor.HttpContext.Session.GetString("username") != null)
+                            {
+                <div>
+
+                    <br /><div style=" font-size: 14px ;text-align:right">
+                        by: <a href="#">@recipe.AccUsername</a>&ensp;
+                    </div>@*}*@
+                    <h3>@recipe.ForName</h3>
+                    <a class="custom-btn btn-8" asp-controller="recipe" asp-action="recipedetail" asp-route-id="@recipe.ForId">See now</a>
+                </div> }
+            else if (recipe.ForCondition == "mem")
+            {
+                <div>
+                    <h4>@recipe.ForCondition</h4>
+                    <br /><div style=" font-size: 14px ;text-align:right">
+                        by: <a href="#">@recipe.AccUsername</a>&ensp;
+                    </div>
+                    <h3>@recipe.ForName</h3>
+                    <a class="custom-btn btn-8">Just Member</a>
+                </div> }
+                                else
+                                {
+                <div>
+                    <h4>@recipe.ForCondition</h4>
+                    <br /><div style=" font-size: 14px ;text-align:right">
+                        by: <a href="#">@recipe.AccUsername</a>&ensp;
+                    </div>
+                    <h3>@recipe.ForName</h3>
+                    <a class="custom-btn btn-8" asp-controller="recipe" asp-action="recipedetail" asp-route-id="@recipe.ForId">See now</a>
+                </div>}
+                        </div>
+                    </div>
+                </div>}
 
 
                 </div>
@@ -149,18 +182,8 @@
 
                         </ul>
                     </aside>
-                    @*<aside class="left_sidebar p_price_widget">
-                            <div class="p_w_title">
-                                <h3>Filter By Price</h3>
-                            </div>
-                            <div class="filter_price">
-                                <div id="slider-range"></div>
-                                <label for="amount">Price range:</label>
-                                <input type="text" id="amount" readonly />
-                                <a href="#">Filter</a>
-                            </div>
-                        </aside>*@
-                    <aside class="left_sidebar p_sale_widget">
+                  
+                    @*<aside class="left_sidebar p_sale_widget">
                         <div class="p_w_title">
                             <h3>Top Sale Products</h3>
                         </div>
@@ -187,7 +210,7 @@
                                 </div>
                             </div>
                         }
-                    </aside>
+                    </aside>*@
                 </div>
             </div>
         </div>
@@ -250,7 +273,7 @@ https://codyhouse.co/gem/simple-confirmation-popup/
             <br>
             <div class="submit">
                 <p class="user-message" id="contactblurb">We will review your formula as soon as possible!</p>
-                <input type="submit" name="submit" id="submit" value="Send" />
+                <input type="submit"  value="Send" class='show-example-btn' data-swal-template='#my-template' />
             </div>
         </div>
     </form>
@@ -264,8 +287,12 @@ https://codyhouse.co/gem/simple-confirmation-popup/
         </p>
     </div>
 </div>
-
-
+<template id='my-template'>
+    <swal-title>Thank you for sending a new recipe for us, we will review your formula as soon as possible!</swal-title>
+</template>
+<script>
+    Swal.bindClickHandler()
+</script>
 <script src="~/js/jspost/jquery.min.js"></script>
 
 
