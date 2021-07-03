@@ -4,5 +4,65 @@
     Layout = "~/Views/SharedAdmin/_LayoutAdmin.cshtml";
 }
 
-<h2>QuanLySmell</h2>
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Tables</h1>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        QuanLySavour
+
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                <thead>
+                                    <tr>
+                                        <th>HashtagId</th>
+                                        <th>SavName</th>
+                                        <th>SavPhoto</th>
+                                        <th>SavIngredients</th>
+                                        <th>SavProcedure</th>
+
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var savour in ViewBag.savours)
+                                    {
+                                        <tr class="odd gradeX">
+                                            <td>@savour.HashtagId</td>
+                                            <td>@savour.SavName</td>
+                                            <td>
+                                                <img src="~/img/savour/@savour.SavPhoto" width="150" height="150" alt="">
+                                            </td>
+
+                                            <td>@savour.SavIngredients</td>
+                                            <td>@savour.SavProcedure</td>
+
+
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.table-responsive -->
+
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+
+    </div>
+</div>
 

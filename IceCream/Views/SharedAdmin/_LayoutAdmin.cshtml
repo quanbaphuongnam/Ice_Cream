@@ -28,12 +28,26 @@
     <!-- Custom Fonts -->
     <link href="~/Admin/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+
+    <link rel="stylesheet" href="../../assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="../../assets/vendors/css/vendor.bundle.base.css">
+     @*endinject 
+     Plugin css for this page 
+     End plugin css for this page 
+     inject:css 
+     endinject 
+     Layout styles*@ 
+    @*<link rel="stylesheet" href="../../assets/css/style.css">*@
+     @*End layout styles*@ 
+    <link rel="shortcut icon" href="../../assets/images/favicon.ico" />
 </head>
 <body>
     <header>
@@ -167,63 +181,24 @@
                             <li>
                                 <a asp-controller="quanlyhoadon" asp-action="quanlyhoadon"><i class="fa fa-table fa-fw"></i> QLBill</a>
                             </li>
+                           
                             <li>
-                                <a asp-controller="approverecipe" asp-action="approverecipe"><i class="fa fa-edit fa-fw"></i> ApproveRecipe</a>
-                            </li>
-                            <li>
-                                <a href="#"><i class="fa fa-wrench fa-fw"></i> UI Elements<span class="fa arrow"></span></a>
+                                <a href="#"><i class="fa fa-wrench fa-fw"></i> All FEEDBACK<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>
-                                        <a href="panels-wells.html">Panels and Wells</a>
+                                        <a asp-controller="feedbackuser" asp-action="feedbackuser">Feedback User Add</a>
                                     </li>
                                     <li>
-                                        <a href="buttons.html">Buttons</a>
+                                        <a asp-controller="feedbackbook" asp-action="feedbackbook">Feedback Book</a>
                                     </li>
                                     <li>
-                                        <a href="notifications.html">Notifications</a>
+                                        <a asp-controller="feedbackrecipe" asp-action="feedbackrecipe">Feedback Recipe</a>
                                     </li>
-                                    <li>
-                                        <a href="typography.html">Typography</a>
-                                    </li>
-                                    <li>
-                                        <a href="icons.html"> Icons</a>
-                                    </li>
-                                    <li>
-                                        <a href="grid.html">Grid</a>
-                                    </li>
+                                  
                                 </ul>
                                 <!-- /.nav-second-level -->
                             </li>
-                            <li>
-                                <a href="#"><i class="fa fa-sitemap fa-fw"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>
-                                <ul class="nav nav-second-level">
-                                    <li>
-                                        <a href="#">Second Level Item</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Second Level Item</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Third Level <span class="fa arrow"></span></a>
-                                        <ul class="nav nav-third-level">
-                                            <li>
-                                                <a href="#">Third Level Item</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">Third Level Item</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">Third Level Item</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">Third Level Item</a>
-                                            </li>
-                                        </ul>
-                                        <!-- /.nav-third-level -->
-                                    </li>
-                                </ul>
-                                <!-- /.nav-second-level -->
-                            </li>
+                            
                             <li>
                                 <a href="#"><i class="fa fa-files-o fa-fw"></i> Sample Pages<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
@@ -325,7 +300,9 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="..~/Admin/js/startmin.js"></script>
-
+    <script src="../../assets/js/off-canvas.js"></script>
+    <script src="../../assets/js/hoverable-collapse.js"></script>
+    <script src="../../assets/js/misc.js"></script>
 
 </body>
 </html>
