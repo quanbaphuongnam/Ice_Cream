@@ -160,10 +160,13 @@
                 <div class="product_left_sidebar">
                     <aside class="left_sidebar search_widget">
                         <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Enter Search Keywords">
-                            <div class="input-group-append">
-                                <button class="btn" type="button"><i class="icon icon-Search"></i></button>
-                            </div>
+                            <form asp-controller="recipe" asp-action="recipe" method="get">
+                                <input type="text" name="SearchString" class="form-control" placeholder="Enter Search Keywords">
+                                <div class="input-group-append">
+                                    <button class="btn" type="submit"><i class="icon icon-Search"></i></button>
+                                </div>
+                            </form>
+                           
                         </div>
                     </aside>
                     <aside class="left_sidebar p_catgories_widget">
