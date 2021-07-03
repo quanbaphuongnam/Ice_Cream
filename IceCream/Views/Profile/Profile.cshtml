@@ -1,8 +1,9 @@
-﻿
-@{
-    ViewData["Title"] = "Profile";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+﻿@model IceCream.Models.Account
+@using Microsoft.AspNetCore.Http;
+
+@inject IHttpContextAccessor HttpContextAccessor
+@{ ViewData["Title"] = "Profile";
+                Layout = "~/Views/Shared/_Layout.cshtml"; }
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -19,34 +20,45 @@
         </div>
     </div>
 </section>
-
+@foreach (var profile in ViewBag.profile) {
 <div class="container emp-profile">
     <form method="post">
         <div class="row">
             <div class="col-md-4">
                 <div class="profile-img">
-                    <img src="~/img/avatar/avatardefault.jpg" alt="" />
+
+                    @if (@profile.AccAvatar == null)
+                    {
+                <img src="~/img/avatar/avatardefault.jpg" alt="" />}
+            else
+            {
+                <img src="~/img/avatar/@profile.AccAvatar" alt="" />
+            }
+
                     <div class="file btn btn-lg btn-primary">
+
                         
-                        Change Photo 
                     </div>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="profile-head">
                     <h5>
-                        Nam Pro player
+                        @profile.AccFullname
                     </h5>
                     <h6>
-                        Member vip 8++
+                        @profile.AccUsername
                     </h6>
-                    <p class="proile-rating">RANKINGS : <span>8/10</span></p>
+                    <p class="proile-rating">TIME REMAINING : <span>182 day</span></p>
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item">
                             <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Timeline</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="comment-tab" data-toggle="tab" href="#comment" role="tab" aria-controls="comment" aria-selected="false">You Comment</a>
                         </li>
                     </ul>
                 </div>
@@ -74,27 +86,11 @@
                 <div class="tab-content profile-tab" id="myTabContent">
                     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                         <div class="row">
-                            <div class="col-md-6">
-                                <label>User Id</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p>Kshiti123</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Name</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p>Kshiti Ghelani</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <label>Email</label>
                             </div>
-                            <div class="col-md-6">
-                                <p>kshitighelani@gmail.com</p>
+                            <div class="col-md-4">
+                                <p>@profile.AccEmail</p>
                             </div>
                         </div>
                         <div class="row">
@@ -102,59 +98,76 @@
                                 <label>Phone</label>
                             </div>
                             <div class="col-md-6">
-                                <p>123 456 7890</p>
+                                <p>@profile.AccPhone</p>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6">
-                                <label>Profession</label>
+                                <label>Gender</label>
                             </div>
                             <div class="col-md-6">
-                                <p>Web Developer and Designer</p>
+                                <p>@profile.AccGender</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Date of birth</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>@profile.AccDob.ToString("dd/MM/yyyy")</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Address</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>@profile.AccAddr</p>
                             </div>
                         </div>
                     </div>
                     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <img src="~/img/cake-feature/arivals-2.jpg" height="100" width="200" alt="Alternate Text" />
-                            </div>
-                            <div class="col-md-3">
-                                <p>Công thức Kem Sôcôla</p>
-                            </div>
-                            <div class="col-md-3">
-                                <button class="custom-btn btn-14">Read More</button>
-                            </div>
-                        </div>
-                        <hr width="100%" align="center" />
-                        <div class="row">
-                            <div class="col-md-6">
-                                <img src="~/img/cake-feature/arivals-2.jpg" height="100" width="200" alt="Alternate Text" />
-                            </div>
-                            <div class="col-md-3">
-                                <p>Công thức Kem Sôcôla</p>
-                            </div>
-                            <div class="col-md-3">
-                                <button class="custom-btn btn-14">Read More</button>
-                            </div>
-                        </div>
-                        <hr width="100%" align="center" />
-                        
-                        <div class="row">
-                            <div class="col-md-6">
-                                <img src="~/img/cake-feature/arivals-2.jpg" height="100" width="200" alt="Alternate Text" />
-                            </div>
-                            <div class="col-md-3">
-                                <p>Công thức Kem Sôcôla</p>
-                            </div>
-                            <div class="col-md-3">
-                                <button class="custom-btn btn-14">Read More</button>
-                            </div>
-                        </div>
+                        @foreach (var accountrecipe in ViewBag.accountrecipe)
+                        {
+                <div class="row">
+                    <div class="col-md-6">
+                        <img src="~/img/recipe/@accountrecipe.ForCover" height="100" width="200" alt="Alternate Text" />
                     </div>
+                    <div class="col-md-3">
+                        <p>@accountrecipe.ForName</p>
+                    </div>
+                    <div class="col-md-3">
+                        <button class="custom-btn btn-14" asp-controller="recipe" asp-action="recipedetail" asp-route-id="@accountrecipe.ForId">Read More</button>
+                    </div>
+                </div>
+                                    <hr width="100%" align="center" />}
+
+
+                    </div>
+                    <div class="tab-pane fade" id="comment" role="tabpanel" aria-labelledby="comment-tab">
+                        @foreach (var accountfeedback in ViewBag.accountfeedback)
+                        {
+                        <div class="row">
+                            <div class="col-md-3">
+                                <img src="~/img/recipe/@accountfeedback.ForCover" height="100" width="150" alt="Alternate Text" />
+                            </div>
+                            <div class="col-md-2">
+                                <p>@accountfeedback.ForName</p>
+                            </div>
+                            <div class="col-md-4" style="color:black">
+                                <p>@accountfeedback.Content</p>
+                            </div>
+                            <div class="col-md-3">
+                                <button class="custom-btn btn-14" asp-controller="recipe" asp-action="recipedetail" asp-route-id="@accountfeedback.ForId">Go</button>
+                            </div>
+                        </div>
+                                            <hr width="100%" align="center" />}
+
+
+                            </div>
                 </div>
             </div>
         </div>
     </form>
 </div>
-
+}

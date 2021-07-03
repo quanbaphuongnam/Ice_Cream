@@ -37,7 +37,7 @@
                         <ul class="dropdown-menu">
                             @if (@HttpContextAccessor.HttpContext.Session.GetString("username") != null)
                             {
-                <li><a asp-controller="profile" asp-action="profile">@HttpContextAccessor.HttpContext.Session.GetString("username")</a></li>
+                <li><a asp-controller="profile" asp-action="profile" asp-route-id="@HttpContextAccessor.HttpContext.Session.GetInt32("account")">@HttpContextAccessor.HttpContext.Session.GetString("username")</a></li>
                                 <li><a asp-controller="cart" asp-action="cart">Cart (@HttpContextAccessor.HttpContext.Session.GetInt32("jsoncart"))</a></li>
                                                 <li><a asp-controller="account" asp-action="logout">Log out</a></li>
  }

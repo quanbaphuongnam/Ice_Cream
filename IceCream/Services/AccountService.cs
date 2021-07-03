@@ -8,6 +8,7 @@ namespace IceCream.Services
 {
     public interface AccountService
     {
+      
         List<Account> FindAllAccount();
         public Account Create(Account account);
         Account Login(string username, string password);
