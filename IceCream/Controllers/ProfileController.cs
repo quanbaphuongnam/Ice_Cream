@@ -95,23 +95,21 @@ namespace IceCream.Controllers
             return View("profile");
         }
         [HttpGet]
-        [Route("editprofile/{id}")]
+        [Route("editprofile")]
         public IActionResult EditProfile(int id)
         {
             return View("profile", profileService.FindByIdProfile(id));
         }
         [HttpPost]
-        [Route("editprofile/{id}")]
+        [Route("editprofile")]
 
         public IActionResult EditProfile(Account account, IFormFile fileavatar)
         {
             //if (HttpContext.Session.GetInt32("account") == id)
             //{
-            var currentProfile = profileService.FindByIdProfile(account.AccId)
-            ;
-            Debug.WriteLine("ID" + account.AccId);
+            var currentProfile = profileService.FindByIdProfile(account.AccId);
 
-            currentProfile.AccId = account.AccId;
+         
                 if (fileavatar != null)
                 {
                     string fileName = Guid.NewGuid().ToString();
@@ -121,16 +119,26 @@ namespace IceCream.Controllers
                     {
                         fileavatar.CopyTo(fileStream);
                     }
-                account.AccAvatar = fileName + "." + ext;
+                    currentProfile.AccAvatar = fileName + "." + ext;
 
                 }
-                else
-                {
-                account.AccAvatar = "avatardefault.jpg";
-                }
-                
-                profileService.EditAcccount(account);
-                return RedirectToAction("profile");
+                else if(account.AccAvatar != null)
+                 {
+                    currentProfile.AccAvatar = account.AccAvatar;
+              
+                }else
+                 {
+                    currentProfile.AccAvatar = "avatardefault.jpg";
+                 }
+               
+                if (account.AccDob != null) { currentProfile.AccDob = account.AccDob; }
+                if (account.AccEmail != null) { currentProfile.AccEmail = account.AccEmail; }
+                if (account.AccGender != null) {  currentProfile.AccGender = account.AccGender; }
+                if (account.AccPhone != null) { currentProfile.AccPhone = account.AccPhone; }
+                if (account.AccAddr != null) { currentProfile.AccAddr = account.AccAddr; }
+                if (account.AccFullname != null) { currentProfile.AccFullname = account.AccFullname; }
+                profileService.EditAcccount(currentProfile);
+                return RedirectToAction("profile", new {id = account.AccId }  );
                 
          }
         
