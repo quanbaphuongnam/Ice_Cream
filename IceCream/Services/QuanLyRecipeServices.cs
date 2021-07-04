@@ -10,6 +10,7 @@ namespace IceCream.Services
     {
         List<Formula> FindAllFormula();
         Formula CreateFormula(Formula formula);
-
+        Formula Find(int id);
+        void Delete(int id);
     }
 }

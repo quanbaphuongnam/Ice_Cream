@@ -21,6 +21,17 @@ namespace IceCream.Services
             return formula;
         }
 
+        public void Delete(int id)
+        {
+            db.Formulas.Remove(db.Formulas.Find(id));
+            db.SaveChanges();
+        }
+
+        public Formula Find(int id)
+        {
+            return db.Formulas.Find(id);
+        }
+
         public List<Formula> FindAllFormula()
         {
             return db.Formulas.ToList();

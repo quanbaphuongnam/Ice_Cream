@@ -24,6 +24,7 @@ namespace IceCream.Controllers.Admin
         {
             db = _db;
             quanlyrecipeServices = _quanlyrecipeService;
+            webHostEnvironment = _webHostEnvironment;
         }
         [Route("quanlyrecipe")]
         [Route("")]
@@ -44,6 +45,12 @@ namespace IceCream.Controllers.Admin
                                   ForCreated = f.ForCreated
                               }).OrderByDescending(f => f.ForId);
             return View("quanlyrecipe");
+        }
+        [Route("addrecipe")]
+        public IActionResult Addrecipe()
+        {
+         
+            return View("addrecipe");
         }
         [HttpPost]
         [Route("addrecipe")]
@@ -73,6 +80,19 @@ namespace IceCream.Controllers.Admin
             quanlyrecipeServices.CreateFormula(formula);
             
             return RedirectToAction("addrecipe");
+        }
+        [Route("updaterecipe")]
+        public IActionResult Updaterecipe()
+        {
+
+            return View("updaterecipe");
+        }
+        [Route("delete/{id}")]
+
+        public IActionResult Delete(int id)
+        {
+            quanlyrecipeServices.Delete(id);
+            return RedirectToAction("quanlyrecipe");
         }
     }
 }
