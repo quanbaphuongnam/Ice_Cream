@@ -35,10 +35,9 @@ namespace IceCream.Controllers
         [Route("recipe")]
         [Route("")]
    
-        public IActionResult Index(string searchString)
+        public IActionResult Index( string searchString)
         {
-          
-         
+            ViewBag.searchString =  searchString;
             //--------------------
             ViewBag.savours = savourService.FindAllSavour();
 
@@ -112,6 +111,24 @@ namespace IceCream.Controllers
         [HttpGet]
         public IActionResult RecipeDetail(int id)
         {
+            ViewBag.savours = savourService.FindAllSavour();
+            ViewBag.newrecipes = (from f in db.Formulas
+                                  join a in db.Accounts on f.ForContributors equals a.AccId
+                                  where (f.ForStatus == 1)
+                                  select new AllRecipe
+                                  {
+                                      AccId = a.AccId,
+                                      AccUsername = a.AccUsername,
+                                      ForId = f.ForId,
+                                      ForCover = f.ForCover,
+                                      ForName = f.ForName,
+                                      ForDescription = f.ForDescription,
+                                      ForCondition = f.ForCondition,
+                                      ForStatus = f.ForStatus,
+                                      ForCreated = f.ForCreated
+
+                                      //ConLai = (x.Soluong - y.Soluong)
+                                  }).OrderByDescending(f => f.ForId).Take(3);
             ViewBag.recipedetailfeedback = (from f in db.Formulas
                                             join fb in db.FeedbackFormulas on f.ForId equals fb.FormulaId
                                             join a in db.Accounts on fb.AccId equals a.AccId

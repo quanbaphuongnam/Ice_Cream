@@ -9,5 +9,7 @@ namespace IceCream.Services
     public interface QuanLyRecipeServices
     {
         List<Formula> FindAllFormula();
+        Formula CreateFormula(Formula formula);
+
     }
 }

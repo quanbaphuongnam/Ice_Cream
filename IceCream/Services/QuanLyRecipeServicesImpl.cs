@@ -13,6 +13,14 @@ namespace IceCream.Services
         {
             db = _db;
         }
+
+        public Formula CreateFormula(Formula formula)
+        {
+            db.Formulas.Add(formula);
+            db.SaveChanges();
+            return formula;
+        }
+
         public List<Formula> FindAllFormula()
         {
             return db.Formulas.ToList();

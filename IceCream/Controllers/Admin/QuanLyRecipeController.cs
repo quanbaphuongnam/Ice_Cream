@@ -2,9 +2,11 @@
 using IceCream.Models.BigModel;
 using IceCream.Services;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -42,6 +44,35 @@ namespace IceCream.Controllers.Admin
                                   ForCreated = f.ForCreated
                               }).OrderByDescending(f => f.ForId);
             return View("quanlyrecipe");
+        }
+        [HttpPost]
+        [Route("addrecipe")]
+        public IActionResult AddRecipe(Formula formula, IFormFile filecover)
+        {
+            if (filecover != null)
+            {
+                string fileName = Guid.NewGuid().ToString();
+                var ext = filecover.ContentType.Split(new char[] { '/' })[1];
+                var path = Path.Combine(webHostEnvironment.WebRootPath, "img/recipe", fileName + "." + ext);
+                using (var fileStream = new FileStream(path, FileMode.Create))
+                {
+                    filecover.CopyTo(fileStream);
+                }
+                formula.ForCover = fileName + "." + ext;
+
+            }
+            else
+            {
+                formula.ForCover = "";
+            }
+         
+
+            formula.ForCreated = DateTime.Now;
+            formula.ForUpdate = DateTime.Now;
+
+            quanlyrecipeServices.CreateFormula(formula);
+            
+            return RedirectToAction("addrecipe");
         }
     }
 }
