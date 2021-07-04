@@ -160,7 +160,7 @@
                     <aside class="left_sidebar search_widget">
                         <div class="input-group">
                             <form asp-controller="recipe" asp-action="recipe" method="get">
-                                <input type="text" name="SearchString" class="form-control" placeholder="Enter Search Keywords">
+                                <input type="text" name="SearchString" class="form-control" value="@ViewBag.searchString" placeholder="Enter Search Keywords">
                                 <div class="input-group-append">
                                     <button class="btn" type="submit"><i class="icon icon-Search"></i></button>
                                 </div>
@@ -174,14 +174,9 @@
                         </div>
                         <ul class="list_style">
                             @foreach (var savour in ViewBag.savours)
-                            {
-                                <li><a href="#">@savour.SavName</a></li>
-
+                            {                               
+                                    <li><a  asp-controller="recipe" asp-action="recipe" method="get" name="SearchString" >@savour.SavName</a></li>
                             }
-
-
-
-
                         </ul>
                     </aside>
                   
