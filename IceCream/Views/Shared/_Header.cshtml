@@ -37,15 +37,15 @@
                         <ul class="dropdown-menu">
                             @if (@HttpContextAccessor.HttpContext.Session.GetString("username") != null)
                             {
-                <li><a asp-controller="profile" asp-action="profile" asp-route-id="@HttpContextAccessor.HttpContext.Session.GetInt32("account")">@HttpContextAccessor.HttpContext.Session.GetString("username")</a></li>
+                                <li><a asp-controller="profile" asp-action="profile" asp-route-id="@HttpContextAccessor.HttpContext.Session.GetInt32("account")">@HttpContextAccessor.HttpContext.Session.GetString("username")</a></li>
                                 <li><a asp-controller="cart" asp-action="cart">Cart (@HttpContextAccessor.HttpContext.Session.GetInt32("jsoncart"))</a></li>
-                                                <li><a asp-controller="account" asp-action="logout">Log out</a></li>
- }
-                                            else
-                                            {
+                                <li><a asp-controller="account" asp-action="logout">Log out</a></li>
+                            }
+                            else
+                            {
                                 <li><a class="popup-with-zoom-anim" href="#test-login">Login</a></li>
-                                               
-}
+
+                            }
                         </ul>
                     </li>
 
@@ -79,9 +79,9 @@
                     <input type="text" asp-for="AccUsername" placeholder="Username" />
                     <input type="email" asp-for="AccEmail" placeholder="Email" />
                     <input type="password" placeholder="Password" id="pass" />
-                    <input type="password" asp-for="AccPassword" placeholder="Confirm Password" onchange="myFunction(this.value)"/>
+                    <input type="password" asp-for="AccPassword" placeholder="Confirm Password" onchange="myFunction(this.value)" />
 
-                    <button type="submit" >Sign Up</button>
+                    <button type="submit">Sign Up</button>
                     <script>
                         function myFunction(val) {
                             alert("The input value has changed. The new value is: " + val);
@@ -101,31 +101,31 @@
                 </form>
                 @if (@HttpContextAccessor.HttpContext.Session.GetString("msg") == "f")
                 {
-    <script type="text/javascript">
-        Swal.fire({
+                    <script type="text/javascript">
+                        Swal.fire({
 
-            icon: 'error',
-            title: 'Login Fail',
-            text: ' Incorrect username or password',
-            showConfirmButton: false,
-            timer: 2000
-        })
-    </script>
- HttpContextAccessor.HttpContext.Session.Remove("msg");
-}
-else if (@HttpContextAccessor.HttpContext.Session.GetString("msg") == "s")
-{
-<script type="text/javascript">
-    Swal.fire({
-        icon: 'success',
-        title: 'Login succesfull',
-        text: ' Welcome to IceCream',
-        showConfirmButton: false,
-        timer: 1500
-    })
-</script>
-HttpContextAccessor.HttpContext.Session.Remove("msg");
-}
+                            icon: 'error',
+                            title: 'Login Fail',
+                            text: ' Incorrect username or password',
+                            showConfirmButton: false,
+                            timer: 2000
+                        })
+                    </script>
+                    HttpContextAccessor.HttpContext.Session.Remove("msg");
+                }
+                else if (@HttpContextAccessor.HttpContext.Session.GetString("msg") == "s")
+                {
+                    <script type="text/javascript">
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Login succesfull',
+                            text: ' Welcome to IceCream',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                    </script>
+                    HttpContextAccessor.HttpContext.Session.Remove("msg");
+                }
             </div>
             <div class="overlay-containerr">
                 <div class="overlay">

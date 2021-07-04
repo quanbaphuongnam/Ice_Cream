@@ -29,7 +29,6 @@ namespace IceCream.Areas.Admin.Controllers
         [Route("index")]
         [Route("")]
         [Route("~/")]
-     
         public IActionResult Index()
         {
             ViewBag.postUrl = configuration["PayPal:PostUrl"];
