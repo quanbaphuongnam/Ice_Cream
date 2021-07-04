@@ -36,5 +36,10 @@ namespace IceCream.Services
             }
             return null;
         }
+
+        public Account Find(string user)
+        {
+            return db.Accounts.SingleOrDefault(b => b.AccUsername == user);
+        }
     }
 }

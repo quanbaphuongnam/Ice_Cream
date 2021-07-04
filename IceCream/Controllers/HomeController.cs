@@ -18,13 +18,17 @@ namespace IceCream.Areas.Admin.Controllers
     public class HomeController : Controller
     {
         private AccountService account;
+        private ServiceAccountService serviceAccountService;
         private RecipeService recipeService;
         private IConfiguration configuration;
-        public HomeController(AccountService _account,RecipeService _recipeService, IConfiguration _configuration)
+        public DatabaseContext db;
+        public HomeController(AccountService _account,RecipeService _recipeService, IConfiguration _configuration, DatabaseContext _db, ServiceAccountService _serviceAccountService)
         {
             account = _account;
+            serviceAccountService = _serviceAccountService;
             recipeService = _recipeService;
             configuration = _configuration;
+            db = _db;
         }
         [Route("index")]
         [Route("")]
@@ -45,12 +49,36 @@ namespace IceCream.Areas.Admin.Controllers
             Debug.WriteLine("First Name: " + result.PayerFirstName);
             Debug.WriteLine("LastName: " + result.PayerLastName);
             Debug.WriteLine("Email: " + result.PayerEmail);
-            Debug.WriteLine(JsonConvert.DeserializeObject(HttpContext.Session.GetString("acc")));
 
             Account acc = JsonConvert.DeserializeObject<Account>(HttpContext.Session.GetString("acc"));
             acc.AccPassword = BCrypt.Net.BCrypt.HashString(acc.AccPassword);
             account.Create(acc);
+            Account acc2 = account.Find(acc.AccUsername);
             HttpContext.Session.Remove("acc");
+            if (result.GrossTotal == 15)
+            {
+                ServiceAccount serviceAccount = new ServiceAccount
+                {
+                    SerId = 1,
+                    AccId = acc2.AccId,
+                    SerAccCreated = DateTime.Now,
+                    SerAccEnd = DateTime.Now.AddDays(30),
+                    SerAccPrice = 15,
+                };
+                serviceAccountService.Create(serviceAccount);
+            }
+            else
+            {
+                ServiceAccount serviceAccount = new ServiceAccount
+                {
+                    SerId = 2,
+                    AccId = acc2.AccId,
+                    SerAccCreated = DateTime.Now,
+                    SerAccEnd = DateTime.Now.AddDays(365),
+                    SerAccPrice = 150,
+                };
+                serviceAccountService.Create(serviceAccount);
+            }
             return View("signupsuccess");
         }
 
@@ -60,6 +88,7 @@ namespace IceCream.Areas.Admin.Controllers
             ViewBag.postUrl = configuration["PayPal:PostUrl"];
             ViewBag.business = configuration["PayPal:Business"];
             ViewBag.returnUrl = configuration["PayPal:ReturnUrl"];
+            ViewBag.services = db.Services.ToList();
             return View("Paypal");
         }
     }

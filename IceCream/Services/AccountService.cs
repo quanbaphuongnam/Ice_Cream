@@ -11,6 +11,7 @@ namespace IceCream.Services
       
         List<Account> FindAllAccount();
         public Account Create(Account account);
+        Account Find(string user);
         Account Login(string username, string password);
 
     }

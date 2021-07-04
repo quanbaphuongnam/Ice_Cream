@@ -1,0 +1,137 @@
+
+
+input:focus, textarea:focus, select:focus {
+    border: 1px solid #fafafa;
+    -webkit-box-shadow: 0 0 6px #007eff;
+    -moz-box-shadow: 0 0 5px #007eff;
+    box-shadow: 0 0 5px #007eff;
+    outline: none;
+}
+
+sup {
+    font-size: 40px;
+}
+
+
+
+#container {
+    width: 100%;
+    text-align: center;
+}
+
+.whole {
+    display: inline-block;
+    margin: 30px auto;
+}
+
+.type {
+    width: 400px;
+    border-radius: 5px 5px 0px 0px;
+    background-color: #eac80d;
+    height: 62px;
+    border-bottom: 3px solid #bfa30c;
+}
+
+    .type p {
+        font-family: 'Open Sans';
+        font-weight: 800;
+        font-size: 29px;
+        text-transform: uppercase;
+        color: white;
+        text-align: center;
+        padding-top: 10px;
+    }
+
+.plan {
+    width: 400px;
+    background-color: #2b2937;
+    border-radius: 0px 0px 5px 5px;
+    font-family: 'Open Sans';
+    font-style: condensed;
+    font-size: 90px;
+    color: white;
+    text-align: center;
+}
+
+.standard {
+    background-color: #1abc9c;
+    border-bottom: 3px solid #18937b;
+}
+
+.header {
+    border-bottom: 1px solid #494a5a;
+    padding-bottom: 39px;
+}
+
+    .header span {
+        font-size: 32px;
+    }
+
+.month {
+    font-size: 14px;
+    color: #575757;
+    padding: 0px;
+    margin: -10px;
+}
+
+.price {
+    height: 120px;
+    line-height: 0px;
+}
+
+.cart {
+    color: white;
+    position: relative;
+    top: 16px;
+}
+
+.bottom {
+    width: 150px;
+    height: 70px;
+    font-size: 18px;
+    background-color: #2b2937;
+    margin: 30px;
+}
+
+.content {
+    font-size: 15px;
+}
+
+.login_c {
+    width: 500px;
+    background-color: #2b2937;
+    height: 300px;
+    margin: 0 auto;
+    margin-top: 40px;
+    border-radius: 5px;
+}
+
+    .login_c input {
+        width: 350px;
+        height: 40px;
+        border: 1px solid #494a5a;
+        margin-bottom: 20px;
+        border-radius: 5px;
+        padding-left: 10px;
+    }
+
+
+.login {
+    background-color: #BC4B1A;
+    border-bottom: 3px solid #7C3618;
+    width: 100%;
+}
+
+.top {
+    margin-top: 35px;
+}
+
+.nodisplay {
+    opacity: 0.1;
+}
+
+.selected {
+    background-color: #1F1B36;
+    margin: 0px;
+    padding: 0px;
+}
