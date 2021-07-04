@@ -61,7 +61,7 @@
         <h2>Sign in/up</h2>
         <div class="containerr" id="containerr">
             <div class="form-containerr sign-up-containerr">
-                <form asp-controller="account" asp-action="add" method="post">
+                @*<form asp-controller="account" asp-action="add" method="post">
                     <h1>Create Account</h1>
                     <input type="text" asp-for="AccUsername" placeholder="Username" />
                     <span asp-validation-for="AccUsername"></span>
@@ -72,7 +72,7 @@
                     <input type="password" placeholder="Confirm Password" />
 
                     <button type="submit" onclick="signup">Sign Up</button>
-                </form>
+                </form>*@
                 <form asp-controller="account" asp-action="add" method="post">
 
                     <h1>Create Account</h1>

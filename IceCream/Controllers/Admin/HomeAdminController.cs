@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,11 @@ namespace IceCream.Areas.Admin.Controllers
         [Route("")]
         public IActionResult Index()
         {
-            return View("homeadmin");
+            if (HttpContext.Session.GetInt32("admin") != null)
+            {
+                return View("homeadmin");
+            }
+            return View("~/Views/Home/Page404.cshtml");
         }
     }
 }

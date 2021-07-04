@@ -46,7 +46,7 @@ namespace IceCream.Areas.Admin.Controllers
             Debug.WriteLine("LastName: " + result.PayerLastName);
             Debug.WriteLine("Email: " + result.PayerEmail);
             Debug.WriteLine(JsonConvert.DeserializeObject(HttpContext.Session.GetString("acc")));
-            Debug.WriteLine("thành công");
+
             Account acc = JsonConvert.DeserializeObject<Account>(HttpContext.Session.GetString("acc"));
             acc.AccPassword = BCrypt.Net.BCrypt.HashString(acc.AccPassword);
             account.Create(acc);
