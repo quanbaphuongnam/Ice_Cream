@@ -29,12 +29,7 @@ namespace IceCream.Services
             return formula;
         }
 
-        public PhotoFormula CreateFormulaListPhoTo(PhotoFormula photoFormula)
-        {
-            db.PhotoFormulas.Add(photoFormula);
-            db.SaveChanges();
-            return photoFormula;
-        }
+      
 
      
     }

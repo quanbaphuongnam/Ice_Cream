@@ -2,10 +2,8 @@
 @using Microsoft.AspNetCore.Http;
 
 @inject IHttpContextAccessor HttpContextAccessor
-@{
-    ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+@{ ViewData["Title"] = "Index";
+                Layout = "~/Views/Shared/_Layout.cshtml"; }
 
 <section class="main_slider_area">
     <div id="main_slider4" class="rev_slider" data-version="5.3.1.6">
@@ -234,28 +232,28 @@
                 <h5> To see more formulas than you need to become our member</h5>
             </div>
             <div class="cake_feature_slider owl-carousel">
-                 
-                @*@foreach (var newrecipe in ViewBag.newrecipes)
-                {
-                    <div class="item">
-                        <div class="cake_feature_item">
-                            <div class="cake_img">
-                                <img src="~/img/recipe/@newrecipe.ForCover" width="270" height="226" alt="">
-                                <span style=" position: absolute; top: -13px; right: -13px; width: 121px; height: 121px; z-index: 100; overflow: hidden; " wfd-id="428"><img src="~/img/new-icon.png"></span>
-                            </div>
-                            <div class="cake_text">
-                                @if (@HttpContextAccessor.HttpContext.Session.GetString("username") == null)
-                                {
-                                    <h4>@newrecipe.ForCondition</h4>
-                                }
-                                <br /><div style=" font-size: 14px ;text-align:right">by: <a href="#">@newrecipe.ForContributors</a>&ensp; </div>
-                                <h3> @newrecipe.ForName</h3>
 
-                                <a class="custom-btn btn-8" asp-controller="recipe" asp-action="recipedetail">See now</a>
+                @*@foreach (var newrecipe in ViewBag.newrecipes)
+                    {
+                        <div class="item">
+                            <div class="cake_feature_item">
+                                <div class="cake_img">
+                                    <img src="~/img/recipe/@newrecipe.ForCover" width="270" height="226" alt="">
+                                    <span style=" position: absolute; top: -13px; right: -13px; width: 121px; height: 121px; z-index: 100; overflow: hidden; " wfd-id="428"><img src="~/img/new-icon.png"></span>
+                                </div>
+                                <div class="cake_text">
+                                    @if (@HttpContextAccessor.HttpContext.Session.GetString("username") == null)
+                                    {
+                                        <h4>@newrecipe.ForCondition</h4>
+                                    }
+                                    <br /><div style=" font-size: 14px ;text-align:right">by: <a href="#">@newrecipe.ForContributors</a>&ensp; </div>
+                                    <h3> @newrecipe.ForName</h3>
+
+                                    <a class="custom-btn btn-8" asp-controller="recipe" asp-action="recipedetail">See now</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                }*@
+                    }*@
             </div>
         </div>
     </div>
@@ -333,50 +331,24 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6">
+            @*<div class="col-lg-6">
                 <div class="arivals_slider owl-carousel">
+                    @foreach (var top1recipe in ViewBag.top1recipe)
+                    {
                     <div class="item">
                         <div class="cake_feature_item">
-                            <div class="cake_img">
-                                <img src="img/avatar/avatardefault.jpg" alt="">
-                            </div>
-                            <h3>Đại gà</h3>
-                            <button class="custom-btn btn-15">2 - post</button>
+                        <div class="cake_img">
+                         <img src="~/img/avatar/avatardefault.jpg" alt="">
+                         </div>
+                        <h3>@top1recipe.AccUsername</h3>
+                        <button class="custom-btn btn-15">@top1recipe</button>
 
                         </div>
-                    </div>
-                    <div class="item">
-                        <div class="cake_feature_item">
-                            <div class="cake_img">
-                                <img src="img/avatar/avatardefault.jpg" alt="">
-                            </div>
-                            <h3>Đại gà</h3>
-                            <button class="custom-btn btn-15">6 - post</button>
+                 </div>}
 
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="cake_feature_item">
-                            <div class="cake_img">
-                                <img src="img/avatar/avatardefault.jpg" alt="">
-                            </div>
-                            <h3>Đại gà</h3>
-                            <button class="custom-btn btn-15">7 - post</button>
 
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="cake_feature_item">
-                            <div class="cake_img">
-                                <img src="img/avatar/avatardefault.jpg" alt="">
-                            </div>
-                            <h3>Đại gà</h3>
-                            <button class="custom-btn btn-15">8 - post</button>
-
-                        </div>
-                    </div>
                 </div>
-            </div>
+            </div>*@
         </div>
     </div>
 </section>

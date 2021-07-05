@@ -43,12 +43,19 @@
                     <div class="blog_text">
                         <div class="blog_time">
                             <div class="float-left">
-                                <a href="#">@recipedetails.ForCreated.ToString("dd/MM/yyyy")</a>
+                                <a href="#">@recipedetails.ForCreated.ToString("dd MMM yyyy")</a>
                             </div>
                             <div class="float-right">
                                 <ul class="list_style">
                                     <li><a href="#">By :  @recipedetails.AccUsername</a></li>
-                                    <li><a href="#">bekery, sweet</a></li>
+                                    <li>
+                                        @foreach (var recipedetailsavour in ViewBag.recipedetailsavour)
+                                        {
+                                        <form asp-controller="recipe" asp-action="recipe" method="get" id="GFG">
+                                            <input hidden type="text" name="SearchString" value="@recipedetailsavour.SavName">
+                                            <button style="font-size: 15px; border: none; margin: 0; width: 270px " type="submit">@recipedetailsavour.SavName</button>
+                                        </form>}
+                                    </li>
                                     <li><a href="#">Comments:  @ViewBag.SLfb </a></li>
                                 </ul>
                             </div>
@@ -79,7 +86,8 @@
                         <a href="#"><h4>@recipedetailfeedback.AccUsername</h4></a>
                         <p>@recipedetailfeedback.Content</p>
                         <div class="date_rep">
-                            <a href="#">@recipedetailfeedback.Created.ToString("dd/MM/yyyy")</a>
+                            
+                            <a href="#">@recipedetailfeedback.Created.ToString("dd MMM yyyy")</a>
 
 
                         </div>
@@ -107,16 +115,17 @@
                         <div class="s_comment_inner">
                             <form method="post" asp-controller="recipe" asp-action="feedbackrecipe" enctype="multipart/form-data" class="row contact_us_form" id="contactForm" novalidate="novalidate">
                                 <div class="form-group col-md-6">
-                                    <span class="label label-default">Comment as  @HttpContextAccessor.HttpContext.Session.GetString("username") </span>
+                                    <span class="label label-default">Comment as <strong>@HttpContextAccessor.HttpContext.Session.GetString("username")</strong>   </span>
                                 </div>
                                 <input hidden type="number" asp-for="FormulaId" value="@idFor" />
                                 <input hidden type="number" asp-for="AccId" value="@HttpContextAccessor.HttpContext.Session.GetInt32("account")" />
                                 <div class="form-group col-md-12">
-                                    <textarea type="text" asp-for="Content" class="form-control"id="message" rows="1" placeholder="Wrtie message"></textarea>
+                                    <textarea type="text" asp-for="Content" class="form-control" id="message" rows="1" placeholder="Wrtie message"></textarea>
                                 </div>
                                 <div class="form-group col-md-12">
                                     <button type="submit" value="submit" class="btn order_s_btn form-control">Submit now</button>
                                 </div>
+                                <input type="hidden" asp-for="AccId"  />
                             </form>
                         </div>
                     </div>
@@ -143,7 +152,12 @@
                     <ul class="list_style">
                         @foreach (var savour in ViewBag.savours)
                         {
-                            <li><a asp-controller="recipe" asp-action="recipe" method="get" name="SearchString">@savour.SavName<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+                        <li>
+                            <form asp-controller="recipe" asp-action="recipe" method="get" id="GFG">
+                                <input hidden type="text" name="SearchString" value="@savour.SavName">
+                                <button style="font-size: 15px; border: none; margin: 0; width: 270px " type="submit">@savour.SavName</button>
+                            </form>
+                        </li>
                         }
                         
                     </ul>
@@ -174,12 +188,18 @@
                         <h3>Tags</h3>
                     </div>
                     <ul class="list_style">
-                        <li><a href="#">Baking Tips</a></li>
-                        <li><a href="#">Bakery</a></li>
-                        <li><a href="#">Recipe</a></li>
-                        <li><a href="#">Baking Tool</a></li>
-                        <li><a href="#">Cakes</a></li>
-                        <li><a href="#">Chocolates</a></li>
+                        @foreach (var recipedetailsavour in ViewBag.recipedetailsavour)
+                        {
+                        <li>
+                            <form asp-controller="recipe" asp-action="recipe" method="get" id="GFG">
+                                <input hidden type="text" name="SearchString" value="@recipedetailsavour.SavName">
+                                <button class="button" style="background-color:pink" type="submit">@recipedetailsavour.SavName</button>
+                            </form>
+                        </li>
+                                
+                            }
+
+                      
                     </ul>
                 </aside>
             </div>

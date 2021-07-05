@@ -64,7 +64,9 @@ namespace IceCream.Controllers
 
                 ViewBag.recipes = from f in db.Formulas
                                   join a in db.Accounts on f.ForContributors equals a.AccId
-                                  where (f.ForStatus == 1 && f.ForName.Contains(searchString) || a.AccUsername.Contains(searchString))
+                                  join sf in db.SavourFormulas on f.ForId equals sf.ForId
+                                  join s in db.Savours on sf.HashtagId equals s.HashtagId
+                                  where (f.ForStatus == 1 && f.ForName.Contains(searchString) || a.AccUsername.Contains(searchString) || s.SavName.Contains(searchString))
                                   select new AllRecipe
                                   {
                                       AccId = a.AccId,
@@ -75,7 +77,9 @@ namespace IceCream.Controllers
                                       ForDescription = f.ForDescription,
                                       ForCondition = f.ForCondition,
                                       ForStatus = f.ForStatus,
-                                      ForCreated = f.ForCreated
+                                      ForCreated = f.ForCreated,
+                                      HashtagId = s.HashtagId,
+                                      SavName = s.SavName
                                       //ConLai = (x.Soluong - y.Soluong)
                                   };
             }
@@ -173,12 +177,25 @@ namespace IceCream.Controllers
                                          //ConLai = (x.Soluong - y.Soluong)
                                      });
             ViewBag.SLfb = db.FeedbackFormulas.Where(fb => fb.FormulaId == id).Count();
+            ViewBag.recipedetailsavour = (from f in db.Formulas
+                                          join sf in db.SavourFormulas on f.ForId equals sf.ForId
+                                          join s in db.Savours on sf.HashtagId equals s.HashtagId
+                                          where (f.ForId == id)
+                                          select new Savour
+                                          {
+
+                                              HashtagId = s.HashtagId,
+                                              SavName = s.SavName
+
+                                              //ConLai = (x.Soluong - y.Soluong)
+
+                                          }).ToList(); 
             return View("recipedetail");
         }
 
         [HttpPost]
         [Route("postrecipe")]
-        public IActionResult CreateRecipe(Formula formula,PhotoFormula photoFormula, IFormFile filecover, IFormFile[] filecovers)
+        public IActionResult CreateRecipe(Formula formula,PhotoFormula photoFormula, IFormFile filecover)
         {
             if (filecover != null)
             {
@@ -196,34 +213,13 @@ namespace IceCream.Controllers
             {
                 formula.ForCover = "";
             }
-            if (filecovers != null && filecovers.Length > 0)
-            {
-                foreach (var photo in filecovers)
-                {
-                    Debug.WriteLine($"File Name: {photo.FileName}");
-                    Debug.WriteLine($"ContentType: {photo.ContentType}");
-                    Debug.WriteLine($"Length: {photo.Length}");
-
-                    var fileNames = System.Guid.NewGuid().ToString();
-                    Debug.WriteLine($"File Name: {fileNames}");
-
-                    var exts = photo.ContentType.Split(new char[] { '/' })[1];
-                    Debug.WriteLine($"ext: {exts}");
-
-                    var paths = Path.Combine(webHostEnvironment.WebRootPath, "img/recipes", fileNames + "." + exts);
-                    using (var fileStream = new FileStream(paths, FileMode.Create))
-                    {
-                        photo.CopyTo(fileStream);
-                    }
-                    photoFormula.Img = fileNames + "." + exts;
-                }
-            }
+          
 
             formula.ForCreated = DateTime.Now;
             formula.ForUpdate = DateTime.Now;
             
             recipeService.CreateFormula(formula);
-            recipeService.CreateFormulaListPhoTo(photoFormula);
+           
             return RedirectToAction("recipe");
         }
 
@@ -231,10 +227,10 @@ namespace IceCream.Controllers
         [Route("feedbackrecipe")]
         public IActionResult FeedbackRecipe(FeedbackFormula fbFormula)
         {
-
+            Debug.WriteLine("fbFormula :"+ fbFormula.FormulaId);
             recipeService.CreateFeedbackFormula(fbFormula);
 
-            return RedirectToAction("recipe");
+            return RedirectToAction("recipedetail", new { id = fbFormula.FormulaId });
         }
     }
 }

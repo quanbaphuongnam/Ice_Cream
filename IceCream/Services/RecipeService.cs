@@ -10,7 +10,7 @@ namespace IceCream.Services
     {
     
         Formula CreateFormula(Formula formula);
-        PhotoFormula CreateFormulaListPhoTo(PhotoFormula photoFormula);
+     
         FeedbackFormula CreateFeedbackFormula(FeedbackFormula fbFormula);
     }
 }

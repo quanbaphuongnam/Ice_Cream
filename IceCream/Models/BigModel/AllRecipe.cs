@@ -9,6 +9,7 @@ namespace IceCream.Models.BigModel
     {
         public int AccId { get; set; }
         public string AccUsername { get; set; }
+        public string AccAvatar { get; set; }
         public int ForId { get; set; }
         public string ForCover { get; set; }
         public string ForName { get; set; }
@@ -18,6 +19,8 @@ namespace IceCream.Models.BigModel
         public byte? ForStatus { get; set; }
         public DateTime? ForCreated { get; set; }
         public DateTime? ForUpdate { get; set; }
-      
+        public string HashtagId { get; set; }
+        public string SavName { get; set; }
+        public int? Soluong { get; set; }
     }
 }
