@@ -66,16 +66,16 @@ namespace IceCream.Controllers
                 if (account.Login(username, password) != null)
                 {
                     HttpContext.Session.SetInt32("account", account.Login(username, password).AccId);
+                    HttpContext.Session.SetString("username", account.Login(username, password).AccUsername);
                     int status = int.Parse(account.Login(username, password).AccStatus.ToString());
                     if (status == 1)
                     {
-                        HttpContext.Session.SetString("username", account.Login(username, password).AccUsername);
                         HttpContext.Session.SetString("msg", "s");
                         return RedirectToAction("index", "home");
                     }
                     else
                     {
-                        return RedirectToAction("paypal", "home");
+                        return RedirectToAction("paypal2", "home");
                     }
                 }
                 else

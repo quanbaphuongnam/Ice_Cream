@@ -1,7 +1,9 @@
 ﻿using IceCream.Models;
+using IceCream.Paypal;
 using IceCream.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -16,13 +18,15 @@ namespace IceCream.Controllers
     {
         public DatabaseContext db;
         private BookService bookService;
-        public CartController(DatabaseContext _db, BookService _bookService)
+        private IConfiguration configuration;
+        public CartController(DatabaseContext _db, BookService _bookService, IConfiguration _configuration)
         {
             db = _db;
             bookService = _bookService;
+            configuration = _configuration;
         }
 
-        [Route("index")]
+        [Route("cart")]
         [Route("")]
         public IActionResult Index()
         {
@@ -42,8 +46,23 @@ namespace IceCream.Controllers
                 List<Cart> cart = JsonConvert.DeserializeObject<List<Cart>>(HttpContext.Session.GetString("cart"));
                 ViewBag.cart = cart;
             }
+            else
+            {
+                return View("~/Views/Home/Page404.cshtml");
+            }
+            ViewBag.postUrl = configuration["PayPal:PostUrl"];
+            ViewBag.business = configuration["PayPal:Business"];
+            ViewBag.returnUrl = configuration["PayPal:ReturnUrl3"];
             return View("checkout");
         }
+
+        [Route("billingDetails")]
+        public IActionResult BillingDetails(InvoiceAccount invoiceAccount)
+        {
+            HttpContext.Session.SetString("billing", JsonConvert.SerializeObject(invoiceAccount));
+            return RedirectToAction("checkout");
+        }
+
 
         [Route("remove/{id}")]
         public IActionResult Remove(int id)
@@ -51,8 +70,16 @@ namespace IceCream.Controllers
             List<Cart> cart = JsonConvert.DeserializeObject<List<Cart>>(HttpContext.Session.GetString("cart"));
             int index = Exists(id, cart);
             cart.RemoveAt(index);
-            HttpContext.Session.SetString("cart", JsonConvert.SerializeObject(cart));
-            HttpContext.Session.SetInt32("jsoncart", cart.Count());
+            if (cart.Count() == 0)
+            {
+                HttpContext.Session.Remove("cart");
+                return View("Cart");
+            }
+            else
+            {
+                HttpContext.Session.SetString("cart", JsonConvert.SerializeObject(cart));
+                HttpContext.Session.SetInt32("jsoncart", cart.Count());
+            }
             return RedirectToAction("Index");
         }
 
@@ -118,6 +145,21 @@ namespace IceCream.Controllers
                 }
             }
             return -1;
+        }
+
+        [Route("checkoutsuccess")]
+        public IActionResult Success([FromQuery(Name = "tx")] string tx)
+        {
+            var result = PDTHolder.Success(tx, configuration, Request);
+            Debug.WriteLine("Customer info:");
+            Debug.WriteLine("First Name: " + result.PayerFirstName);
+            Debug.WriteLine("LastName: " + result.PayerLastName);
+            Debug.WriteLine("Email: " + result.PayerEmail);
+
+
+            InvoiceAccount invoiceAccount = JsonConvert.DeserializeObject<InvoiceAccount>(HttpContext.Session.GetString("billing"));
+
+            return RedirectToAction("index","home");
         }
     }
 }
