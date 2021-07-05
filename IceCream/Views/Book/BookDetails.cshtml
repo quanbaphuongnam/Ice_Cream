@@ -28,11 +28,11 @@
             <div class="col-lg-6">
                 <div class="product_details_text">
                     <h4>@ViewBag.book.BookName</h4>
-                    <p>@ViewBag.book.InvoiceDetailAccounts</p>
+                    <br/>
+                    <br/>
                     <h5>Price :<span>$@ViewBag.book.BookPrice</span></h5>
                     <div class="quantity_box">
                         <label for="quantity">Quantity : @ViewBag.book.BookQuantity</label>
-                        <input type="number" min="1" max="@ViewBag.book.BookQuantity" id="quantity" placeholder="1">
                     </div>
                     <a class="pink_more" asp-controller="cart" asp-action="buy" asp-route-id="@ViewBag.book.BookId">Add to Cart</a>
                 </div>
@@ -79,20 +79,23 @@
             {
                 if (counter <= 4)
                 {
-                    <div class="col-lg-3 col-md-4 col-6">
-                        <div class="cake_feature_item">
-                            <div class="cake_img">
-                                <img src="~/img/books/@book.BookPhoto" width="250" height="360" alt="">
-                            </div>
-                            <div class="cake_text">
-                                <br />
-                                <p style="color: #f52c2c; font-family: Impact, fantasy; font-size: 40px ">$@book.BookPrice</p>
-                                <h3>@book.BookName</h3>
-                                <a asp-controller="book" asp-action="bookdetails" asp-route-id="@book.BookId" class="custom-btn btn-5">Add cart</a>
+                    if (book.BookId != ViewBag.book.BookId)
+                    {
+                        <div class="col-lg-3 col-md-4 col-6">
+                            <div class="cake_feature_item">
+                                <div class="cake_img">
+                                    <img src="~/img/books/@book.BookPhoto" width="250" height="360" alt="">
+                                </div>
+                                <div class="cake_text">
+                                    <br />
+                                    <p style="color: #f52c2c; font-family: Impact, fantasy; font-size: 40px ">$@book.BookPrice</p>
+                                    <h3>@book.BookName</h3>
+                                    <a asp-controller="book" asp-action="bookdetails" asp-route-id="@book.BookId" class="custom-btn btn-5">Add cart</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    counter++;
+                        counter++;
+                    }
                 }
             }
         </div>

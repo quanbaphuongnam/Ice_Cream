@@ -1,0 +1,62 @@
+﻿
+@{ ViewData["Title"] = "SignUpSuccess";
+    Layout = "~/Views/Shared/_Layout.cshtml"; }
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link href="~/css/SignUpPaypal.css" rel="stylesheet">
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script type="text/javascript">
+    $(".header").click(function () {
+        var $this = $(this);
+        $this.closest(".whole").find(".content").slideToggle();
+    });
+
+    $(".whole").on("click", "a", function () {
+        event.preventDefault();
+        $(".plan").removeClass("selected");
+        $(this).closest(".whole").find(".plan").addClass("selected");
+    });
+</script>
+<section class="error_area">
+    <div class="container">
+        <div class="error_inner">
+            <div class="error_inner_text">
+                <img src="~/img/paypal.png" width="300" height="150" alt="paypal " style="margin-top: 250px" />
+
+                @foreach (var service in ViewBag.services)
+                {
+                    <form action="@ViewBag.postUrl" method="post">
+                        <input type="hidden" name="upload" value="1" />
+                        <input type="hidden" name="return" value="@ViewBag.returnUrl" />
+                        <input type="hidden" name="cmd" value="_cart" />
+                        <input type="hidden" name="business" value="@ViewBag.business" />
+                        <div class="whole">
+                            @{ var index = 1;}
+                            <div class="type standard">
+                                <p>@service.SerName</p>
+                            </div>
+                            <div class="plan">
+                                <div class="header">
+                                    <span>$</span>@service.SerPrice
+                                    <p class="month">per @service.SerName</p>
+                                </div>
+                                <div class="content">
+                                    <pre style="white-space: pre-wrap; word-wrap: break-word; color: white; margin-top: 20px">@service.SerDescription</pre>
+                                </div>
+                                <input type="hidden" name="item_number_@index" value="1" />
+                                <input type="hidden" name="item_name_@index" value="@service.SerName" />
+                                <input type="hidden" name="amount_@index" value="@service.SerPrice" />
+                                <input type="hidden" name="quantity_@index" value="1" />
+                                <div class="price">
+                                    <button type="submit" class="bottom"><p class="cart">Sign Up</p></button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    }
+
+            </div>
+        </div>
+    </div>
+</section>

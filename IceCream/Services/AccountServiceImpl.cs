@@ -41,5 +41,12 @@ namespace IceCream.Services
         {
             return db.Accounts.SingleOrDefault(b => b.AccUsername == user);
         }
+
+        public Account EditAcccount(Account account)
+        {
+            db.Entry(account).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            db.SaveChanges();
+            return account;
+        }
     }
 }

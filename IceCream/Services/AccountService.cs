@@ -13,6 +13,7 @@ namespace IceCream.Services
         public Account Create(Account account);
         Account Find(string user);
         Account Login(string username, string password);
+        Account EditAcccount(Account account);
 
     }
 }

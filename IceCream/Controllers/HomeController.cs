@@ -82,6 +82,21 @@ namespace IceCream.Areas.Admin.Controllers
             return View("signupsuccess");
         }
 
+        [Route("signupsuccess2")]
+        public IActionResult Success2([FromQuery(Name = "tx")] string tx)
+        {
+            var result = PDTHolder.Success(tx, configuration, Request);
+            Debug.WriteLine("Customer info:");
+            Debug.WriteLine("First Name: " + result.PayerFirstName);
+            Debug.WriteLine("LastName: " + result.PayerLastName);
+            Debug.WriteLine("Email: " + result.PayerEmail);
+
+            Account acc = account.Find(HttpContext.Session.GetString("username"));
+            acc.AccStatus = 1;
+            account.EditAcccount(acc);
+            return View("signupsuccess");
+        }
+
         [Route("paypal")]
         public IActionResult Paypal()
         {
@@ -90,6 +105,16 @@ namespace IceCream.Areas.Admin.Controllers
             ViewBag.returnUrl = configuration["PayPal:ReturnUrl"];
             ViewBag.services = db.Services.ToList();
             return View("Paypal");
+        }
+
+        [Route("paypal2")]
+        public IActionResult Paypal2()
+        {
+            ViewBag.postUrl = configuration["PayPal:PostUrl"];
+            ViewBag.business = configuration["PayPal:Business"];
+            ViewBag.returnUrl = configuration["PayPal:ReturnUrl2"];
+            ViewBag.services = db.Services.ToList();
+            return View("Paypal2");
         }
     }
 }
