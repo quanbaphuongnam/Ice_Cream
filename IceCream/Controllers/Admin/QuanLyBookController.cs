@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-
+using PagedList;
 namespace IceCream.Controllers.Admin
 {
     [Route("quanlybook")]
@@ -29,18 +29,19 @@ namespace IceCream.Controllers.Admin
         [Route("")]
         public IActionResult Index()
         {
+            //quanlybookServices.ListAllPaging(page, paseSize);
             ViewBag.quanlybooks = quanlybookServices.FindAllBook();
+            //ViewBag.quanlybooks = quanlybookServices.ListAllPaging(page, paseSize);
             return View("quanlybook");
         }
+
         [HttpGet]
-        [Route("edit/id")]
+        [Route("edit")]
         public IActionResult Edit(int id)
         {
-            ViewBag.quanLybook = from a in db.Books
-                                 where a.BookId == id
-                                 select a;
 
-            return View("edit", (id));
+            ViewBag.book = quanlybookServices.Find(id);
+            return View("edit");
         }
         [Route("edit")]
         [HttpPost]
@@ -61,6 +62,8 @@ namespace IceCream.Controllers.Admin
                 currentBook.BookPhoto = fileName + "." + ext;
 
             }
+
+
             currentBook.BookName = book.BookName;
             currentBook.BookPrice = book.BookPrice;
             currentBook.BookQuantity = book.BookQuantity;
@@ -70,6 +73,49 @@ namespace IceCream.Controllers.Admin
             currentBook.BookStatus = book.BookStatus;
 
             quanlybookServices.Update(currentBook);
+            return RedirectToAction("quanlybook");
+        }
+        [HttpDelete]
+        [Route("delete/{id}")]
+        public IActionResult Delete(int id)
+        {
+
+            quanlybookServices.Delete(id);
+            return RedirectToAction("quanlybook");
+        }
+        [Route("add")]
+        public IActionResult Add()
+        {
+
+            return View("add");
+        }
+        [HttpPost]
+        [Route("add")]
+        public IActionResult Add(Book book, IFormFile file)
+        {
+            if (file != null)
+            {
+                string fileName = Guid.NewGuid().ToString();
+                var ext = file.ContentType.Split(new char[] { '/' })[1];
+                var path = Path.Combine(webHostEnvironment.WebRootPath, "img/recipe", fileName + "." + ext);
+                using (var fileStream = new FileStream(path, FileMode.Create))
+                {
+                    file.CopyTo(fileStream);
+                }
+                book.BookPhoto = fileName + "." + ext;
+
+            }
+            else
+            {
+                book.BookPhoto = "noimage.png";
+            }
+
+
+            book.BookCreated = DateTime.Now;
+            book.BookUpdate = DateTime.Now;
+
+            quanlybookServices.AddBook(book);
+
             return RedirectToAction("quanlybook");
         }
     }

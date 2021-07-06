@@ -46,7 +46,10 @@ namespace IceCream
             services.AddScoped<QuanLyBookServices, QuanLyBookSercicesImpl>();
             services.AddScoped<QuanLyRecipeServices, QuanLyRecipeServicesImpl>();
             services.AddScoped<QuanLySavourServices, QuanLySavourServicesImpl>();
+            services.AddScoped<QuanLyUserServices, QuanLyUserServicesImpl>();
             services.AddScoped<ServiceAccountService, ServiceAccountServiceImpl>();
+            services.AddScoped<InvoiceService, InvoiceServiceImpl>();
+            services.AddScoped<InvoiceDetailAccountService, InvoiceDetailAccountServiceImpl>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

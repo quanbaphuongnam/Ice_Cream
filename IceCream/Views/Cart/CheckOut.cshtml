@@ -31,7 +31,7 @@
                     <form class="billing_form row" asp-controller="cart" asp-action="billingDetails" method="post" id="form1" novalidate="novalidate">
                         <div class="form-group col-md-6">
                             <label for="first">Full Name *</label>
-                            <input type="text" class="form-control" asp-for="Name" id="first" name="name" placeholder="Full Name">
+                            <input type="text" class="form-control" asp-for="Name" id="name" name="name" placeholder="Full Name">
                         </div>
 
                         <div class="form-group col-md-12">
@@ -135,9 +135,16 @@
         </div>
     </div>
 </section>
+@*@if (@HttpContextAccessor.HttpContext.Session.GetString("msgcheckout") == "f")
+{
+    <script type="text/javascript">
+        
+    </script>
+    HttpContextAccessor.HttpContext.Session.Remove("msgcheckout");
+}*@
 @if (@HttpContextAccessor.HttpContext.Session.GetString("billing") != null)
 {
-<script type="text/javascript">
+    <script type="text/javascript">
         Swal.fire({
             title: 'Are you sure?',
             text: "You won't be able to revert this!",
@@ -154,12 +161,23 @@
                 HttpContextAccessor.HttpContext.Session.Remove("billing")
             }
         })
-</script>
+    </script>
 }
 <script type="text/javascript">
     function submitBilling() {
-        document.getElementById("form1").submit();
+        if (document.getElementById("name").value != "" && document.getElementById("address").value != "" && document.getElementById("email").value != "" && document.getElementById("phone").value != "") {
+            document.getElementById("form1").submit();
+        }
+        else {
+            Swal.fire({
 
+                icon: 'error',
+                title: 'Checkout Fail',
+                text: ' Please fill out the invoice completely',
+                showConfirmButton: false,
+                timer: 2000
+            })
+        }
     }
 </script>
 <!--================End Billing Details Area =================-->

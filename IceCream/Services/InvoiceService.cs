@@ -11,7 +11,7 @@ namespace IceCream.Services
       
         List<InvoiceAccount> FindAll();
         public InvoiceAccount Create(InvoiceAccount invoiceAccount);
-        InvoiceAccount Find(int id);
+        InvoiceAccount Find(string id);
         InvoiceAccount Edit(InvoiceAccount invoiceAccount);
 
     }

@@ -44,7 +44,7 @@
                             <tbody>
                                 @foreach (var item in ViewBag.cart)
                                 {
-                                    string txt_class = "quantity_" + item.book.BookId;
+                                    //string txt_class = "quantity_" + item.book.BookId;
                                     total += item.quantity * item.book.BookPrice;
                                     <tr>
                                         <td>

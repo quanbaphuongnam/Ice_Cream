@@ -19,62 +19,67 @@
                     <form asp-action="edit" asp-controller="quanlybook" method="post" enctype="multipart/form-data">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-                        @foreach (var books in ViewBag.quanLybook)
-                        {
-                            <div class="form-group">
-                                <label asp-for="BookId" class="control-label"></label>
-                                <input asp-for="BookId" class="form-control" value="@books.BookId" />
-                                <span asp-validation-for="BookId" class="text-danger"></span>
+
+                        <div class="form-group">
+                            <label asp-for="BookId" class="control-label"></label>
+                            <input asp-for="BookId" class="form-control" value="@ViewBag.book.BookId" />
+
+                        </div>
+                        <div class="form-group">
+                            <h4 style="text-align:left; "> BookPhoto </h4>
+                            @*<input style="padding: 0px 0px 8px 0px !important;" type="file" name="file"  />*@
+                            <input style="padding: 0px 0px 8px 0px !important;" id="imageFile" type="file" name="file" class="imageFile" accept="image/*">
+                            <td><img src="~/img/books/@ViewBag.book.BookPhoto" width="100" height="160" alt=""></td>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="BookName" class="control-label"></label>
+                            <input asp-for="BookName" class="form-control" value="@ViewBag.book.BookName" />
+
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="BookDescription" class="control-label"></label>
+                            <input asp-for="BookDescription" class="form-control" value="@ViewBag.book.BookDescription" />
+
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="BookPrice" class="control-label"></label>
+                            <input asp-for="BookPrice" class="form-control" value="@ViewBag.book.BookPrice" />
+
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="BookQuantity" class="control-label"></label>
+                            <input asp-for="BookQuantity" class="form-control" value="@ViewBag.book.BookQuantity" />
+
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="BookYear" class="control-label"></label>
+                            <input asp-for="BookYear" class="form-control" value="@ViewBag.book.BookYear" />
+
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="BookCreated" class="control-label"></label>
+                            <input asp-for="BookCreated" class="form-control" value="@ViewBag.book.BookCreated" />
+
+                        </div>
+
+                        <div class="form-group">
+                            <label>Choose status</label>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" asp-for="BookStatus" name="optionsRadios1" id="optionsRadios1" value="0" checked>Not Activated
+                                </label>
                             </div>
-                            <div class="form-group">
-                                <h4 style="text-align:left; "> BookPhoto </h4>
-                                <input style="padding: 0px 0px 8px 0px !important;" type="file" name="file" />
-                                <td><img src="~/img/books/@books.BookPhoto" width="100" height="160" alt=""></td>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" asp-for="BookStatus" name="optionsRadios1" id="optionsRadios2" value="1">Activated
+                                </label>
                             </div>
-                            <div class="form-group">
-                                <label asp-for="BookName" class="control-label"></label>
-                                <input asp-for="BookName" class="form-control" />
-                                <span asp-validation-for="BookName" class="text-danger"> </span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="BookDescription" class="control-label"></label>
-                                <input asp-for="BookDescription" class="form-control" />
-                                <span asp-validation-for="BookDescription" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="BookPrice" class="control-label"></label>
-                                <input asp-for="BookPrice" class="form-control" />
-                                <span asp-validation-for="BookPrice" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="BookQuantity" class="control-label"></label>
-                                <input asp-for="BookQuantity" class="form-control" />
-                                <span asp-validation-for="BookQuantity" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="BookYear" class="control-label"></label>
-                                <input asp-for="BookYear" class="form-control" />
-                                <span asp-validation-for="BookYear" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="BookCreated" class="control-label"></label>
-                                <input asp-for="BookCreated" class="form-control" />
-                                <span asp-validation-for="BookCreated" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="BookUpdate" class="control-label"></label>
-                                <input asp-for="BookUpdate" class="form-control" />
-                                <span asp-validation-for="BookUpdate" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="BookStatus" class="control-label"></label>
-                                <input asp-for="BookStatus" class="form-control" />
-                                <span asp-validation-for="BookStatus" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <input type="submit" value="Save" class="btn btn-default" />
-                            </div>
-                        }
+
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Save" class="btn btn-default" />
+                        </div>
+
 
                     </form>
                 </div>

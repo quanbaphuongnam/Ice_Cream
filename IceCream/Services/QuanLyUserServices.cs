@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace IceCream.Services
 {
-    public interface BookService
+    public interface QuanLyUserServices
     {
-        List<Book> FindAllBook();
+        List<Account> FindAllUser();
 
-        Book Find(int id);
+        public Account Update(Account account);
 
-        Book Edit(Book book);
+        public Account Find(int id);
     }
 }

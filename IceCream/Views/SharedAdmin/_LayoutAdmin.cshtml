@@ -39,14 +39,14 @@
 
     <link rel="stylesheet" href="../../assets/vendors/mdi/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="../../assets/vendors/css/vendor.bundle.base.css">
-     @*endinject 
-     Plugin css for this page 
-     End plugin css for this page 
-     inject:css 
-     endinject 
-     Layout styles*@ 
+    @*endinject
+        Plugin css for this page
+        End plugin css for this page
+        inject:css
+        endinject
+        Layout styles*@
     @*<link rel="stylesheet" href="../../assets/css/style.css">*@
-     @*End layout styles*@ 
+    @*End layout styles*@
     <link rel="shortcut icon" href="../../assets/images/favicon.ico" />
 </head>
 <body>
@@ -160,45 +160,34 @@
                                 <!-- /input-group -->
                             </li>
                             <li>
-                                <a asp-controller="quanlyuser" asp-action="quanlyuser" class="active"><i class="fa fa-dashboard fa-fw"></i> QLUser</a>
+                                <a asp-controller="quanlyuser" asp-action="quanlyuser" class="active"><i class="fa fa-dashboard fa-fw"></i> ManagerUser</a>
 
                             </li>
                             <li>
-                                <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> QuanLyProduct<span class="fa arrow"></span></a>
+                                <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> ManagerProduct<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>
-                                        <a asp-controller="quanlybook" asp-action="quanlybook"> QLBook </a>
+                                        <a asp-controller="quanlybook" asp-action="quanlybook"> ManagerBook </a>
                                     </li>
                                     <li>
-                                        <a asp-controller="quanlyrecipe" asp-action="quanlyrecipe">QLRecipe</a>
+                                        <a asp-controller="quanlyrecipe" asp-action="quanlyrecipe">ManagerRecipe</a>
                                     </li>
                                     <li>
-                                        <a asp-controller="quanlysmell" asp-action="quanlysmell">QLSmell</a>
+                                        <a asp-controller="quanlysmell" asp-action="quanlysmell">ManagerSmell</a>
                                     </li>
                                 </ul>
                                 <!-- /.nav-second-level -->
                             </li>
                             <li>
-                                <a asp-controller="quanlyhoadon" asp-action="quanlyhoadon"><i class="fa fa-table fa-fw"></i> QLBill</a>
+                                <a asp-controller="quanlyhoadon" asp-action="quanlyhoadon"><i class="fa fa-table fa-fw"></i>ManagerBill</a>
                             </li>
-                           
+
                             <li>
-                                <a href="#"><i class="fa fa-wrench fa-fw"></i> All FEEDBACK<span class="fa arrow"></span></a>
-                                <ul class="nav nav-second-level">
-                                    <li>
-                                        <a asp-controller="feedbackuser" asp-action="feedbackuser">Feedback User Add</a>
-                                    </li>
-                                    <li>
-                                        <a asp-controller="feedbackbook" asp-action="feedbackbook">Feedback Book</a>
-                                    </li>
-                                    <li>
-                                        <a asp-controller="feedbackrecipe" asp-action="feedbackrecipe">Feedback Recipe</a>
-                                    </li>
-                                  
-                                </ul>
+                                <a asp-controller="feedbackrecipe" asp-action="feedbackrecipe"><i class="fa fa-wrench fa-fw"></i> Feeback Recipe<span class="fa arrow"></span></a>
+
                                 <!-- /.nav-second-level -->
                             </li>
-                            
+
                             <li>
                                 <a href="#"><i class="fa fa-files-o fa-fw"></i> Sample Pages<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">

@@ -16,7 +16,7 @@
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        QuanLySavour
+                        <a asp-controller="quanlysmell" asp-action="add" class="btn btn-danger"> AddSavour</a>
 
                     </div>
                     <!-- /.panel-heading -->
@@ -30,6 +30,8 @@
                                         <th>SavPhoto</th>
                                         <th>SavIngredients</th>
                                         <th>SavProcedure</th>
+                                        <th>Edit</th>
+                                        <th>Delete</th>
 
 
                                     </tr>
@@ -46,8 +48,8 @@
 
                                             <td>@savour.SavIngredients</td>
                                             <td>@savour.SavProcedure</td>
-
-
+                                            <td><a asp-controller="quanlysmell" asp-action="edit" asp-route-id="@savour.HashtagId" class="btn btn-warning btn-circle"><i class="fa fa-edit"></i> </a></td>
+                                            <td><a asp-controller="quanlysmell" asp-action="delete" asp-route-id="@savour.HashtagId" onclick="return confirm('Are u sure ?')" class="btn btn-danger btn-circle"><i class="fa fa-times"></i> </a></td>
                                         </tr>
                                     }
                                 </tbody>

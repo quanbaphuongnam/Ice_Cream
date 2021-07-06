@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 
 #nullable disable
@@ -23,6 +24,7 @@ namespace IceCream.Models
         public DateTime? BookUpdate { get; set; }
         public byte? BookStatus { get; set; }
 
+        [JsonIgnore]
         public virtual ICollection<InvoiceDetailAccount> InvoiceDetailAccounts { get; set; }
 
     }

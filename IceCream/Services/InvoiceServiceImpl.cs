@@ -26,7 +26,7 @@ namespace IceCream.Services
             return invoiceAccount;
         }
 
-        public InvoiceAccount Find(int id)
+        public InvoiceAccount Find(string id)
         {
             return db.InvoiceAccounts.SingleOrDefault(b => b.InvId == id);
         }

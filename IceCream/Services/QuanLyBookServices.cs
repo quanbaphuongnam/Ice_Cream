@@ -6,13 +6,17 @@ using System.Threading.Tasks;
 
 namespace IceCream.Services
 {
-     public interface QuanLyBookServices
+    public interface QuanLyBookServices
     {
         List<Book> FindAllBook();
-        public bool Update(Book book);
+
+
+        public Book Update(Book book);
 
         public Book Find(int id);
 
-        
+        public bool Delete(int id);
+
+        Book AddBook(Book book);
     }
 }
