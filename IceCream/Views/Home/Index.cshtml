@@ -41,7 +41,7 @@
                          data-responsive_offset="on"
                          data-transform_idle="o:1;"
                          data-frames="[{&quot;delay&quot;:10,&quot;speed&quot;:1500,&quot;frame&quot;:&quot;0&quot;,&quot;from&quot;:&quot;y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;&quot;,&quot;mask&quot;:&quot;x:0px;y:[100%];s:inherit;e:inherit;&quot;,&quot;to&quot;:&quot;o:1;&quot;,&quot;ease&quot;:&quot;Power2.easeInOut&quot;},{&quot;delay&quot;:&quot;wait&quot;,&quot;speed&quot;:1500,&quot;frame&quot;:&quot;999&quot;,&quot;to&quot;:&quot;y:[175%];&quot;,&quot;mask&quot;:&quot;x:inherit;y:inherit;s:inherit;e:inherit;&quot;,&quot;ease&quot;:&quot;Power2.easeInOut&quot;}]">
-                        Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit quia consequuntur magni dolores eos qui ratione
+                        Attractive formulas are waiting for you to welcome you
                     </div>
 
                     <div class="tp-caption tp-resizeme slider_button"
@@ -55,7 +55,7 @@
                          data-type="text"
                          data-responsive_offset="on"
                          data-frames="[{&quot;delay&quot;:10,&quot;speed&quot;:1500,&quot;frame&quot;:&quot;0&quot;,&quot;from&quot;:&quot;y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;&quot;,&quot;mask&quot;:&quot;x:0px;y:[100%];s:inherit;e:inherit;&quot;,&quot;to&quot;:&quot;o:1;&quot;,&quot;ease&quot;:&quot;Power2.easeInOut&quot;},{&quot;delay&quot;:&quot;wait&quot;,&quot;speed&quot;:1500,&quot;frame&quot;:&quot;999&quot;,&quot;to&quot;:&quot;y:[175%];&quot;,&quot;mask&quot;:&quot;x:inherit;y:inherit;s:inherit;e:inherit;&quot;,&quot;ease&quot;:&quot;Power2.easeInOut&quot;}]">
-                        <a class="main_btn" href="#">See now</a>
+                        <a class="main_btn"  asp-controller="recipe" asp-action="Recipe">See now</a>
                     </div>
                 </div>
             </li>
@@ -93,7 +93,7 @@
                          data-responsive_offset="on"
                          data-transform_idle="o:1;"
                          data-frames="[{&quot;delay&quot;:10,&quot;speed&quot;:1500,&quot;frame&quot;:&quot;0&quot;,&quot;from&quot;:&quot;y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;&quot;,&quot;mask&quot;:&quot;x:0px;y:[100%];s:inherit;e:inherit;&quot;,&quot;to&quot;:&quot;o:1;&quot;,&quot;ease&quot;:&quot;Power2.easeInOut&quot;},{&quot;delay&quot;:&quot;wait&quot;,&quot;speed&quot;:1500,&quot;frame&quot;:&quot;999&quot;,&quot;to&quot;:&quot;y:[175%];&quot;,&quot;mask&quot;:&quot;x:inherit;y:inherit;s:inherit;e:inherit;&quot;,&quot;ease&quot;:&quot;Power2.easeInOut&quot;}]">
-                        Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit quia consequuntur magni dolores eos qui ratione
+                        Sign up to experience the best featureso
                     </div>
 
                     <div class="tp-caption tp-resizeme slider_button"
@@ -216,7 +216,7 @@
                     </div>
                     <div class="welcome_left_text">
                         <p>We’re here to add a little extra sweetness to your day. The Ice Cream Shop is a virtual restaurant and new way to order your favorite ice cream brands right to your front door. Available on all your favorite delivery apps including Postmates, DoorDash, Uber Eats, and GrubHub, The Ice Cream Shop features fan-favorite products from beloved ice cream brands Ben & Jerry’s, Talenti, Magnum, Breyers and Good Humor.</p>
-                        <a class="pink_btn" href="#">Know more about us</a>
+                        <a class="pink_btn" asp-controller="aboutus" asp-action="aboutus">Know more about us</a>
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -226,11 +226,11 @@
                 </div>
             </div>
         </div>
-        <div class="cake_feature_inner">
+        @*<div class="cake_feature_inner">
             <div class="main_title">
                 <h2 id="textcolor">Free formulas available</h2>
                 <h5> To see more formulas than you need to become our member</h5>
-            </div>
+            </div>*@
             <div class="cake_feature_slider owl-carousel">
 
                 @*@foreach (var newrecipe in ViewBag.newrecipes)
@@ -255,7 +255,7 @@
                         </div>
                     }*@
             </div>
-        </div>
+        @*</div>*@
     </div>
 </section>
 <!--================End Welcome Area =================-->
@@ -281,7 +281,7 @@
                     <div class="media-body">
                         <h4>Dedicated page to showcase your mouth-watering delicacies</h4>
                         <p>Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi equatur uis autem vel eum.</p>
-                        <a class="w_view_btn" href="#">View Details</a>
+                        <a class="w_view_btn" href="#">View </a>
                     </div>
                 </div>
             </div>
@@ -311,7 +311,7 @@
     </div>
 </section>
 <!--================End Special Recipe Area =================-->
-<!--================New Arivals Area =================-->
+================New Arivals Area =================
 <section class="new_arivals_area p_100">
     <div class="container">
         <div class="single_pest_title">
@@ -326,14 +326,14 @@
 
                     </div>
                     <div class="arivals_text">
-                        <h4> Nam vjp pro</h4>
+                        <h4> </h4>
                         <button class="custom-btn btn-15">32 - post</button>
                     </div>
                 </div>
             </div>
-            @*<div class="col-lg-6">
+            <div class="col-lg-6">
                 <div class="arivals_slider owl-carousel">
-                    @foreach (var top1recipe in ViewBag.top1recipe)
+                    @*@foreach (var top1recipe in ViewBag.top1recipe.OrderBy(f => f.ForContributors))
                     {
                     <div class="item">
                         <div class="cake_feature_item">
@@ -344,11 +344,11 @@
                         <button class="custom-btn btn-15">@top1recipe</button>
 
                         </div>
-                 </div>}
+                 </div>}*@
 
 
                 </div>
-            </div>*@
+            </div>
         </div>
     </div>
 </section>

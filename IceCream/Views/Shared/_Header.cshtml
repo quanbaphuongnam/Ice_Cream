@@ -16,23 +16,17 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav justify-content-end">
-                    <li class="dropdown submenu active">
+                    <li class="active">
                         <a class="dropdown-toggle" asp-controller="home" asp-action="index">Home</a>
-                        @*<ul class="dropdown-menu">
-                                <li><a href="index.html">Home 1</a></li>
-                                <li><a href="index-2.html">Home 2</a></li>
-                                <li><a href="index-3.html">Home 3</a></li>
-                                <li><a href="index-4.html">Home 4</a></li>
-                                <li><a href="index-5.html">Home 5</a></li>
-                            </ul>*@
+                      
                     </li>
-                    <li><a asp-controller="recipe" asp-action="Recipe">Recipe</a></li>
-                    <li><a asp-controller="book" asp-action="allbook">Order Book</a></li>
+                    <li ><a asp-controller="recipe" asp-action="Recipe">Recipe</a></li>
+                    <li ><a asp-controller="book" asp-action="allbook">Order Book</a></li>
                     <li><a asp-controller="aboutus" asp-action="aboutus">About Us</a></li>
-                    <li><a asp-controller="Contact" asp-action="Contact">Contact</a></li>
+                    <li ><a asp-controller="Contact" asp-action="Contact">Contact</a></li>
                     <li><a asp-controller="FAQ" asp-action="FAQ">FAQ’s</a></li>
 
-                    <li class="dropdown submenu">
+                    <li class="dropdown submenu ">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Account</a>
                         <ul class="dropdown-menu">
                             @if (@HttpContextAccessor.HttpContext.Session.GetString("username") != null)

@@ -41,7 +41,7 @@ namespace IceCream.Areas.Admin.Controllers
             ViewBag.returnUrl = configuration["PayPal:ReturnUrl"];
 
             ViewBag.top1recipe = (from Formula in db.Formulas
-                                  group new { Formula, Formula.ForContributorsNavigation } by new
+                                  group new { Formula, Formula.ForContributorsNavigation } by new 
                                   {
                                       Formula.ForContributors,
                                       Formula.ForContributorsNavigation.AccUsername,
@@ -53,8 +53,8 @@ namespace IceCream.Areas.Admin.Controllers
                                       g.Key.AccAvatar,
                                       g.Key.ForContributors,
                                       Quantity = g.Count(p => p.Formula.ForContributors != null)
-                                  });
-
+                                  }).ToList();
+  
             return View();
         }
 
