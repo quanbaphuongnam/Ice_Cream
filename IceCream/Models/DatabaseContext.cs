@@ -248,7 +248,10 @@ namespace IceCream.Models
 
                 entity.ToTable("invoice_account");
 
-                entity.Property(e => e.InvId).HasColumnName("inv_id");
+                entity.Property(e => e.InvId)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("inv_id");
 
                 entity.Property(e => e.AccId).HasColumnName("acc_id");
 
@@ -295,7 +298,10 @@ namespace IceCream.Models
 
                 entity.Property(e => e.BookId).HasColumnName("book_id");
 
-                entity.Property(e => e.InvId).HasColumnName("inv_id");
+                entity.Property(e => e.InvId)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("inv_id");
 
                 entity.Property(e => e.ScName)
                     .IsRequired()

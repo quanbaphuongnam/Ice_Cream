@@ -14,6 +14,13 @@ namespace IceCream.Services
             db = _db;
         }
 
+        public Book Edit(Book book)
+        {
+            db.Entry(book).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            db.SaveChanges();
+            return book;
+        }
+
         public Book Find(int id)
         {
             return db.Books.SingleOrDefault(b => b.BookId == id);

@@ -12,7 +12,7 @@ namespace IceCream.Models
             InvoiceDetailAccounts = new HashSet<InvoiceDetailAccount>();
         }
 
-        public int InvId { get; set; }
+        public string InvId { get; set; }
         public int? AccId { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }

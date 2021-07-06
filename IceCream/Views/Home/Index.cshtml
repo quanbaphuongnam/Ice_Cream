@@ -1,9 +1,7 @@
 ﻿@model IceCream.Models.Formula
-@using Microsoft.AspNetCore.Http;
-
-@inject IHttpContextAccessor HttpContextAccessor
 @{ ViewData["Title"] = "Index";
-                Layout = "~/Views/Shared/_Layout.cshtml"; }
+    Layout = "~/Views/Shared/_Layout.cshtml"; 
+}
 
 <section class="main_slider_area">
     <div id="main_slider4" class="rev_slider" data-version="5.3.1.6">
@@ -332,23 +330,23 @@
                 </div>
             </div>
             @*<div class="col-lg-6">
-                <div class="arivals_slider owl-carousel">
-                    @foreach (var top1recipe in ViewBag.top1recipe)
-                    {
-                    <div class="item">
-                        <div class="cake_feature_item">
-                        <div class="cake_img">
-                         <img src="~/img/avatar/avatardefault.jpg" alt="">
-                         </div>
-                        <h3>@top1recipe.AccUsername</h3>
-                        <button class="custom-btn btn-15">@top1recipe</button>
+                    <div class="arivals_slider owl-carousel">
+                        @foreach (var top1recipe in ViewBag.top1recipe)
+                        {
+                        <div class="item">
+                            <div class="cake_feature_item">
+                            <div class="cake_img">
+                             <img src="~/img/avatar/avatardefault.jpg" alt="">
+                             </div>
+                            <h3>@top1recipe.AccUsername</h3>
+                            <button class="custom-btn btn-15">@top1recipe</button>
 
-                        </div>
-                 </div>}
+                            </div>
+                     </div>}
 
 
-                </div>
-            </div>*@
+                    </div>
+                </div>*@
         </div>
     </div>
 </section>

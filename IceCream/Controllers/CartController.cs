@@ -18,12 +18,16 @@ namespace IceCream.Controllers
     {
         public DatabaseContext db;
         private BookService bookService;
+        private InvoiceService invoiceService;
+        private InvoiceDetailAccountService invoiceDetailAccountService;
         private IConfiguration configuration;
-        public CartController(DatabaseContext _db, BookService _bookService, IConfiguration _configuration)
+        public CartController(DatabaseContext _db, BookService _bookService, IConfiguration _configuration, InvoiceService _invoiceService, InvoiceDetailAccountService _invoiceDetailAccountService)
         {
             db = _db;
             bookService = _bookService;
             configuration = _configuration;
+            invoiceService = _invoiceService;
+            invoiceDetailAccountService = _invoiceDetailAccountService;
         }
 
         [Route("cart")]
@@ -111,6 +115,7 @@ namespace IceCream.Controllers
                     }
                 };
                 HttpContext.Session.SetString("cart", JsonConvert.SerializeObject(cart));
+                Debug.WriteLine(book.BookId);
                 HttpContext.Session.SetInt32("jsoncart", cart.Count());
             }
             else
@@ -151,15 +156,43 @@ namespace IceCream.Controllers
         public IActionResult Success([FromQuery(Name = "tx")] string tx)
         {
             var result = PDTHolder.Success(tx, configuration, Request);
-            Debug.WriteLine("Customer info:");
-            Debug.WriteLine("First Name: " + result.PayerFirstName);
-            Debug.WriteLine("LastName: " + result.PayerLastName);
-            Debug.WriteLine("Email: " + result.PayerEmail);
-
-
             InvoiceAccount invoiceAccount = JsonConvert.DeserializeObject<InvoiceAccount>(HttpContext.Session.GetString("billing"));
-
-            return RedirectToAction("index","home");
+            InvoiceAccount invoice = new InvoiceAccount
+            {
+                InvId = result.TransactionId,
+                AccId = (HttpContext.Session.GetInt32("account")!=null)? HttpContext.Session.GetInt32("account"): null,
+                Name = invoiceAccount.Name,
+                Email = invoiceAccount.Email,
+                Addr = invoiceAccount.Addr,
+                Phone = invoiceAccount.Phone,
+                InvTotal = int.Parse(result.GrossTotal.ToString()),
+                InvPayment = "Paypal",
+                InvStatus = "Paid",
+            };
+            invoiceService.Create(invoice);
+            List<Cart> carts = JsonConvert.DeserializeObject<List<Cart>>(HttpContext.Session.GetString("cart"));
+            foreach (var cart in carts)
+            {
+                InvoiceDetailAccount invoiceDetail = new InvoiceDetailAccount
+                {
+                    InvId = result.TransactionId,
+                    BookId = cart.book.BookId,
+                    ScName = cart.book.BookName,
+                    ScQuantity = cart.quantity,
+                    ScPhoto = cart.book.BookPhoto,
+                    ScPrice = cart.book.BookPrice,
+                    Total = cart.quantity * cart.book.BookPrice,
+                };
+                invoiceDetailAccountService.Create(invoiceDetail);
+                Book book = bookService.Find(cart.book.BookId);
+                book.BookQuantity -= cart.quantity;
+                bookService.Edit(book);
+            };
+            HttpContext.Session.SetString("msgbilling", "s");
+            HttpContext.Session.Remove("billing");
+            HttpContext.Session.Remove("cart");
+            HttpContext.Session.Remove("jsoncart");
+            return RedirectToAction("allbook", "book");
         }
     }
 }

@@ -1,9 +1,25 @@
 ﻿@model IceCream.Models.Book
+@using Microsoft.AspNetCore.Http;
+
+@inject IHttpContextAccessor HttpContextAccessor
 @{
     ViewData["Title"] = "AllBook";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@if (@HttpContextAccessor.HttpContext.Session.GetString("msgbilling") == "s")
+{
+    <script type="text/javascript">
+        Swal.fire({
+            icon: 'success',
+            title: 'Order successful',
+            text: ' Please continue to shop',
+            showConfirmButton: false,
+            timer: 1500
+        })
+    </script>
+    HttpContextAccessor.HttpContext.Session.Remove("msgbilling");
+}
 <section class="banner_area">
     <div class="container">
         <div class="banner_text">
@@ -21,7 +37,7 @@
 <!--================Blog Main Area =================-->
 <section class="our_cakes_area p_100">
     <div class="container">
-     
+
 
 
         <div class="book">
@@ -139,5 +155,4 @@
 </section>
 <!--================End Special Recipe Area =================-->
 <!--================Newsletter Area =================-->
-
 <!--================End Newsletter Area =================-->
