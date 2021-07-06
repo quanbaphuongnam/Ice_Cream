@@ -6,8 +6,14 @@ using System.Threading.Tasks;
 
 namespace IceCream.Services
 {
-   public interface QuanLySavourServices
+    public interface QuanLySavourServices
     {
         List<Savour> FindAllSavour();
+        public Savour Update(Savour savour);
+
+        public Savour Find(string HagId);
+
+        public bool Delete(string id);
+        Savour AddSavour(Savour savour);
     }
 }

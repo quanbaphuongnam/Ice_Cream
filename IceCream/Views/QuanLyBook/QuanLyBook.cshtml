@@ -1,4 +1,5 @@
-﻿
+﻿@model IceCream.Models.Book
+
 @{
     ViewData["Title"] = "QuanLyBook";
     Layout = "~/Views/SharedAdmin/_LayoutAdmin.cshtml";
@@ -16,7 +17,7 @@
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <a asp-controller="quanlybook" asp-action="quanlybook"> QuanLyBook</a>
+                        <a asp-controller="quanlybook" asp-action="add" class="btn btn-danger"> AddBook</a>
 
                     </div>
                     <!-- /.panel-heading -->
@@ -33,31 +34,42 @@
                                         <th>BookQuantity</th>
                                         <th>BookYear</th>
                                         <th>BookCreated</th>
+                                        <th>BookUpdate</th>
                                         <th>BookStatus</th>
                                         <th>Update</th>
                                         <th>Delete</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach (var quanlybook in ViewBag.quanlybooks)
+                                    @foreach (var books in ViewBag.quanlybooks)
                                     {
                                         <tr class="odd gradeX">
-                                            <td>@quanlybook.BookId</td>
-                                            <td><img src="~/img/books/@quanlybook.BookPhoto" width="100" height="160" alt=""></td>
-                                            <td>@quanlybook.BookName</td>
-                                            <td>@quanlybook.BookDescription</td>
-                                            <td>@quanlybook.BookPrice$</td>
-                                            <td>@quanlybook.BookQuantity</td>
-                                            <td>@quanlybook.BookYear</td>
-                                            <td>@quanlybook.BookCreated.ToString(string.Format("dd/MM/yyyy")) </td>
-                                            <td>@quanlybook.BookStatus</td>
-                                            <td><a asp-controller="quanlybook" asp-action="edit" asp-route-id="@quanlybook.BookId"> Update</a></td>
-                                            <td>@quanlybook.BookStatus</td>
+                                            <td>@books.BookId</td>
+                                            <td><img src="~/img/books/@books.BookPhoto" width="100" height="160" alt=""></td>
+                                            <td>@books.BookName</td>
+                                            <td>@books.BookDescription</td>
+                                            <td>@books.BookPrice$</td>
+                                            <td>@books.BookQuantity</td>
+                                            <td>@books.BookYear</td>
+                                            <td>
+                                                @if (books.BookCreated != null)
+                                                {@books.BookCreated.ToString("dd/MM/yyyy")}
+                                            </td>
+                                            <td>
+                                                @if (books.BookUpdate != null)
+                                                {@books.BookUpdate.ToString("dd/MM/yyyy")}
+                                            </td>
+                                            <td>@books.BookStatus</td>
+                                            <td><a asp-controller="quanlybook" asp-action="edit" asp-route-id="@books.BookId" class="btn btn-warning btn-circle"><i class="fa fa-edit"></i> </a></td>
+                                            <td><a asp-controller="quanlybook" asp-action="delete" asp-route-id="@books.BookId" onclick="return confirm('Are u sure ?')" class="btn btn-danger btn-circle"><i class="fa fa-times"></i></a></td>
 
                                         </tr>
+
                                     }
+
                                 </tbody>
                             </table>
+
                         </div>
                         <!-- /.table-responsive -->
 

@@ -17,5 +17,35 @@ namespace IceCream.Services
         {
             return db.Savours.ToList();
         }
+        public bool Delete(string id)
+        {
+            db.Savours.Remove(db.Savours.Find(id));
+            db.SaveChanges();
+            return true;
+        }
+
+
+        public Savour Find(string HagId)
+        {
+            return db.Savours.SingleOrDefault(b => b.HashtagId == HagId);
+        }
+
+
+
+        public Savour Update(Savour savour)
+        {
+            db.Entry(savour).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            db.SaveChanges();
+            return savour;
+        }
+
+
+
+        public Savour AddSavour(Savour savour)
+        {
+            db.Savours.Add(savour);
+            db.SaveChanges();
+            return savour;
+        }
     }
 }

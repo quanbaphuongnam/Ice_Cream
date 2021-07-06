@@ -1,0 +1,107 @@
+﻿
+@{
+    ViewData["Title"] = "Add";
+    Layout = "~/Views/SharedAdmin/_LayoutAdmin.cshtml";
+}
+
+@model IceCream.Models.Savour
+@using Microsoft.AspNetCore.Http;
+
+@inject IHttpContextAccessor HttpContextAccessor
+
+<div id="wrapper">
+
+
+
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Add Savour</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Add Savour
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+
+                                <div class="col-lg-6">
+                                    <form method="post" asp-controller="quanlysmell" asp-action="add" enctype="multipart/form-data" role="form">
+
+                                        <div class="form-group">
+                                            <label>HashtagId</label>
+                                            <input type="text" asp-for="HashtagId" class="form-control" placeholder="Enter id recipe">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Name Recipe</label>
+                                            <input type="text" asp-for="SavName" class="form-control" placeholder="Enter name recipe">
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <label>Choose savour photo</label>
+                                            <input type="file" name="file">
+                                            <img src="" id="preview" height="400" width="400" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Ingredients</label>
+                                            <textarea type="text" asp-for="SavIngredients" class="form-control"></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Procedure</label>
+                                            <textarea type="text" asp-for="SavProcedure" class="form-control" rows="9"></textarea>
+                                        </div>
+
+
+                                        @*@HttpContextAccessor.HttpContext.Session.GetInt32(" account")*@
+                                    </form>
+                                </div>
+                                <div class="col-lg-6">
+
+
+                                </div>
+
+
+
+
+                            </div>
+                            <!-- /.row (nested) -->
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </div>
+    <!-- /#page-wrapper -->
+
+</div>
+<script>
+    $(document).ready(function () {
+
+        $('#imageFile').change(function (evt) {
+
+            var files = evt.target.files;
+            var file = files[0];
+
+            if (file) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    document.getElementById('preview').src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    });</script>
+
