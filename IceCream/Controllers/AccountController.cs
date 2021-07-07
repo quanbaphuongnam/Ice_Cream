@@ -1,4 +1,5 @@
-﻿using IceCream.Models;
+﻿using IceCream.Helpers;
+using IceCream.Models;
 using IceCream.Services;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -90,6 +91,72 @@ namespace IceCream.Controllers
         public IActionResult Logout()
         {
             HttpContext.Session.Clear();
+            return RedirectToAction("index", "home");
+        }
+
+        [HttpGet]
+        [Route("forgotpassword")]
+        public IActionResult forgotpassword()
+        {
+            return View("Forgotpassword");
+        }
+        [HttpPost]
+        [Route("forgotpassword")]
+        public IActionResult forgotpassword(string username, string email)
+        {
+            if (!String.IsNullOrEmpty(username) && !String.IsNullOrEmpty(email))
+            {
+                if (account.checkemail(username, email) != null)
+                {
+                    string content = "Name: " + username;
+                    int num = new Random().Next(1000, 9999);
+                    content += "<br><br>Confirmation Code: " + num;
+                    if (EmailHelpers.Send("IceCreamAd123@gmail.com", email, "Email confirmation code", content))
+                    {
+                        Debug.WriteLine(num);
+                        HttpContext.Session.SetString("userCheck", username);
+                        HttpContext.Session.SetInt32("msgnum", num);
+                        HttpContext.Session.SetString("msgforgotpassword", "s");
+                        return RedirectToAction("Forgotpassword");
+                    }
+                    else
+                    {
+                        HttpContext.Session.SetString("msgforgotpassword", "f");
+                    }
+                }
+                else
+                {
+                    HttpContext.Session.SetString("msgforgotpassword", "f");
+                }
+            }
+            return RedirectToAction("Forgotpassword");
+        }
+        [HttpPost]
+        [Route("checkVerification")]
+        public IActionResult CheckVerification(int code)
+        {
+                if (HttpContext.Session.GetInt32("msgnum") == code)
+                {
+                    HttpContext.Session.SetString("msgcheckcode", "s");
+                    HttpContext.Session.Remove("msgforgotpassword");
+                }
+                else
+                {
+                    HttpContext.Session.SetString("msgcheckcode", "f");
+                }
+            return RedirectToAction("Forgotpassword");
+        }
+        [HttpPost]
+        [Route("updatePassword")]
+        public IActionResult updatePassword(string cfpass)
+        {
+            if (!String.IsNullOrEmpty(cfpass))
+            {
+                Account acc = account.Find(HttpContext.Session.GetString("userCheck"));
+                acc.AccPassword = BCrypt.Net.BCrypt.HashString(cfpass);
+                account.EditAcccount(acc);
+                HttpContext.Session.SetString("msgNewPass", "s");
+            }
             return RedirectToAction("index", "home");
         }
     }
