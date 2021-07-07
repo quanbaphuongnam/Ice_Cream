@@ -48,5 +48,15 @@ namespace IceCream.Services
             db.SaveChanges();
             return account;
         }
+
+        public Account checkemail(string username, string email)
+        {
+            var account = db.Accounts.SingleOrDefault(a => a.AccUsername == username && a.AccEmail == email);
+            if (account != null)
+            {
+                return account;
+            }
+            return null;
+        }
     }
 }
