@@ -50,25 +50,19 @@ namespace IceCream.Controllers.Admin
      
         }
         [Route("activefb/{id}")]
-        public IActionResult Activerecipe(FeedbackFormula feedbackFormula, int id)
+        public IActionResult Activerecipe(int id)
         {
-
-
             var currentRecipe = feedbackFomulaServices.FindFBFormula(id);
-
-
-
             if (currentRecipe.FeedbackStatus == 1)
             {
-                currentRecipe.FeedbackStatus = 1;
+                currentRecipe.FeedbackStatus = 0 ;
             }
             else 
             {
-                currentRecipe.FeedbackStatus = 0;
+                currentRecipe.FeedbackStatus = 1;
             }
             currentRecipe.Created = DateTime.Now;
             feedbackFomulaServices.EditFormula(currentRecipe);
-
             return RedirectToAction("feedbackfomula");
         }
     }

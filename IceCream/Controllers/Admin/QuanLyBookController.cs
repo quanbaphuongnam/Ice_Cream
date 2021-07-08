@@ -9,6 +9,8 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using PagedList;
+using System.Diagnostics;
+
 namespace IceCream.Controllers.Admin
 {
     [Route("quanlybook")]
@@ -55,6 +57,7 @@ namespace IceCream.Controllers.Admin
         {
 
             var currentBook = quanlybookServices.Find(book.BookId);
+          
 
             if (filecover != null)
             {
@@ -68,11 +71,7 @@ namespace IceCream.Controllers.Admin
                 currentBook.BookPhoto = fileName + "." + ext;
 
             }
-            else if (currentBook.BookPhoto != null)
-            {
-                currentBook.BookPhoto = book.BookPhoto;
-
-            }
+           
 
             if (book.BookName != null) { currentBook.BookName = book.BookName; }
             if (book.BookPrice != null) { currentBook.BookPrice = book.BookPrice; }
@@ -86,12 +85,12 @@ namespace IceCream.Controllers.Admin
             //currentBook.BookYear = book.BookYear;
             //currentBook.BookCreated = book.BookCreated;
             //currentBook.BookStatus = book.BookStatus;
-            currentBook.BookUpdate = DateTime.Now;
+            //currentBook.BookUpdate = DateTime.Now;
 
             quanlybookServices.Update(currentBook);
             return RedirectToAction("quanlybook");
         }
-        [HttpDelete]
+        
         [Route("delete/{id}")]
         public IActionResult Delete(int id)
         {
