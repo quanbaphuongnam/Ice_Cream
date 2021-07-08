@@ -13,7 +13,7 @@ namespace IceCream.Services
 
         public Savour Find(string HagId);
 
-        public bool Delete(string id);
+        void Delete(string id);
         Savour AddSavour(Savour savour);
     }
 }

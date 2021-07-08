@@ -21,16 +21,16 @@
 
 
                         <div class="form-group">
-                            <label asp-for="BookId" class="control-label"></label>
-                            <input asp-for="BookId" class="form-control" value="@ViewBag.book.BookId" />
+                            <label asp-for="BookId" class="control-label"> BookID :@ViewBag.book.BookId</label>
+                            <input asp-for="BookId" class="form-control" />
 
                         </div>
                         <div class="form-group">
-                            <h4 style="text-align:left; "> BookPhoto </h4>
-                            @*<input style="padding: 0px 0px 8px 0px !important;" type="file" name="file"  />*@
-                            <input style="padding: 0px 0px 8px 0px !important;" id="imageFile" type="file" name="file" class="imageFile" accept="image/*">
-                            <td><img src="~/img/books/@ViewBag.book.BookPhoto" width="100" height="160" alt=""></td>
+                            <label>Choose cover photo</label>
+                            <input type="file" name="filecover" id="readUrl">
+                            <img height="400" width="400" id="uploadedImage" src="~/img/books/@ViewBag.book.BookPhoto" alt="Uploaded Image" accept="image/png, image/jpeg" />
                         </div>
+                     
                         <div class="form-group">
                             <label asp-for="BookName" class="control-label"></label>
                             <input asp-for="BookName" class="form-control" value="@ViewBag.book.BookName" />
@@ -78,6 +78,7 @@
                         </div>
                         <div class="form-group">
                             <input type="submit" value="Save" class="btn btn-default" />
+                            <button type="reset" class="btn btn-default">Reset Button</button>
                         </div>
 
 
@@ -92,3 +93,14 @@
         </div>
     </div>
 </div>
+<script>
+    document.getElementById('readUrl').addEventListener('change', function () {
+        if (this.files[0]) {
+            var picture = new FileReader();
+            picture.readAsDataURL(this.files[0]);
+            picture.addEventListener('load', function (event) {
+                document.getElementById('uploadedImage').setAttribute('src', event.target.result);
+                document.getElementById('uploadedImage').style.display = 'block';
+            });
+        }
+    });</script>

@@ -22,12 +22,12 @@ namespace IceCream.Services
             return book;
         }
 
-        public bool Delete(int id)
+        public void Delete(int id)
         {
             db.Books.Remove(db.Books.Find(id));
             db.SaveChanges();
-            return true;
         }
+
 
         public Book Find(int id)
         {

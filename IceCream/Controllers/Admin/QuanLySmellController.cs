@@ -26,9 +26,15 @@ namespace IceCream.Controllers.Admin
         [Route("")]
         public IActionResult Index()
         {
-            ViewBag.savours = quanLySavourServices.FindAllSavour();
-            return View("quanlysmell");
+            if (HttpContext.Session.GetInt32("admin") != null)
+            {
+                ViewBag.savours = quanLySavourServices.FindAllSavour();
+                return View("quanlysmell");
+            }
+            return View("~/Views/Home/Page404.cshtml");
         }
+          
+       
         [HttpGet]
         [Route("edit")]
         public IActionResult Edit(string id)
@@ -39,28 +45,38 @@ namespace IceCream.Controllers.Admin
         }
         [Route("edit")]
         [HttpPost]
-        public IActionResult Edit(Savour savour, IFormFile file)
+        public IActionResult Edit(Savour savour, IFormFile filecover)
         {
 
             var cureentsav = quanLySavourServices.Find(savour.HashtagId);
 
-            if (file != null)
+            if (filecover != null)
             {
-                var fileName = System.Guid.NewGuid().ToString().Replace("-", "");
-                var ext = file.ContentType.Split(new char[] { '/' })[1];
-                var path = Path.Combine(webHostEnvironment.WebRootPath, "img/books", fileName + "." + ext);
+                string fileName = Guid.NewGuid().ToString();
+                var ext = filecover.ContentType.Split(new char[] { '/' })[1];
+                var path = Path.Combine(webHostEnvironment.WebRootPath, "img/savour", fileName + "." + ext);
                 using (var fileStream = new FileStream(path, FileMode.Create))
                 {
-                    file.CopyTo(fileStream);
+                    filecover.CopyTo(fileStream);
                 }
                 cureentsav.SavPhoto = fileName + "." + ext;
 
             }
+            else if (cureentsav.SavPhoto != null)
+            {
+                cureentsav.SavPhoto = savour.SavPhoto;
 
+            }
 
-            cureentsav.SavName = savour.SavName;
-            cureentsav.SavIngredients = savour.SavIngredients;
-            cureentsav.SavProcedure = savour.SavProcedure;
+        
+            if (savour.SavName != null) { cureentsav.SavName = savour.SavName; }
+            if (savour.SavIngredients != null) { cureentsav.SavIngredients = savour.SavIngredients; }
+            if (savour.SavProcedure !=null) { cureentsav.SavProcedure = savour.SavProcedure; }
+          
+
+            //cureentsav.SavName = savour.SavName;
+            //cureentsav.SavIngredients = savour.SavIngredients;
+            //cureentsav.SavProcedure = savour.SavProcedure;
 
 
             quanLySavourServices.Update(cureentsav);
@@ -82,23 +98,23 @@ namespace IceCream.Controllers.Admin
         }
         [HttpPost]
         [Route("add")]
-        public IActionResult Add(Savour savour, IFormFile file)
+        public IActionResult Add(Savour savour, IFormFile filecover)
         {
-            if (file != null)
+            if (filecover != null)
             {
                 string fileName = Guid.NewGuid().ToString();
-                var ext = file.ContentType.Split(new char[] { '/' })[1];
-                var path = Path.Combine(webHostEnvironment.WebRootPath, "img/recipe", fileName + "." + ext);
+                var ext = filecover.ContentType.Split(new char[] { '/' })[1];
+                var path = Path.Combine(webHostEnvironment.WebRootPath, "img/savour", fileName + "." + ext);
                 using (var fileStream = new FileStream(path, FileMode.Create))
                 {
-                    file.CopyTo(fileStream);
+                    filecover.CopyTo(fileStream);
                 }
                 savour.SavPhoto = fileName + "." + ext;
 
             }
             else
             {
-                savour.SavPhoto = "noimage.png";
+                savour.SavPhoto = "";
             }
 
 
