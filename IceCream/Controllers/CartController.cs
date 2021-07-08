@@ -63,6 +63,8 @@ namespace IceCream.Controllers
         [Route("billingDetails")]
         public IActionResult BillingDetails(InvoiceAccount invoiceAccount)
         {
+            Debug.WriteLine("aaaaa: " + invoiceAccount.Email);
+            Debug.WriteLine("aaaaa: " + invoiceAccount.Addr);
             HttpContext.Session.SetString("billing", JsonConvert.SerializeObject(invoiceAccount));
             return RedirectToAction("checkout");
         }
