@@ -176,7 +176,7 @@ namespace IceCream.Controllers
                                          ForCreated = f.ForCreated,
                                          //ConLai = (x.Soluong - y.Soluong)
                                      });
-            ViewBag.SLfb = db.FeedbackFormulas.Where(fb => fb.FormulaId == id).Count();
+            ViewBag.SLfb = db.FeedbackFormulas.Where(fb => fb.FormulaId == id ).Count();
             ViewBag.recipedetailsavour = (from f in db.Formulas
                                           join sf in db.SavourFormulas on f.ForId equals sf.ForId
                                           join s in db.Savours on sf.HashtagId equals s.HashtagId
@@ -219,7 +219,7 @@ namespace IceCream.Controllers
             formula.ForUpdate = DateTime.Now;
             
             recipeService.CreateFormula(formula);
-           
+            ViewBag.messenge = 1;
             return RedirectToAction("recipe");
         }
 

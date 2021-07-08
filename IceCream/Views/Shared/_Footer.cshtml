@@ -15,7 +15,7 @@
                     <div class="input-group">
 
                         <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" type="button">Subscribe Now</button>
+                            <button class="btn btn-outline-secondary" type="button" href="#test-login">Subscribe</button>
                         </div>
                     </div>
                 </div>
@@ -48,9 +48,9 @@
                     </div>
                     <ul class="list_style">
                         <li><a href="#">Your Account</a></li>
-                        <li><a href="#">View Order</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Terms & Conditionis</a></li>
+                        <li><a asp-controller="cart" asp-action="cart">View Order (@HttpContextAccessor.HttpContext.Session.GetInt32("jsoncart"))</a></li>
+                        <li><a asp-controller="aboutus" asp-action="aboutus">About Us</a></li>
+                        <li><a asp-controller="Contact" asp-action="Contact">Contact</a></li>
                     </ul>
                 </aside>
             </div>

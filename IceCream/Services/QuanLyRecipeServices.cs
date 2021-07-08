@@ -12,5 +12,7 @@ namespace IceCream.Services
         Formula CreateFormula(Formula formula);
         Formula Find(int id);
         void Delete(int id);
+        Formula FindByIdFormula(int id);
+        Formula EditFormula(Formula formula);
     }
 }

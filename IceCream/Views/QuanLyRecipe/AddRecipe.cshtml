@@ -40,35 +40,29 @@
                                         </div>
                                         <div class="form-group">
                                             <label>Choose cover photo</label>
-                                            <input type="file" name="filecover">
-                                            <img src="" id="preview" height="400" width="400" />
+                                            <input type="file" name="filecover" id="readUrl">
+                                            <img height="400" width="400" id="uploadedImage" src="#" alt="Uploaded Image" accept="image/png, image/jpeg" />
                                         </div>
                                         <div class="form-group">
                                             <label>Choose condition</label>
-                                            <div class="radio">
-                                                <label asp-for="ForCondition"></label>
-                                                <input type="radio" name="optionsRadios"  value="free" checked>Free <br />    
-                                                <input type="radio" name="optionsRadios"  value="mem" checked>Member
-                                                <span asp-validation-for="ForCondition"></span>
-                                            </div>
-                                            
+                                            <select asp-for="ForCondition" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                                                <option selected>Not selected yet</option>
+                                                <option style="color:dodgerblue" value="free">Free</option>
+                                                <option  style="color:lawngreen" value="mem">Member</option>
+
+                                            </select>
+
 
                                         </div>
+                                    
                                         <div class="form-group">
                                             <label>Choose status</label>
-                                            <div class="radio">
-                                                <label>
-                                                    <input type="radio" asp-for="ForStatus" name="optionsRadios1" id="optionsRadios1" value="0" checked>Not Activated
-                                                </label>
-                                            </div>
-                                            <div class="radio">
-                                                <label>
-                                                    <input type="radio" asp-for="ForStatus" name="optionsRadios1" id="optionsRadios2" value="1">Activated
-                                                </label>
-                                            </div>
+                                            <select asp-for="ForStatus" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                                                <option style="color:red" value="0" selected>Not Activated</option>
+                                                <option style="color:orange" value="1">Activated</option>
 
+                                            </select>
                                         </div>
-
 
                                         <div class="form-group">
                                             <label>Description</label>
@@ -174,19 +168,13 @@
 
 </div>
 <script>
-    $(document).ready(function () {
-
-        $('#imageFile').change(function (evt) {
-
-            var files = evt.target.files;
-            var file = files[0];
-
-            if (file) {
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    document.getElementById('preview').src = e.target.result;
-                };
-                reader.readAsDataURL(file);
-            }
-        });
+    document.getElementById('readUrl').addEventListener('change', function () {
+        if (this.files[0]) {
+            var picture = new FileReader();
+            picture.readAsDataURL(this.files[0]);
+            picture.addEventListener('load', function (event) {
+                document.getElementById('uploadedImage').setAttribute('src', event.target.result);
+                document.getElementById('uploadedImage').style.display = 'block';
+            });
+        }
     });</script>

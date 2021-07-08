@@ -43,7 +43,7 @@ namespace IceCream.Controllers.Admin
                                   ForCondition = f.ForCondition,
                                   ForStatus = f.ForStatus,
                                   ForCreated = f.ForCreated
-                              }).OrderByDescending(f => f.ForId);
+                              }).OrderBy( f => f.ForStatus);
             return View("quanlyrecipe");
         }
         [Route("addrecipe")]
@@ -81,11 +81,81 @@ namespace IceCream.Controllers.Admin
             
             return RedirectToAction("addrecipe");
         }
+        [HttpGet]
         [Route("updaterecipe")]
-        public IActionResult Updaterecipe()
+        public IActionResult Updaterecipe(int id)
+        {
+            ViewBag.fomula = (from f in db.Formulas
+                              join a in db.Accounts on f.ForContributors equals a.AccId
+                              select new AllRecipe
+                              {
+                                  AccId = a.AccId,
+                                  AccUsername = a.AccUsername,
+                                  ForId = f.ForId,
+                                  ForCover = f.ForCover,
+                                  ForName = f.ForName,
+                                  ForDescription = f.ForDescription,
+                                  ForCondition = f.ForCondition,
+                                  ForStatus = f.ForStatus,
+                                  ForCreated = f.ForCreated
+                              }).Where(f => f.ForId == id);
+            return View("updaterecipe", quanlyrecipeServices.FindByIdFormula(id));
+        }
+        [Route("updaterecipe")]
+        public IActionResult Updaterecipe(Formula formula , IFormFile filecover)
+        {
+          
+
+            var currentRecipe = quanlyrecipeServices.FindByIdFormula(formula.ForId);
+
+           
+            if (filecover != null)
+            {
+                string fileName = Guid.NewGuid().ToString();
+                var ext = filecover.ContentType.Split(new char[] { '/' })[1];
+                var path = Path.Combine(webHostEnvironment.WebRootPath, "img/recipe", fileName + "." + ext);
+                using (var fileStream = new FileStream(path, FileMode.Create))
+                {
+                    filecover.CopyTo(fileStream);
+                }
+                currentRecipe.ForCover = fileName + "." + ext;
+
+            }
+            else if(formula.ForCover != null)
+            {
+                currentRecipe.ForCover = formula.ForCover;
+
+            }
+          
+
+            if (formula.ForName != null) { currentRecipe.ForName = formula.ForName; }
+            if (formula.ForDescription != null) { currentRecipe.ForDescription = formula.ForDescription; }
+            if (formula.ForContributors != null) { currentRecipe.ForContributors = formula.ForContributors; }
+            if (formula.ForCondition != null) { currentRecipe.ForCondition = formula.ForCondition; }
+            if (formula.ForStatus != null) { currentRecipe.ForStatus = formula.ForStatus; }
+            currentRecipe.ForUpdate = DateTime.Now; 
+            quanlyrecipeServices.EditFormula(currentRecipe);
+      
+            return RedirectToAction("updaterecipe",new { id = formula.ForId });
+        }
+      
+      
+       
+        
+        [Route("activerecipe/{id}")]
+        public IActionResult Activerecipe(Formula formula,int id)
         {
 
-            return View("updaterecipe");
+
+            var currentRecipe = quanlyrecipeServices.FindByIdFormula(id);
+
+
+         
+            currentRecipe.ForStatus = 1;
+            currentRecipe.ForUpdate = DateTime.Now;
+            quanlyrecipeServices.EditFormula(currentRecipe);
+
+            return RedirectToAction("quanlyrecipe");
         }
         [Route("delete/{id}")]
 
