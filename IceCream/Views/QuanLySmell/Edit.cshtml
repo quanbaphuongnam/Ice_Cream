@@ -28,20 +28,21 @@
                             <div class="row">
 
                                 <div class="col-lg-6">
-                                    <form method="post" asp-controller="quanlysmell" asp-action="addrecipe" enctype="multipart/form-data" role="form">
+                                    <form method="post" asp-controller="quanlysmell" asp-action="edit" enctype="multipart/form-data" role="form">
 
                                         <div class="form-group">
-                                            <label>IdHashTag</label>
-                                            <input type="text" asp-for="HashtagId" class="form-control">
+                                            <label>IdHashTag </label>
+                                            <input type="text" asp-for="HashtagId" class="form-control" value="@ViewBag.savour.HashtagId">
                                         </div>
                                         <div class="form-group">
                                             <label>Choose cover photo</label>
                                             <input type="file" name="filecover" id="readUrl">
                                             <img height="400" width="400" id="uploadedImage" src="~/img/savour/@ViewBag.savour.SavPhoto" alt="Uploaded Image" accept="image/png, image/jpeg" />
                                         </div>
-
-
-
+                                        <div class="form-group">
+                                            <label>Name </label>
+                                            <input type="text" asp-for="SavName" class="form-control" value="@ViewBag.savour.SavName">
+                                        </div>
                                         <div class="form-group">
                                             <label>Ingredients</label>
                                             <textarea type="text" asp-for="SavIngredients" value="@ViewBag.savour.SavIngredients" class="form-control" rows="5"></textarea>
@@ -49,14 +50,14 @@
 
                                         <div class="form-group">
                                             <label>Procedure</label>
-                                            <textarea type="text" asp-for="SavProcedure" class="form-control" rows="5"></textarea>
+                                            <textarea type="text" value="@ViewBag.savour.SavProcedure" asp-for="SavProcedure" class="form-control" rows="5"></textarea>
                                         </div>
                                         <div class="form-group">
                                             <input type="submit" value="Save" class="btn btn-default" />
                                             <button type="reset" class="btn btn-default">Reset Button</button>
                                         </div>
 
-                                   
+
                                     </form>
                                 </div>
                                 <div class="col-lg-6">

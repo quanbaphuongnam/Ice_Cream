@@ -62,13 +62,9 @@ namespace IceCream.Controllers.Admin
                 cureentsav.SavPhoto = fileName + "." + ext;
 
             }
-            else if (cureentsav.SavPhoto != null)
-            {
-                cureentsav.SavPhoto = savour.SavPhoto;
+            
 
-            }
-
-        
+            if (savour.HashtagId != null) { cureentsav.HashtagId = savour.HashtagId; }
             if (savour.SavName != null) { cureentsav.SavName = savour.SavName; }
             if (savour.SavIngredients != null) { cureentsav.SavIngredients = savour.SavIngredients; }
             if (savour.SavProcedure !=null) { cureentsav.SavProcedure = savour.SavProcedure; }
@@ -82,7 +78,7 @@ namespace IceCream.Controllers.Admin
             quanLySavourServices.Update(cureentsav);
             return RedirectToAction("quanlysmell");
         }
-        [HttpDelete]
+      
         [Route("delete/{id}")]
         public IActionResult Delete(string id)
         {
@@ -122,7 +118,7 @@ namespace IceCream.Controllers.Admin
 
             quanLySavourServices.AddSavour(savour);
 
-            return RedirectToAction("quanlybook");
+            return RedirectToAction("quanlysmell");
         }
     }
 }

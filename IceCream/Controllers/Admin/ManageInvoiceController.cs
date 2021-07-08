@@ -17,6 +17,7 @@ namespace IceCream.Controllers.Admin
         private ManageInvoiceServices manageInvoiceServices;
         private InvoiceDetailAccountService invoiceDetailAccountService;
 
+
         public ManageInvoiceController(DatabaseContext _db, ManageInvoiceServices _manageInvoiceServices, InvoiceDetailAccountService _invoiceDetailAccountService)
         {
             db = _db;
