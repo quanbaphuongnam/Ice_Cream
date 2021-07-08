@@ -167,6 +167,7 @@ namespace IceCream.Controllers
                 Email = invoiceAccount.Email,
                 Addr = invoiceAccount.Addr,
                 Phone = invoiceAccount.Phone,
+                InvCreated = DateTime.Now,
                 InvTotal = int.Parse(result.GrossTotal.ToString()),
                 InvPayment = "Paypal",
                 InvStatus = "Paid",

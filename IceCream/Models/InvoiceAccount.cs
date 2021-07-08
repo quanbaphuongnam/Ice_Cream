@@ -21,6 +21,7 @@ namespace IceCream.Models
         public int? InvTotal { get; set; }
         public string InvPayment { get; set; }
         public string InvStatus { get; set; }
+        public DateTime? InvCreated { get; set; }
 
         public virtual Account Acc { get; set; }
         public virtual ICollection<InvoiceDetailAccount> InvoiceDetailAccounts { get; set; }

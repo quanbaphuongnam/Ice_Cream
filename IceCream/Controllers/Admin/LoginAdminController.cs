@@ -50,5 +50,12 @@ namespace IceCream.Controllers.Admin
             }
             return RedirectToAction("login", "loginAdmin");
         }
+        [HttpGet]
+        [Route("logout")]
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("login", "loginAdmin");
+        }
     }
 }
