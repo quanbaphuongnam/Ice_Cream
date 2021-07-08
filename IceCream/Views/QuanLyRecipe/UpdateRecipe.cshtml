@@ -1,12 +1,13 @@
-﻿
-@{
-    ViewData["Title"] = "UpdateRecipe";
-    Layout = "~/Views/SharedAdmin/_LayoutAdmin.cshtml";
-}
-@model IceCream.Models.Formula
+﻿@model IceCream.Models.Formula
 @using Microsoft.AspNetCore.Http;
 
 @inject IHttpContextAccessor HttpContextAccessor
+@{
+    ViewData["Title"] = "UpdateRecipe";
+    Layout = "~/Views/SharedAdmin/_LayoutAdmin.cshtml";
+
+}
+
 <div id="wrapper">
 
 
@@ -24,62 +25,58 @@
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Add Recipe
+                            Update Recipe
                         </div>
                         <div class="panel-body">
                             <div class="row">
+                                @foreach (var fomula in ViewBag.fomula)
+                                {
+                                    <div class="col-lg-6">
+                                        <form method="post" asp-controller="quanlyrecipe" asp-action="updaterecipe" enctype="multipart/form-data" role="form">
 
-                                <div class="col-lg-6">
-                                    <form method="post" asp-controller="quanlyrecipe" asp-action="addrecipe" enctype="multipart/form-data" role="form">
+                                            <div class="form-group">
+                                                <label>Name Recipe Id @fomula.ForId</label>
+                                                <input type="text" asp-for="ForName" value="@fomula.ForName" class="form-control" placeholder="Enter name recipe">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Choose cover photo</label>
+                                                <input type="file" name="filecover" id="readUrl">
+                                                <img height="400" width="400" id="uploadedImage" src="~/img/recipe/@fomula.ForCover" alt="Uploaded Image" accept="image/png, image/jpeg" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Choose condition</label>
+                                                <select asp-for="ForCondition" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                                                   
+                                                    <option style="color:dodgerblue" value="free">Free</option>
+                                                    <option style="color:lawngreen" value="mem">Member</option>
 
-                                        <div class="form-group">
-                                            <label>Name Recipe</label>
-                                            <input type="text" asp-for="ForName" class="form-control" placeholder="Enter name recipe">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Choose cover photo</label>
-                                            <input type="file" name="filecover">
-                                            <img src="" id="preview" height="400" width="400" />
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Choose condition</label>
-                                            <div class="radio">
-                                                <label asp-for="ForCondition"></label>
-                                                <input type="radio" name="optionsRadios" value="free" checked>Free <br />
-                                                <input type="radio" name="optionsRadios" value="mem" checked>Member
-                                                <span asp-validation-for="ForCondition"></span>
+                                                </select>
+
+
                                             </div>
 
+                                            <div class="form-group">
+                                                <label>Choose status</label>
+                                                <select asp-for="ForStatus" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                                                    <option style="color:red" value="0" selected>Unqualified</option>
+                                                    <option style="color:orange" value="1">Approved</option>
 
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Choose status</label>
-                                            <div class="radio">
-                                                <label>
-                                                    <input type="radio" asp-for="ForStatus" name="optionsRadios1" id="optionsRadios1" value="0" checked>Not Activated
-                                                </label>
-                                            </div>
-                                            <div class="radio">
-                                                <label>
-                                                    <input type="radio" asp-for="ForStatus" name="optionsRadios1" id="optionsRadios2" value="1">Activated
-                                                </label>
+                                                </select>
                                             </div>
 
-                                        </div>
-
-
-                                        <div class="form-group">
-                                            <label>Description</label>
-                                            <textarea type="text" asp-for="ForDescription" class="form-control" rows="9"></textarea>
-                                        </div>
-                                        <div class="form-group">
-                                            <button type="submit" class="btn btn-default">Submit Button</button>
-                                            <button type="reset" class="btn btn-default">Reset Button</button>
-                                        </div>
-                                        <input hidden type="number" asp-for="ForContributors" value="1" />
-                                        @*@HttpContextAccessor.HttpContext.Session.GetInt32(" account")*@
-                                    </form>
-                                </div>
+                                            <div class="form-group">
+                                                <label>Description</label>
+                                                <textarea type="text" asp-for="ForDescription" value="@fomula.ForDescription" class="form-control" rows="9"></textarea>
+                                            </div>
+                                            <div class="form-group">
+                                                <button type="submit" class="btn btn-default">Submit Button</button>
+                                                <button type="reset" class="btn btn-default">Reset Button</button>
+                                            </div>
+                                            <input type="hidden" asp-for="ForId" value="@fomula.ForId" />
+                                            @*@HttpContextAccessor.HttpContext.Session.GetInt32(" account")*@
+                                        </form>
+                                    </div>
+                                }
                                 <div class="col-lg-6">
 
 
@@ -172,21 +169,15 @@
 
 </div>
 <script>
-    $(document).ready(function () {
-
-        $('#imageFile').change(function (evt) {
-
-            var files = evt.target.files;
-            var file = files[0];
-
-            if (file) {
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    document.getElementById('preview').src = e.target.result;
-                };
-                reader.readAsDataURL(file);
-            }
-        });
+    document.getElementById('readUrl').addEventListener('change', function () {
+        if (this.files[0]) {
+            var picture = new FileReader();
+            picture.readAsDataURL(this.files[0]);
+            picture.addEventListener('load', function (event) {
+                document.getElementById('uploadedImage').setAttribute('src', event.target.result);
+                document.getElementById('uploadedImage').style.display = 'block';
+            });
+        }
     });</script>
 
 

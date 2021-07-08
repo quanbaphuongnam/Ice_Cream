@@ -57,10 +57,10 @@ else
                             <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Timeline</a>
+                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Timeline(@ViewBag.SLct)</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="comment-tab" data-toggle="tab" href="#comment" role="tab" aria-controls="comment" aria-selected="false">Comments</a>
+                            <a class="nav-link" id="comment-tab" data-toggle="tab" href="#comment" role="tab" aria-controls="comment" aria-selected="false">Comments(@ViewBag.SLfb)</a>
                         </li>
                     </ul>
                 </div>
@@ -85,14 +85,14 @@ else
                                 <p>Operating on the forum</p>
                                 <a href="">Number of articles: @ViewBag.SLct</a><br />
                                 <a href="">Quantity comments:  @ViewBag.SLfb</a>
-                                @if (@HttpContextAccessor.HttpContext.Session.GetInt32("account") == @profile.AccId)
+                                @*@if (@HttpContextAccessor.HttpContext.Session.GetInt32("account") == @profile.AccId)
                                 {
                             <p>SKILLS</p>
                                   <a href="">Web Designer</a><br />
                                   <a href="">Web Developer</a><br />
                                   <a href="">WordPress</a><br />
                                   <a href="">WooCommerce</a><br />
-                                  <a href="">PHP, .Net</a><br />}
+                                  <a href="">PHP, .Net</a><br />}*@
                             </div>
 
                         </div>
@@ -146,46 +146,71 @@ else
                         </div>
                     </div>
                     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                        @foreach (var accountrecipe in ViewBag.accountrecipe)
-                        {
-        <div class="row">
-            <div class="col-md-6">
-               
-                <img src="~/img/recipe/@accountrecipe.ForCover" height="100" width="200" alt="Alternate Text" />
-            </div>
-            <div class="col-md-3">
-                <p>@accountrecipe.ForName</p>
-            </div>
-            <div class="col-md-3">
-                <button class="custom-btn btn-14" asp-controller="recipe" asp-action="recipedetail" asp-route-id="@accountrecipe.ForId">Read More</button>
-            </div>
-        </div>
-                            <hr width="100%" align="center" />}
+                        <div>
+                            @foreach (var accountrecipe in ViewBag.accountrecipe)
+                            {
+                            if (accountrecipe.ForId != null)
+                            {
+                            <div class="row">
+                                <div class="col-md-6">
+
+                                    <img src="~/img/recipe/@accountrecipe.ForCover" height="100" width="200" alt="Alternate Text" />
+                                </div>
+                                <div class="col-md-3">
+                                    <p>@accountrecipe.ForName</p>
+                                </div>
+                                <div class="col-md-3">
+                                    <button class="custom-btn btn-14" asp-controller="recipe" asp-action="recipedetail" asp-route-id="@accountrecipe.ForId">Read More</button>
+                                </div>
+                            </div>
+                                                    <hr width="100%" align="center" />}
+                                                else
+                                                {
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h3>There are no formula </h3>
+                                </div>
+                            </div>}
+                                }
+                        </div>
 
 
                     </div>
                     <div class="tab-pane fade" id="comment" role="tabpanel" aria-labelledby="comment-tab">
                         @foreach (var accountfeedback in ViewBag.accountfeedback)
                         {
-        <div class="row">
-            <div class="col-md-3">
-                <img src="~/img/recipe/@accountfeedback.ForCover" height="100" width="150" alt="Alternate Text" />
-            </div>
-            <div class="col-md-2">
-                <p>@accountfeedback.ForName</p>
-            </div>
-            <div class="col-md-4" style="color:black">
-                <p>@accountfeedback.Content</p> 
-            </div>
-            <div class="col-md-3">
-                <button class="custom-btn btn-14" asp-controller="recipe" asp-action="recipedetail" asp-route-id="@accountfeedback.ForId"> Go</button>
-            </div>
-        </div>
-                            <hr width="100%" align="center" />}
+                            @if (accountfeedback.ForId.Count() >0)
+                            {
+                    <div class="row">
+                        <div class="col-md-3">
+                            <img src="~/img/recipe/@accountfeedback.ForCover" height="100" width="150" alt="Alternate Text" />
+                        </div>
+                        <div class="col-md-2">
+                            <p>@accountfeedback.ForName</p>
+                        </div>
+                        <div class="col-md-4" style="color:black">
+                            <p>@accountfeedback.Content</p>
+                        </div>
+                        <div class="col-md-3">
+                            <button class="custom-btn btn-14" asp-controller="recipe" asp-action="recipedetail" asp-route-id="@accountfeedback.ForId"> Go</button>
+                        </div>
+                    </div>
+
+
+                    <hr width="100%" align="center" />}
+                else
+                {
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3>There are no comments </h3> 
+                        </div>
+                        </div>
+                        }
+                        }
 
 
                     </div>
-                </div>
+                                        </div>
             </div>
         </div>
     </form>
@@ -235,9 +260,10 @@ else
                                     </div>
                                     <div class="form-group">
                                         <label for="email1">Gender</label>
-                                        <select class="form-select"  asp-for="AccGender">
+                                        <select class="form-select" asp-for="AccGender">
                                             <option value="Male">Male</option>
                                             <option value="Female">Female</option>
+                                            <option value="Other">Other</option>
                                         </select>
 
                                     </div>

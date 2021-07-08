@@ -57,7 +57,7 @@
                                     {
                     <div>
                         <br /><div style=" font-size: 14px ;text-align:right">
-                            by: <a href="#">@newrecipe.AccUsername</a>&ensp;
+                            by: <a asp-controller="profile" asp-action="profile" asp-route-id="@newrecipe.AccId">@newrecipe.AccUsername</a>&ensp;
                         </div>@*}*@
                         <h3>@newrecipe.ForName</h3>
                         <a class="custom-btn btn-8" asp-controller="recipe" asp-action="recipedetail" asp-route-id="@newrecipe.ForId">See now</a>
@@ -67,7 +67,7 @@
                     <div>
                         <h4>@newrecipe.ForCondition</h4>
                         <br /><div style=" font-size: 14px ;text-align:right">
-                            by: <a href="#">@newrecipe.AccUsername</a>&ensp;
+                            by: <a asp-controller="profile" asp-action="profile" asp-route-id="@newrecipe.AccId">@newrecipe.AccUsername</a>&ensp;
                         </div>
                         <h3>@newrecipe.ForName</h3>
                         <a class="custom-btn btn-8">Just Member</a>
@@ -78,7 +78,7 @@
                     <div>
                         <h4>@newrecipe.ForCondition</h4>
                         <br /><div style=" font-size: 14px ;text-align:right">
-                            by: <a href="#">@newrecipe.AccUsername</a>&ensp;
+                            by: <a asp-controller="profile" asp-action="profile" asp-route-id="@newrecipe.AccId">@newrecipe.AccUsername</a>&ensp;
                         </div>
                         <h3>@newrecipe.ForName</h3>
                         <a class="custom-btn btn-8" asp-controller="recipe" asp-action="recipedetail" asp-route-id="@newrecipe.ForId">See now</a>
@@ -106,7 +106,7 @@
                 <div>
 
                     <br /><div style=" font-size: 14px ;text-align:right">
-                        by: <a href="#">@recipe.AccUsername</a>&ensp;
+                        by: <a asp-controller="profile" asp-action="profile" asp-route-id="@recipe.AccId">@recipe.AccUsername</a>&ensp;
                     </div>@*}*@
                     <h3>@recipe.ForName</h3>
                     <a class="custom-btn btn-8" asp-controller="recipe" asp-action="recipedetail" asp-route-id="@recipe.ForId">See now</a>
@@ -116,7 +116,7 @@
                 <div>
                     <h4>@recipe.ForCondition</h4>
                     <br /><div style=" font-size: 14px ;text-align:right">
-                        by: <a href="#">@recipe.AccUsername</a>&ensp;
+                        by: <a asp-controller="profile" asp-action="profile" asp-route-id="@recipe.AccId">@recipe.AccUsername</a>&ensp;
                     </div>
                     <h3>@recipe.ForName</h3>
                     <a class="custom-btn btn-8">Just Member</a>
@@ -126,7 +126,7 @@
                 <div>
                     <h4>@recipe.ForCondition</h4>
                     <br /><div style=" font-size: 14px ;text-align:right">
-                        by: <a href="#">@recipe.AccUsername</a>&ensp;
+                        by: <a asp-controller="profile" asp-action="profile" asp-route-id="@recipe.AccId">@recipe.AccUsername</a>&ensp;
                     </div>
                     <h3>@recipe.ForName</h3>
                     <a class="custom-btn btn-8" asp-controller="recipe" asp-action="recipedetail" asp-route-id="@recipe.ForId">See now</a>
@@ -144,11 +144,11 @@
                     <div class="middle_list">
                         <nav aria-label="Page navigation example">
                             <ul class="pagination">
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item active"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item "><a class="page-link" href="#">2</a></li>
                                 <li class="page-item"><a class="page-link" href="#">3</a></li>
                                 <li class="page-item"><a class="page-link" href="#">...</a></li>
-                                <li class="page-item"><a class="page-link" href="#">12</a></li>
+                                <li class="page-item"><a class="page-link" href="#">5</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -162,7 +162,7 @@
                             <form asp-controller="recipe" asp-action="recipe" method="get">
                                 <input type="text" name="SearchString" class="form-control" value="@ViewBag.searchString" placeholder="Enter Search Keywords">
                                 <div class="input-group-append">
-                                    <button class="btn" type="submit"><i class="icon icon-Search"></i></button>
+                                    <button class="btn" type="submit" ><i class="icon icon-Search"></i></button>
                                 </div>
                             </form>
                            
@@ -250,17 +250,17 @@ https://codyhouse.co/gem/simple-confirmation-popup/
             <h4 style="text-align:left; "> <strong>Recipe Name</strong> </h4>
             <div class="name">
 
-                <input class="input" type="text" asp-for="Formula.ForName" id="name" />
+                <input class="input" type="text" asp-for="Formula.ForName" id="name" required />
             </div>
 
             <div class="message">
                 <h4 style="text-align:left; "> <strong>Recipe Detail</strong> </h4>
-                <textarea id="message" type="text" asp-for="Formula.ForDescription"></textarea>
+                <textarea id="message" type="text" asp-for="Formula.ForDescription" required></textarea>
             </div>
 
             <div class="message">
                 <h4 style="text-align:left; "> <strong>Recipe Cover</strong> </h4>
-                <input style="padding: 0px 0px 8px 0px !important;" type="file" name="filecover" />
+                <input style="padding: 0px 0px 8px 0px !important;" type="file" name="filecover" required />
             </div>
           
             <input hidden type="number" asp-for="Formula.ForContributors" value="@HttpContextAccessor.HttpContext.Session.GetInt32("account")" />
@@ -293,3 +293,15 @@ https://codyhouse.co/gem/simple-confirmation-popup/
 
 
 
+@if (@ViewBag.messenge != null) {
+<script>
+
+    Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'Your work has been saved',
+        showConfirmButton: false,
+        timer: 1500
+    })
+
+</script>}

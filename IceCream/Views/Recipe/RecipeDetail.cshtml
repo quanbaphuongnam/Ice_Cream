@@ -47,7 +47,7 @@
                             </div>
                             <div class="float-right">
                                 <ul class="list_style">
-                                    <li><a href="#">By :  @recipedetails.AccUsername</a></li>
+                                    <li><a asp-controller="profile" asp-action="profile" asp-route-id="@recipedetails.AccUsername">By :  @recipedetails.AccUsername</a></li>
                                     <li>
                                         @foreach (var recipedetailsavour in ViewBag.recipedetailsavour)
                                         {

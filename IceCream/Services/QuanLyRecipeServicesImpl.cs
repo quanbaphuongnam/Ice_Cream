@@ -27,6 +27,14 @@ namespace IceCream.Services
             db.SaveChanges();
         }
 
+        public Formula EditFormula(Formula formula)
+        {
+            db.Entry(formula).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+
+            db.SaveChanges();
+            return formula;
+        }
+
         public Formula Find(int id)
         {
             return db.Formulas.Find(id);
@@ -36,5 +44,11 @@ namespace IceCream.Services
         {
             return db.Formulas.ToList();
         }
+
+        public Formula FindByIdFormula(int id)
+        {
+            return db.Formulas.SingleOrDefault(p => p.ForId == id);
+        }
+   
     }
 }

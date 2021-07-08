@@ -40,20 +40,20 @@ namespace IceCream.Areas.Admin.Controllers
             ViewBag.business = configuration["PayPal:Business"];
             ViewBag.returnUrl = configuration["PayPal:ReturnUrl"];
 
-            ViewBag.top1recipe = (from Formula in db.Formulas
-                                  group new { Formula, Formula.ForContributorsNavigation } by new 
-                                  {
-                                      Formula.ForContributors,
-                                      Formula.ForContributorsNavigation.AccUsername,
-                                      Formula.ForContributorsNavigation.AccAvatar
-                                  } into g
-                                  select new
-                                  {
-                                      g.Key.AccUsername,
-                                      g.Key.AccAvatar,
-                                      g.Key.ForContributors,
-                                      Quantity = g.Count(p => p.Formula.ForContributors != null)
-                                  }).ToList();
+            //ViewBag.top1recipe = (from Formula in db.Formulas
+            //                      group new { Formula, Formula.ForContributorsNavigation } by new 
+            //                      {
+            //                          Formula.ForContributors,
+            //                          Formula.ForContributorsNavigation.AccUsername,
+            //                          Formula.ForContributorsNavigation.AccAvatar
+            //                      } into g
+            //                      select new
+            //                      {
+            //                          g.Key.AccUsername,
+            //                          g.Key.AccAvatar,
+            //                          g.Key.ForContributors,
+            //                          Quantity = g.Count(p => p.Formula.ForContributors != null)
+            //                      }).ToList();
   
             return View();
         }
