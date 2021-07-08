@@ -55,30 +55,24 @@
         <h2>Sign in/up</h2>
         <div class="containerr" id="containerr">
             <div class="form-containerr sign-up-containerr">
-                @*<form asp-controller="account" asp-action="add" method="post">
-                    <h1>Create Account</h1>
-                    <input type="text" asp-for="AccUsername" placeholder="Username" />
-                    <span asp-validation-for="AccUsername"></span>
-                    <input type="email" asp-for="AccEmail" placeholder="Email" />
-                    <span asp-validation-for="AccEmail"></span>
-                    <input type="password" asp-for="AccPassword" placeholder="Password" />
-                    <span asp-validation-for="AccPassword"></span>
-                    <input type="password" placeholder="Confirm Password" />
-
-                    <button type="submit" onclick="signup">Sign Up</button>
-                </form>*@
                 <form asp-controller="account" asp-action="add" method="post">
 
                     <h1>Create Account</h1>
-                    <input type="text" asp-for="AccUsername" placeholder="Username" />
-                    <input type="email" asp-for="AccEmail" placeholder="Email" />
-                    <input type="password" asp-for="AccPassword" placeholder="Password" id="pass" />
-                    <input type="password" placeholder="Confirm Password" onchange="myFunction(this.value)" />
-
+                    <input type="text" asp-for="AccUsername" placeholder="Username" required />
+                    <input type="email" asp-for="AccEmail" placeholder="Email" required />
+                    <input type="password" placeholder="Password" id="password" required />
+                    <span id='message' style="color: red;"></span>
+                    <input type="password" asp-for="AccPassword" placeholder="Confirm Password" id="confirm_password" onchange="check()" required />
                     <button type="submit">Sign Up</button>
                     <script>
-                        function myFunction(val) {
-                            alert("The input value has changed. The new value is: " + val);
+                        function check() {
+                            if (document.getElementById('password').value ===
+                                document.getElementById('confirm_password').value) {
+                                document.getElementById('message').innerHTML = "";
+                            } else {
+                                document.getElementById('confirm_password').value = "";
+                                document.getElementById('message').innerHTML = "Confirm Password is not matching!! Try Again";
+                            }
                         }
                     </script>
                 </form>
@@ -88,9 +82,9 @@
                 <form method="post" asp-controller="account" asp-action="login" id="formLogin">
                     <h1>Sign in</h1>
                     <span>or use your account</span>
-                    <input type="text" placeholder="Username" name="username" />
-                    <input type="password" placeholder="Password" name="password" />
-                    <a href="#" style="margin: 10px 0px">Forgot your password?</a>
+                    <input type="text" placeholder="Username" name="username" required />
+                    <input type="password" placeholder="Password" name="password" required />
+                    <a style="margin: 10px 0px" asp-controller="account" asp-action="forgotpassword">Forgot your password?</a>
                     <button type="submit" form="formLogin" name="Login">Sign In</button>
                 </form>
                 @if (@HttpContextAccessor.HttpContext.Session.GetString("msg") == "f")
@@ -116,6 +110,32 @@
                             text: ' Welcome to IceCream',
                             showConfirmButton: false,
                             timer: 1500
+                        })
+                    </script>
+                    HttpContextAccessor.HttpContext.Session.Remove("msg");
+                }
+                else if (@HttpContextAccessor.HttpContext.Session.GetString("msgNewPass") == "s")
+                {
+                    <script type="text/javascript">
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Update Password succesfull',
+                            text: ' Please login again',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                    </script>
+                    HttpContextAccessor.HttpContext.Session.Remove("msgNewPass");
+                }
+                else if (@HttpContextAccessor.HttpContext.Session.GetString("msg") == "e")
+                {
+                    <script type="text/javascript">
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Your account has expired',
+                            text: ' Please renew your account!',
+                            showConfirmButton: false,
+                            timer: 2000
                         })
                     </script>
                     HttpContextAccessor.HttpContext.Session.Remove("msg");

@@ -11,6 +11,7 @@ namespace IceCream.Services
       
         List<ServiceAccount> FindAll();
         public ServiceAccount Create(ServiceAccount serviceAccount);
+        ServiceAccount FindAccId(int AccId);
 
     }
 }

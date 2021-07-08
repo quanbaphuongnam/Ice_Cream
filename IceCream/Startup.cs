@@ -50,6 +50,7 @@ namespace IceCream
             services.AddScoped<ServiceAccountService, ServiceAccountServiceImpl>();
             services.AddScoped<InvoiceService, InvoiceServiceImpl>();
             services.AddScoped<InvoiceDetailAccountService, InvoiceDetailAccountServiceImpl>();
+            services.AddScoped<ManageInvoiceServices, ManageInvoiceServicesImpl>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
