@@ -144,11 +144,13 @@
                     <div class="middle_list">
                         <nav aria-label="Page navigation example">
                             <ul class="pagination">
-                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item "><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">...</a></li>
-                                <li class="page-item"><a class="page-link" href="#">5</a></li>
+                                @{ int index = 1;
+                                    double page = ViewBag.Pages / 9;}
+                                @for (int i = 1; i <= Math.Round(page)+1;  i++)
+                                {
+                                    <li class="page-item"><a class="page-link" asp-controller="recipe" asp-action="Index" asp-route-page="@index">@index</a></li>
+                                    index++;
+                                }
                             </ul>
                         </nav>
                     </div>

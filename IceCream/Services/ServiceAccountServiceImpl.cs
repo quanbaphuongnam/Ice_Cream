@@ -30,5 +30,11 @@ namespace IceCream.Services
         {
             return db.ServiceAccounts.Where(b => b.AccId == AccId).OrderByDescending(b => b.SerAccEnd).Take(1).Single();
         }
+
+        public void Delete(int id)
+        {
+            db.ServiceAccounts.Remove(db.ServiceAccounts.SingleOrDefault(b => b.SerId == id));
+            db.SaveChanges();
+        }
     }
 }

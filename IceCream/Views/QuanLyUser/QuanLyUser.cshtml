@@ -1,4 +1,4 @@
-﻿@model IceCream.Models.Account
+﻿
 @{
     ViewData["Title"] = "QuanLyUser";
     Layout = "~/Views/SharedAdmin/_LayoutAdmin.cshtml";
@@ -42,69 +42,132 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                        @foreach (var user in ViewBag.User)
-                                        {
-                                            <tr class="odd gradeX">
-                                                <td>@user.AccId</td>
-                                                <td>@user.AccUsername</td>
-                                                <td>
-                                                    <img src="~/img/avatar/@user.AccAvatar" width="100" height="100" alt="">
-                                                </td>
-                                                <td>@user.AccEmail</td>
-                                                <td>@user.AccPhone</td>
-                                                <td>@user.AccFullname</td>
-                                                <td>@user.AccGender </td>
-                                                <td class="center">
-                                                    @if (user.AccDob != null)
-                                                    {@user.AccDob.ToString("dd/MM/yyyy")}
-                                                </td>
-                                                <td>@user.AccAddr</td>
-                                                <td>@(user.AccRole == 1 ? "user" : "admin")</td>
-                                                <td>@user.AccMoney</td>
-                                                <td>
-                                                    @if (user.AccStatus == 1)
-                                                    {
-                                                        <a asp-controller="quanlyuser" asp-action="edit" asp-route-id="@user.AccId" class="btn btn-success">active</a>
-                                                    }
-                                                    else
-                                                    {
-                                                        <a asp-controller="quanlyuser" asp-action="edit" asp-route-id="@user.AccId" class="btn btn-danger">Disable</a>
-                                                    }
-                                                </td>
-                                            </tr>
-                                        }
+                                    @foreach (var user in ViewBag.User)
+                                    {
+                                        <tr class="odd gradeX">
+                                            <td>@user.AccId</td>
+                                            <td>@user.AccUsername</td>
+                                            <td>
+                                                <img src="~/img/avatar/@user.AccAvatar" width="100" height="100" alt="">
+                                            </td>
+                                            <td>@user.AccEmail</td>
+                                            <td>@user.AccPhone</td>
+                                            <td>@user.AccFullname</td>
+                                            <td>@user.AccGender </td>
+                                            <td class="center">
+                                                @if (user.AccDob != null)
+                                                {@user.AccDob.ToString("dd/MM/yyyy")}
+                                            </td>
+                                            <td>@user.AccAddr</td>
+                                            <td>@(user.AccRole == 1 ? "user" : "admin")</td>
+                                            <td>@user.AccMoney</td>
+                                            <td>
+                                                @if (user.AccStatus == 1)
+                                                {
+                                                    <a asp-controller="quanlyuser" asp-action="edit" asp-route-id="@user.AccId" class="btn btn-success">active</a>
+                                                }
+                                                else
+                                                {
+                                                    <a asp-controller="quanlyuser" asp-action="edit" asp-route-id="@user.AccId" class="btn btn-danger">Disable</a>
+                                                }
+                                            </td>
+                                        </tr>
+                                    }
                                 </tbody>
                             </table>
                         </div>
                         <!-- /.table-responsive -->
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
+                <div class="panel panel-default" style="width: 50%; position: absolute;">
+                    <div class="panel-heading">
+                        <h2>Service - Account</h2>
 
                     </div>
-                    <!-- /.panel-body -->
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <div class="panel-body">
+                            <div class="table-responsive" style=" height: 206px;  overflow: auto;">
+                                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                    <thead>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>SerId</th>
+                                            <th>AccId</th>
+                                            <th>Date Created</th>
+                                            <th>End Date</th>
+                                            <th>Price</th>
+                                            <th></th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var serAcc in ViewBag.SerAccount)
+                                        {
+                                            <tr class="odd gradeX">
+                                                <td>@serAcc.SerAccId</td>
+                                                <td>@serAcc.SerId</td>
+                                                <td>@serAcc.AccId</td>
+                                                <td class="center">
+                                                    @if (serAcc.SerAccCreated != null)
+                                                    {@serAcc.SerAccCreated.ToString("dd/MM/yyyy")}
+                                                </td>
+                                                <td class="center">
+                                                    @if (serAcc.SerAccEnd != null)
+                                                    {@serAcc.SerAccEnd.ToString("dd/MM/yyyy")}
+                                                </td>
+                                                <td>@serAcc.SerAccPrice</td>
+                                                <td><a asp-controller="quanlyuser" asp-action="delete" asp-route-idser="@serAcc.SerAccId" onclick="return confirm('Are u sure ?')" class="btn btn-danger btn-circle"><i class="fa fa-times"></i></a></td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- /.table-responsive -->
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
                 </div>
-                <!-- /.panel -->
+                <div class="panel panel-default" style="width: 40%; position: relative; float: right;">
+                    <div class="panel-heading">
+                        <h2>Service - Account</h2>
+
+                    </div>
+                    <!-- /.panel-heading -->
+                    @foreach (var service in ViewBag.services)
+                    {
+                        <div>
+                            <h3>@service.SerPrice/@service.SerName</h3>
+                            <pre style="background-color:white; border:none; overflow-x: auto; white-space: pre-wrap; white-space: -moz-pre-wrap; white-space: -pre-wrap; white-space: -o-pre-wrap; word-wrap: break-word;">@service.SerDescription</pre>
+                        </div>
+                    }
+                    <!-- /.panel -->
+                </div>
             </div>
-            <!-- /.col-lg-12 -->
+
         </div>
-
     </div>
-</div>
-<script>
-    $(document).ready(function () {
+    <script>
+        $(document).ready(function () {
 
-        $('#imageFile').change(function (evt) {
+            $('#imageFile').change(function (evt) {
 
-            var files = evt.target.files;
-            var file = files[0];
+                var files = evt.target.files;
+                var file = files[0];
 
-            if (file) {
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    document.getElementById('preview').src = e.target.result;
-                };
-                reader.readAsDataURL(file);
-            }
-        });
-    });</script>
+                if (file) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        document.getElementById('preview').src = e.target.result;
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        });</script>
 
 
 

@@ -10,7 +10,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using PagedList.Mvc;
 using System.Threading.Tasks;
+using PagedList;
 
 namespace IceCream.Controllers
 {
@@ -35,7 +37,7 @@ namespace IceCream.Controllers
         [Route("recipe")]
         [Route("")]
    
-        public IActionResult Index( string searchString)
+        public IActionResult Index( string searchString, int page = 1)
         {
             ViewBag.searchString =  searchString;
             //--------------------
@@ -61,8 +63,8 @@ namespace IceCream.Controllers
 
             if (!String.IsNullOrEmpty(searchString))
                 {
-
-                ViewBag.recipes = from f in db.Formulas
+                int size = 9;
+                var recipess = from f in db.Formulas
                                   join a in db.Accounts on f.ForContributors equals a.AccId
                                   join sf in db.SavourFormulas on f.ForId equals sf.ForId
                                   join s in db.Savours on sf.HashtagId equals s.HashtagId
@@ -82,11 +84,15 @@ namespace IceCream.Controllers
                                       SavName = s.SavName
                                       //ConLai = (x.Soluong - y.Soluong)
                                   };
+                ViewBag.Pages = recipess.Count();
+                ViewBag.Page = page;
+                ViewBag.recipes = recipess.Skip((page - 1) * size).Take(size).ToList();
+                ViewBag.recipesCount = recipess.Skip((page - 1) * size).Take(size).ToList().Count();
             }
             else
             {
-                
-                ViewBag.recipes = from f in db.Formulas
+                int size = 9;
+                var recipess = from f in db.Formulas
                                   join a in db.Accounts on f.ForContributors equals a.AccId
                                   where (f.ForStatus == 1)
                                   select new AllRecipe
@@ -103,7 +109,10 @@ namespace IceCream.Controllers
                                       //ConLai = (x.Soluong - y.Soluong)
                                   };
 
-                
+                ViewBag.Pages = recipess.Count();
+                ViewBag.Page = page;
+                ViewBag.recipes = recipess.Skip((page - 1) * size).Take(size).ToList();
+                ViewBag.recipesCount = recipess.Skip((page - 1) * size).Take(size).ToList().Count();
             }
                
            
