@@ -1,0 +1,79 @@
+﻿
+@{
+    ViewData["Title"] = "FeedbackFomula";
+    Layout = "~/Views/SharedAdmin/_LayoutAdmin.cshtml";
+}
+
+
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">  FeedbackFomula</h1>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                <thead>
+                                    <tr>
+                                        <th>FeedbackId</th>
+                                        <th>AccId</th>
+                                        <th>AccUsername</th>
+                                        <th>AccFullname</th>
+                                        <th>FormulaId</th>
+                                        <th>Content</th>
+                                        <th>Created</th>
+                                        <th>FeedbackStatus</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var fbfomula in ViewBag.fbfomula)
+                                    {
+                                    <tr class="odd gradeX">
+                                        <td>@fbfomula.FeedbackId</td>
+                                        <td>@fbfomula.AccId</td>
+                                        <td>@fbfomula.AccUsername</td>
+                                        <td>@fbfomula.AccFullname</td>
+                                        <td>@fbfomula.FormulaId</td>
+                                        <td><div style=" height: 50px; width: 50px;  overflow: auto;">@fbfomula.Content </div></td>
+                                        
+                                        <td class="center">@fbfomula.Created.ToString(string.Format("dd/MM/yyyy")) </td>
+                                        <td>
+                                            @if (fbfomula.FeedbackStatus == 1)
+                                            {
+                                            <a asp-controller="feedbackfomula" asp-action="activefb" asp-route-id="@fbfomula.FeedbackId" class="btn btn-success ">Active</a>
+                                            }
+                                            else
+                                            { <a asp-controller="feedbackfomula" asp-action="activefb" asp-route-id="@fbfomula.FeedbackId" class="btn btn-danger ">Blocked</a>}
+                                        </td>
+
+                                    </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.table-responsive -->
+
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+
+    </div>
+</div>
+
+
+
+
+

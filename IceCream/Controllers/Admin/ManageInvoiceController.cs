@@ -1,5 +1,6 @@
 ﻿using IceCream.Models;
 using IceCream.Services;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -28,8 +29,13 @@ namespace IceCream.Controllers.Admin
         [Route("")]
         public IActionResult Index()
         {
-            ViewBag.manageInvoice = manageInvoiceServices.FindAll();
-            return View("manageinvoice");
+            if (HttpContext.Session.GetInt32("admin") != null)
+            {
+                ViewBag.manageInvoice = manageInvoiceServices.FindAll();
+                return View("manageinvoice");
+            }
+            return View("~/Views/Home/Page404.cshtml");
+           
         }
         [Route("detail")]
         public IActionResult Detail(string id)

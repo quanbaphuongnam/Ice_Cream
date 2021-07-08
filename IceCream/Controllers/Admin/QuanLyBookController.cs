@@ -29,10 +29,16 @@ namespace IceCream.Controllers.Admin
         [Route("")]
         public IActionResult Index()
         {
-            //quanlybookServices.ListAllPaging(page, paseSize);
-            ViewBag.quanlybooks = quanlybookServices.FindAllBook();
-            //ViewBag.quanlybooks = quanlybookServices.ListAllPaging(page, paseSize);
-            return View("quanlybook");
+
+            if (HttpContext.Session.GetInt32("admin") != null)
+            {
+                ViewBag.quanlybooks = quanlybookServices.FindAllBook();
+                return View("quanlybook");
+            }
+            return View("~/Views/Home/Page404.cshtml");
+          
+           
+           
         }
 
         [HttpGet]
@@ -45,32 +51,42 @@ namespace IceCream.Controllers.Admin
         }
         [Route("edit")]
         [HttpPost]
-        public IActionResult Edit(Book book, IFormFile file)
+        public IActionResult Edit(Book book, IFormFile filecover)
         {
 
             var currentBook = quanlybookServices.Find(book.BookId);
 
-            if (file != null)
+            if (filecover != null)
             {
-                var fileName = System.Guid.NewGuid().ToString().Replace("-", "");
-                var ext = file.ContentType.Split(new char[] { '/' })[1];
+                string fileName = Guid.NewGuid().ToString();
+                var ext = filecover.ContentType.Split(new char[] { '/' })[1];
                 var path = Path.Combine(webHostEnvironment.WebRootPath, "img/books", fileName + "." + ext);
                 using (var fileStream = new FileStream(path, FileMode.Create))
                 {
-                    file.CopyTo(fileStream);
+                    filecover.CopyTo(fileStream);
                 }
                 currentBook.BookPhoto = fileName + "." + ext;
 
             }
+            else if (currentBook.BookPhoto != null)
+            {
+                currentBook.BookPhoto = book.BookPhoto;
 
+            }
 
-            currentBook.BookName = book.BookName;
-            currentBook.BookPrice = book.BookPrice;
-            currentBook.BookQuantity = book.BookQuantity;
-            currentBook.BookYear = book.BookYear;
-            currentBook.BookCreated = book.BookCreated;
+            if (book.BookName != null) { currentBook.BookName = book.BookName; }
+            if (book.BookPrice != null) { currentBook.BookPrice = book.BookPrice; }
+            if (book.BookQuantity != null) { currentBook.BookQuantity = book.BookQuantity; }
+            if (book.BookYear != null) { currentBook.BookYear = book.BookYear; }
+            if (book.BookCreated != null) { currentBook.BookCreated = book.BookCreated; }
+            if (book.BookStatus != null) { currentBook.BookStatus = book.BookStatus; }
+            //currentBook.BookName = book.BookName;
+            //currentBook.BookPrice = book.BookPrice;
+            //currentBook.BookQuantity = book.BookQuantity;
+            //currentBook.BookYear = book.BookYear;
+            //currentBook.BookCreated = book.BookCreated;
+            //currentBook.BookStatus = book.BookStatus;
             currentBook.BookUpdate = DateTime.Now;
-            currentBook.BookStatus = book.BookStatus;
 
             quanlybookServices.Update(currentBook);
             return RedirectToAction("quanlybook");
@@ -91,25 +107,24 @@ namespace IceCream.Controllers.Admin
         }
         [HttpPost]
         [Route("add")]
-        public IActionResult Add(Book book, IFormFile file)
+        public IActionResult Add(Book book, IFormFile filecover)
         {
-            if (file != null)
+            if (filecover != null)
             {
                 string fileName = Guid.NewGuid().ToString();
-                var ext = file.ContentType.Split(new char[] { '/' })[1];
-                var path = Path.Combine(webHostEnvironment.WebRootPath, "img/recipe", fileName + "." + ext);
+                var ext = filecover.ContentType.Split(new char[] { '/' })[1];
+                var path = Path.Combine(webHostEnvironment.WebRootPath, "img/books", fileName + "." + ext);
                 using (var fileStream = new FileStream(path, FileMode.Create))
                 {
-                    file.CopyTo(fileStream);
+                    filecover.CopyTo(fileStream);
                 }
                 book.BookPhoto = fileName + "." + ext;
 
             }
             else
             {
-                book.BookPhoto = "noimage.png";
+                book.BookPhoto = "";
             }
-
 
             book.BookCreated = DateTime.Now;
             book.BookUpdate = DateTime.Now;

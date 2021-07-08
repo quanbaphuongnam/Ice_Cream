@@ -35,10 +35,9 @@
                                             <input type="text" asp-for="HashtagId" class="form-control">
                                         </div>
                                         <div class="form-group">
-                                            <h4 style="text-align:left; "> SaurPhoto </h4>
-                                            @*<input style="padding: 0px 0px 8px 0px !important;" type="file" name="file"  />*@
-                                            <input style="padding: 0px 0px 8px 0px !important;" id="imageFile" type="file" name="file" class="imageFile" accept="image/*">
-                                            <td><img src="~/img/savour/@ViewBag.savour.SavPhoto" width="100" height="160" alt=""></td>
+                                            <label>Choose cover photo</label>
+                                            <input type="file" name="filecover" id="readUrl">
+                                            <img height="400" width="400" id="uploadedImage" src="~/img/savour/@ViewBag.savour.SavPhoto" alt="Uploaded Image" accept="image/png, image/jpeg" />
                                         </div>
 
 
@@ -52,16 +51,20 @@
                                             <label>Procedure</label>
                                             <textarea type="text" asp-for="SavProcedure" class="form-control" rows="5"></textarea>
                                         </div>
+                                        <div class="form-group">
+                                            <input type="submit" value="Save" class="btn btn-default" />
+                                            <button type="reset" class="btn btn-default">Reset Button</button>
+                                        </div>
 
-
-                                        @*@HttpContextAccessor.HttpContext.Session.GetInt32(" account")*@
+                                   
                                     </form>
                                 </div>
                                 <div class="col-lg-6">
+                                   
 
 
                                 </div>
-
+                                
 
 
 
@@ -98,6 +101,16 @@
             }
         });
     });</script>
-
+<script>
+    document.getElementById('readUrl').addEventListener('change', function () {
+        if (this.files[0]) {
+            var picture = new FileReader();
+            picture.readAsDataURL(this.files[0]);
+            picture.addEventListener('load', function (event) {
+                document.getElementById('uploadedImage').setAttribute('src', event.target.result);
+                document.getElementById('uploadedImage').style.display = 'block';
+            });
+        }
+    });</script>
 
 

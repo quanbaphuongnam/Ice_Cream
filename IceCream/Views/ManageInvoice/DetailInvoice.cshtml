@@ -79,22 +79,6 @@
 
 </div>
     </div>
-<script>
-    $(document).ready(function () {
 
-        $('#imageFile').change(function (evt) {
-
-            var files = evt.target.files;
-            var file = files[0];
-
-            if (file) {
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    document.getElementById('preview').src = e.target.result;
-                };
-                reader.readAsDataURL(file);
-            }
-        });
-    });</script>
 
 

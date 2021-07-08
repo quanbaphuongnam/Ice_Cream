@@ -17,11 +17,10 @@ namespace IceCream.Services
         {
             return db.Savours.ToList();
         }
-        public bool Delete(string id)
+        public void Delete(string id)
         {
             db.Savours.Remove(db.Savours.Find(id));
             db.SaveChanges();
-            return true;
         }
 
 

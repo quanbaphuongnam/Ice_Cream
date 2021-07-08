@@ -15,7 +15,7 @@ namespace IceCream.Services
 
         public Book Find(int id);
 
-        public bool Delete(int id);
+        void Delete(int id);
 
         Book AddBook(Book book);
     }
