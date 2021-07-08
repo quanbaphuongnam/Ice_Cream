@@ -71,60 +71,6 @@
                 </ul>
 
                 <ul class="nav navbar-right navbar-top-links">
-                    <li class="dropdown navbar-inverse">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="fa fa-bell fa-fw"></i> <b class="caret"></b>
-                        </a>
-                        <ul class="dropdown-menu dropdown-alerts">
-                            <li>
-                                <a href="#">
-                                    <div>
-                                        <i class="fa fa-comment fa-fw"></i> New Comment
-                                        <span class="pull-right text-muted small">4 minutes ago</span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <div>
-                                        <i class="fa fa-twitter fa-fw"></i> 3 New Followers
-                                        <span class="pull-right text-muted small">12 minutes ago</span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <div>
-                                        <i class="fa fa-envelope fa-fw"></i> Message Sent
-                                        <span class="pull-right text-muted small">4 minutes ago</span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <div>
-                                        <i class="fa fa-tasks fa-fw"></i> New Task
-                                        <span class="pull-right text-muted small">4 minutes ago</span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <div>
-                                        <i class="fa fa-upload fa-fw"></i> Server Rebooted
-                                        <span class="pull-right text-muted small">4 minutes ago</span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a class="text-center" href="#">
-                                    <strong>See All Alerts</strong>
-                                    <i class="fa fa-angle-right"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                             <i class="fa fa-user fa-fw"></i> admin <b class="caret"></b>
@@ -142,57 +88,34 @@
                 <div class="navbar-default sidebar" role="navigation">
                     <div class="sidebar-nav navbar-collapse">
                         <ul class="nav" id="side-menu">
-                            <li class="sidebar-search">
-                                <div class="input-group custom-search-form">
-                                    <input type="text" class="form-control" placeholder="Search...">
-                                    <span class="input-group-btn">
-                                        <button class="btn btn-primary" type="button">
-                                            <i class="fa fa-search"></i>
-                                        </button>
-                                    </span>
-                                </div>
-                                <!-- /input-group -->
+                            <li style="padding: 40px 15px;">
+                                <a asp-controller="homeadmin" asp-action="homeadmin"><img src="~/img/logocream.png" width="200" height="40" alt=""></a>
                             </li>
-                            <li>
-                                <a asp-controller="quanlyuser" asp-action="quanlyuser" class="active"><i class="fa fa-dashboard fa-fw"></i> ManagerUser</a>
-
+                            <li style="padding: 40px 15px; font-size: 18px">
+                                <a asp-controller="quanlyuser" asp-action="quanlyuser"><i class="fa fa-dashboard fa-fw"></i> ManagerUser</a>
                             </li>
-                            <li>
+                            <li style="padding: 40px 15px;">
                                 <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> ManagerProduct<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
-                                    <li>
+                                    <li style="padding: 40px 15px;">
                                         <a asp-controller="quanlybook" asp-action="quanlybook"> ManagerBook </a>
                                     </li>
-                                    <li>
+                                    <li style="padding: 40px 15px;">
                                         <a asp-controller="quanlyrecipe" asp-action="quanlyrecipe">ManagerRecipe</a>
                                     </li>
-                                    <li>
+                                    <li style="padding: 40px 15px;">
                                         <a asp-controller="quanlysmell" asp-action="quanlysmell">ManagerSmell</a>
                                     </li>
                                 </ul>
                                 <!-- /.nav-second-level -->
                             </li>
-                            <li>
+                            <li style="padding: 40px 15px;">
                                 <a asp-controller="manageinvoice" asp-action="manageinvoice"><i class="fa fa-table fa-fw"></i>ManagerBill Detail</a>
                             </li>
 
-                            <li>
+                            <li style="padding: 40px 15px;">
                                 <a asp-controller="feedbackfomula" asp-action="feedbackfomula"><i class="fa fa-wrench fa-fw"></i> Feeback Recipe</a>
 
-                                <!-- /.nav-second-level -->
-                            </li>
-                    
-
-                            <li>
-                                <a href="#"><i class="fa fa-files-o fa-fw"></i> Sample Pages<span class="fa arrow"></span></a>
-                                <ul class="nav nav-second-level">
-                                    <li>
-                                        <a href="blank.html">Blank Page</a>
-                                    </li>
-                                    <li>
-                                        <a href="login.html">Login Page</a>
-                                    </li>
-                                </ul>
                                 <!-- /.nav-second-level -->
                             </li>
                         </ul>
