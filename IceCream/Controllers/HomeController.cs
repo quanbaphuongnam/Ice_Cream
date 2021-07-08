@@ -108,9 +108,34 @@ namespace IceCream.Areas.Admin.Controllers
             Debug.WriteLine("LastName: " + result.PayerLastName);
             Debug.WriteLine("Email: " + result.PayerEmail);
 
-            Account acc = account.Find(HttpContext.Session.GetString("username"));
+            Account acc = account.Find(HttpContext.Session.GetString("userSignUp"));
             acc.AccStatus = 1;
             account.EditAcccount(acc);
+            if (result.GrossTotal == 15)
+            {
+                ServiceAccount serviceAccount = new ServiceAccount
+                {
+                    SerId = 1,
+                    AccId = acc.AccId,
+                    SerAccCreated = DateTime.Now,
+                    SerAccEnd = DateTime.Now.AddDays(30),
+                    SerAccPrice = 15,
+                };
+                serviceAccountService.Create(serviceAccount);
+            }
+            else
+            {
+                ServiceAccount serviceAccount = new ServiceAccount
+                {
+                    SerId = 2,
+                    AccId = acc.AccId,
+                    SerAccCreated = DateTime.Now,
+                    SerAccEnd = DateTime.Now.AddDays(365),
+                    SerAccPrice = 150,
+                };
+                serviceAccountService.Create(serviceAccount);
+            }
+            HttpContext.Session.Remove("userSignUp");
             return View("signupsuccess");
         }
 

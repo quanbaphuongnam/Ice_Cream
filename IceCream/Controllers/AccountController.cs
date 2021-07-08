@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -18,13 +19,14 @@ namespace IceCream.Controllers
     public class AccountController : Controller
     {
         private AccountService account;
-
+        private ServiceAccountService serviceAccountService;
         private IWebHostEnvironment webHostEnvironment;
         private IConfiguration configuration;
 
-        public AccountController(AccountService _account, IWebHostEnvironment _webHostEnvironment, IConfiguration _configuration)
+        public AccountController(AccountService _account, ServiceAccountService _serviceAccountService, IWebHostEnvironment _webHostEnvironment, IConfiguration _configuration)
         {
             account = _account;
+            serviceAccountService = _serviceAccountService;
             webHostEnvironment = _webHostEnvironment;
             configuration = _configuration;
         }
@@ -49,8 +51,16 @@ namespace IceCream.Controllers
         [Route("add")]
         public IActionResult Add(Account acc)
         {
-            HttpContext.Session.SetString("acc", JsonConvert.SerializeObject(acc));
-            return RedirectToAction("paypal", "home");
+            if(account.Find(acc.AccUsername) == null)
+            {
+                HttpContext.Session.SetString("acc", JsonConvert.SerializeObject(acc));
+                return RedirectToAction("paypal", "home");
+            }
+            else
+            {
+                HttpContext.Session.SetString("msgSignUp", "f");
+            }
+            return RedirectToAction("index", "home", new Account());
         }
         [HttpGet]
         [Route("login")]
@@ -64,18 +74,33 @@ namespace IceCream.Controllers
         {
             if(!String.IsNullOrEmpty(username) && !String.IsNullOrEmpty(password))
             {
-                if (account.Login(username, password) != null)
+                Account acc = account.Login(username, password);
+                if (acc != null)
                 {
-                    HttpContext.Session.SetInt32("account", account.Login(username, password).AccId);
-                    HttpContext.Session.SetString("username", account.Login(username, password).AccUsername);
-                    int status = int.Parse(account.Login(username, password).AccStatus.ToString());
+                    ServiceAccount serviceAccount = serviceAccountService.FindAccId(acc.AccId);
+                    DateTime accEnd = DateTime.Parse(serviceAccount.SerAccEnd.ToString());
+                    TimeSpan date = accEnd.Subtract(DateTime.Now);
+                    Debug.WriteLine("aaaaaaaaaaaa: " + accEnd);
+                    Debug.WriteLine("aaaaaaaaaaaa: " + DateTime.Now);
+                    int days = date.Days;
+                    if(int.Parse(days.ToString()) <= 0)
+                    {
+                        acc.AccStatus = 0;
+                        account.EditAcccount(acc);
+                    }
+                    Debug.WriteLine("aaaaaaaaaaaa: " + days.ToString());
+                    int status = int.Parse(account.Find(username).AccStatus.ToString());
                     if (status == 1)
                     {
+                        HttpContext.Session.SetInt32("account", account.Login(username, password).AccId);
+                        HttpContext.Session.SetString("username", account.Login(username, password).AccUsername);
                         HttpContext.Session.SetString("msg", "s");
                         return RedirectToAction("index", "home");
                     }
                     else
                     {
+                        HttpContext.Session.SetString("userSignUp", account.Login(username, password).AccUsername);
+                        HttpContext.Session.SetString("msg", "e");
                         return RedirectToAction("paypal2", "home");
                     }
                 }

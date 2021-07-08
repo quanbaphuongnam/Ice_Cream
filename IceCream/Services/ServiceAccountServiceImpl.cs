@@ -25,5 +25,10 @@ namespace IceCream.Services
             db.SaveChanges();
             return serviceAccount;
         }
+
+        public ServiceAccount FindAccId(int AccId)
+        {
+            return db.ServiceAccounts.Where(b => b.AccId == AccId).OrderByDescending(b => b.SerAccEnd).Take(1).Single();
+        }
     }
 }

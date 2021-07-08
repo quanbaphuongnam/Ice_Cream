@@ -127,6 +127,19 @@
                     </script>
                     HttpContextAccessor.HttpContext.Session.Remove("msgNewPass");
                 }
+                else if (@HttpContextAccessor.HttpContext.Session.GetString("msg") == "e")
+                {
+                    <script type="text/javascript">
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Your account has expired',
+                            text: ' Please renew your account!',
+                            showConfirmButton: false,
+                            timer: 2000
+                        })
+                    </script>
+                    HttpContextAccessor.HttpContext.Session.Remove("msg");
+                }
             </div>
             <div class="overlay-containerr">
                 <div class="overlay">
