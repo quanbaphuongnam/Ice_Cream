@@ -2,9 +2,11 @@
 using IceCream.Models;
 using IceCream.Services;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -24,31 +26,34 @@ namespace IceCream.Controllers.Admin
             webHostEnvironment = _webHostEnvironment;
 
         }
-        [Route("quanlyuser")]
         [Route("")]
+        [Route("quanlyuser")]
         public IActionResult Index()
         {
-            ViewBag.User = quanLyUserServices.FindAllUser();
-            return View("quanlyuser");
+            if (HttpContext.Session.GetInt32("admin") != null)
+            {
+                ViewBag.User = quanLyUserServices.FindAllUser();
+                return View("quanlyuser");
+            }
+            return View("~/Views/Home/Page404.cshtml");
+          
         }
-        [HttpGet]
-        [Route("edit")]
+
+
+        [Route("edit/{id}")]
         public IActionResult Edit(int id)
         {
 
-
-            return View("quanlyuser", quanLyUserServices.Find(id));
-        }
-        [Route("edit")]
-        [HttpPost]
-        public IActionResult Edit(Account account)
-        {
-
-            var currentUser = quanLyUserServices.Find(account.AccId);
-
-
-            currentUser.AccStatus = account.AccStatus;
-
+            var currentUser = quanLyUserServices.Find(id);
+            if(currentUser.AccStatus == 1)
+            {
+                currentUser.AccStatus = 0;
+            }
+            else
+            {
+                currentUser.AccStatus = 1;
+            }
+            Debug.WriteLine(currentUser.AccStatus);
             quanLyUserServices.Update(currentUser);
             return RedirectToAction("quanlyuser");
         }

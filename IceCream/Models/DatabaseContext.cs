@@ -284,6 +284,10 @@ namespace IceCream.Models
                     .IsUnicode(false)
                     .HasColumnName("phone");
 
+                entity.Property(e => e.InvCreated)
+                   .HasColumnType("datetime")
+                   .HasColumnName("inv_created");
+
                 entity.HasOne(d => d.Acc)
                     .WithMany(p => p.InvoiceAccounts)
                     .HasForeignKey(d => d.AccId)

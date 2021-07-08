@@ -77,31 +77,39 @@ namespace IceCream.Controllers
                 Account acc = account.Login(username, password);
                 if (acc != null)
                 {
-                    ServiceAccount serviceAccount = serviceAccountService.FindAccId(acc.AccId);
-                    DateTime accEnd = DateTime.Parse(serviceAccount.SerAccEnd.ToString());
-                    TimeSpan date = accEnd.Subtract(DateTime.Now);
-                    Debug.WriteLine("aaaaaaaaaaaa: " + accEnd);
-                    Debug.WriteLine("aaaaaaaaaaaa: " + DateTime.Now);
-                    int days = date.Days;
-                    if(int.Parse(days.ToString()) <= 0)
+                    if(acc.AccRole == 2)
                     {
-                        acc.AccStatus = 0;
-                        account.EditAcccount(acc);
-                    }
-                    Debug.WriteLine("aaaaaaaaaaaa: " + days.ToString());
-                    int status = int.Parse(account.Find(username).AccStatus.ToString());
-                    if (status == 1)
-                    {
-                        HttpContext.Session.SetInt32("account", account.Login(username, password).AccId);
-                        HttpContext.Session.SetString("username", account.Login(username, password).AccUsername);
-                        HttpContext.Session.SetString("msg", "s");
+                        HttpContext.Session.SetString("msg", "f");
                         return RedirectToAction("index", "home");
                     }
                     else
                     {
-                        HttpContext.Session.SetString("userSignUp", account.Login(username, password).AccUsername);
-                        HttpContext.Session.SetString("msg", "e");
-                        return RedirectToAction("paypal2", "home");
+                        ServiceAccount serviceAccount = serviceAccountService.FindAccId(acc.AccId);
+                        DateTime accEnd = DateTime.Parse(serviceAccount.SerAccEnd.ToString());
+                        TimeSpan date = accEnd.Subtract(DateTime.Now);
+                        Debug.WriteLine("aaaaaaaaaaaa: " + accEnd);
+                        Debug.WriteLine("aaaaaaaaaaaa: " + DateTime.Now);
+                        int days = date.Days;
+                        if (int.Parse(days.ToString()) <= 0)
+                        {
+                            acc.AccStatus = 0;
+                            account.EditAcccount(acc);
+                        }
+                        Debug.WriteLine("aaaaaaaaaaaa: " + days.ToString());
+                        int status = int.Parse(account.Find(username).AccStatus.ToString());
+                        if (status == 1)
+                        {
+                            HttpContext.Session.SetInt32("account", account.Login(username, password).AccId);
+                            HttpContext.Session.SetString("username", account.Login(username, password).AccUsername);
+                            HttpContext.Session.SetString("msg", "s");
+                            return RedirectToAction("index", "home");
+                        }
+                        else
+                        {
+                            HttpContext.Session.SetString("userSignUp", account.Login(username, password).AccUsername);
+                            HttpContext.Session.SetString("msg", "e");
+                            return RedirectToAction("paypal2", "home");
+                        }
                     }
                 }
                 else
