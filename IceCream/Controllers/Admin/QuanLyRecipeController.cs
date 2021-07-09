@@ -30,21 +30,26 @@ namespace IceCream.Controllers.Admin
         [Route("")]
         public IActionResult Index()
         {
-            ViewBag.fomula = (from f in db.Formulas
-                              join a in db.Accounts on f.ForContributors equals a.AccId
-                              select new AllRecipe
-                              {
-                                  AccId = a.AccId,
-                                  AccUsername = a.AccUsername,
-                                  ForId = f.ForId,
-                                  ForCover = f.ForCover,
-                                  ForName = f.ForName,
-                                  ForDescription = f.ForDescription,
-                                  ForCondition = f.ForCondition,
-                                  ForStatus = f.ForStatus,
-                                  ForCreated = f.ForCreated
-                              }).OrderBy( f => f.ForStatus);
-            return View("quanlyrecipe");
+            if (HttpContext.Session.GetInt32("admin") != null)
+            {
+                ViewBag.fomula = (from f in db.Formulas
+                                  join a in db.Accounts on f.ForContributors equals a.AccId
+                                  select new AllRecipe
+                                  {
+                                      AccId = a.AccId,
+                                      AccUsername = a.AccUsername,
+                                      ForId = f.ForId,
+                                      ForCover = f.ForCover,
+                                      ForName = f.ForName,
+                                      ForDescription = f.ForDescription,
+                                      ForCondition = f.ForCondition,
+                                      ForStatus = f.ForStatus,
+                                      ForCreated = f.ForCreated
+                                  }).OrderBy(f => f.ForStatus);
+                return View("quanlyrecipe");
+            }
+            return View("~/Views/Home/Page404.cshtml");
+           
         }
         [Route("addrecipe")]
         public IActionResult Addrecipe()

@@ -16,14 +16,14 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav justify-content-end">
-                    <li >
+                    <li class="active">
                         <a class="dropdown-toggle" asp-controller="home" asp-action="index">Home</a>
-                      
+
                     </li>
-                    <li ><a asp-controller="recipe" asp-action="Recipe">Recipe</a></li>
-                    <li ><a asp-controller="book" asp-action="allbook">Order Book</a></li>
+                    <li><a asp-controller="recipe" asp-action="Recipe">Recipe</a></li>
+                    <li><a asp-controller="book" asp-action="allbook">Order Book</a></li>
                     <li><a asp-controller="aboutus" asp-action="aboutus">About Us</a></li>
-                    <li ><a asp-controller="Contact" asp-action="Contact">Contact</a></li>
+                    <li><a asp-controller="Contact" asp-action="Contact">Contact</a></li>
                     <li><a asp-controller="FAQ" asp-action="FAQ">FAQ’s</a></li>
 
                     <li class="dropdown submenu ">
@@ -139,6 +139,19 @@
                         })
                     </script>
                     HttpContextAccessor.HttpContext.Session.Remove("msg");
+                }
+                else if (@HttpContextAccessor.HttpContext.Session.GetString("msgSignUp") == "f")
+                {
+                    <script type="text/javascript">
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Your username is duplicate',
+                            text: ' Please re-enter your username!',
+                            showConfirmButton: false,
+                            timer: 2000
+                        })
+                    </script>
+                    HttpContextAccessor.HttpContext.Session.Remove("msgSignUp");
                 }
             </div>
             <div class="overlay-containerr">

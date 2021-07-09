@@ -44,23 +44,26 @@
                                 <tbody>
                                     @foreach (var user in ViewBag.User)
                                     {
-                                        <tr class="odd gradeX">
-                                            <td>@user.AccId</td>
-                                            <td>@user.AccUsername</td>
-                                            <td>
-                                                <img src="~/img/avatar/@user.AccAvatar" width="100" height="100" alt="">
-                                            </td>
-                                            <td>@user.AccEmail</td>
-                                            <td>@user.AccPhone</td>
-                                            <td>@user.AccFullname</td>
-                                            <td>@user.AccGender </td>
-                                            <td class="center">
-                                                @if (user.AccDob != null)
-                                                {@user.AccDob.ToString("dd/MM/yyyy")}
-                                            </td>
-                                            <td>@user.AccAddr</td>
-                                            <td>@(user.AccRole == 1 ? "user" : "admin")</td>
-                                            <td>@user.AccMoney</td>
+                                    <tr class="odd gradeX">
+                                        <td>@user.AccId</td>
+                                        <td>@user.AccUsername</td>
+                                        <td>
+                                            <img src="~/img/avatar/@user.AccAvatar" width="100" height="100" alt="">
+                                        </td>
+                                        <td>@user.AccEmail</td>
+                                        <td>@user.AccPhone</td>
+                                        <td>@user.AccFullname</td>
+                                        <td>@user.AccGender </td>
+                                        <td class="center">
+                                            @if (user.AccDob != null)
+                                            {@user.AccDob.ToString("dd/MM/yyyy")}
+                                        </td>
+                                        <td>@user.AccAddr</td>
+                                        <td>@(user.AccRole == 1 ? "user" : "admin")</td>
+                                        <td>@user.AccMoney</td>
+
+                                        @if (user.AccRole != 2)
+                                        {
                                             <td>
                                                 @if (user.AccStatus == 1)
                                                 {
@@ -71,7 +74,8 @@
                                                     <a asp-controller="quanlyuser" asp-action="edit" asp-route-id="@user.AccId" class="btn btn-danger">Disable</a>
                                                 }
                                             </td>
-                                        </tr>
+                                        }
+                                    </tr>
                                     }
                                 </tbody>
                             </table>

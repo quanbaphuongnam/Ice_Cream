@@ -242,7 +242,7 @@ https://codyhouse.co/gem/simple-confirmation-popup/
 
 
 <div class="cd-popup contact" >
-    <form  method="post"  asp-controller="recipe" asp-action="postrecipe" enctype="multipart/form-data" id="contactform" class="contact-form">
+    <form  method="post"  asp-controller="recipe" asp-action="postrecipe" enctype="multipart/form-data" class="contact-form">
         <div class="cd-popup-container" style="">
             <p style="">
                 <a href="" class="cd-popup-close cd-close-button">
@@ -270,13 +270,14 @@ https://codyhouse.co/gem/simple-confirmation-popup/
           
             <br>
             <div style="text-align:left">
-                <input type="checkbox"  name="human" />
+                <h4 style="text-align:left; "> <strong>Recipe Cover</strong> </h4>
+                <input type="checkbox" id="human" name="human" />
                 <label for="human">I am a human and not a robot.</label>
             </div>
             <br>
             <div class="submit">
                 <p class="user-message">We will review your formula as soon as possible!</p>
-                <input type="submit"  value="Send"   />
+                <input type="submit"  value="Send" class='show-example-btn'  />
             </div>
         </div>
     </form>
@@ -287,15 +288,3 @@ https://codyhouse.co/gem/simple-confirmation-popup/
 
 
 
-@if (@ViewBag.messenge != null) {
-<script>
-
-    Swal.fire({
-        position: 'top-end',
-        icon: 'success',
-        title: 'Your work has been saved',
-        showConfirmButton: false,
-        timer: 1500
-    })
-
-</script>}
