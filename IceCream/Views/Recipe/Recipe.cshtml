@@ -241,7 +241,7 @@ https://codyhouse.co/gem/simple-confirmation-popup/
 
 
 
-<div class="cd-popup contact" role="alert">
+<div class="cd-popup contact" >
     <form  method="post"  asp-controller="recipe" asp-action="postrecipe" enctype="multipart/form-data" id="contactform" class="contact-form">
         <div class="cd-popup-container" style="">
             <p style="">
@@ -252,17 +252,17 @@ https://codyhouse.co/gem/simple-confirmation-popup/
             <h4 style="text-align:left; "> <strong>Recipe Name</strong> </h4>
             <div class="name">
 
-                <input class="input" type="text" asp-for="Formula.ForName" id="name" required />
+                <input class="input" type="text" asp-for="Formula.ForName"   />
             </div>
 
             <div class="message">
                 <h4 style="text-align:left; "> <strong>Recipe Detail</strong> </h4>
-                <textarea id="message" type="text" asp-for="Formula.ForDescription" required></textarea>
+                <textarea  type="text" asp-for="Formula.ForDescription" ></textarea>
             </div>
 
             <div class="message">
                 <h4 style="text-align:left; "> <strong>Recipe Cover</strong> </h4>
-                <input style="padding: 0px 0px 8px 0px !important;" type="file" name="filecover" required />
+                <input style="padding: 0px 0px 8px 0px !important;" type="file" name="filecover"  />
             </div>
           
             <input hidden type="number" asp-for="Formula.ForContributors" value="@HttpContextAccessor.HttpContext.Session.GetInt32("account")" />
@@ -270,26 +270,18 @@ https://codyhouse.co/gem/simple-confirmation-popup/
           
             <br>
             <div style="text-align:left">
-                <input type="checkbox" id="human" name="human" />
+                <input type="checkbox"  name="human" />
                 <label for="human">I am a human and not a robot.</label>
             </div>
             <br>
             <div class="submit">
-                <p class="user-message" id="contactblurb">We will review your formula as soon as possible!</p>
-                <input type="submit"  value="Send" class='show-example-btn'  />
+                <p class="user-message">We will review your formula as soon as possible!</p>
+                <input type="submit"  value="Send"   />
             </div>
         </div>
     </form>
 </div>
 
-<div class="cd-popup notification" role="alert">
-    <div class="cd-popup-container">
-        <a href="" class="cd-popup-close cd-close-button"><i class="fa fa-times" style="pointer-events:none;"></i></a>
-        <p>
-            <h3 id="notification-text">Thank you for sending a new recipe for us, we will review your formula as soon as possible!</h3>
-        </p>
-    </div>
-</div>
 
 <script src="~/js/jspost/jquery.min.js"></script>
 

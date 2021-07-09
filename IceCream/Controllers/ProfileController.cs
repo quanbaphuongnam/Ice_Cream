@@ -17,16 +17,18 @@ namespace IceCream.Controllers
     public class ProfileController : Controller
     {
         public DatabaseContext db;
-
+        private AccountService account;
         private ProfileService profileService;
-
+        private ServiceAccountService serviceAccountService;
         private IWebHostEnvironment webHostEnvironment;
-        public ProfileController(DatabaseContext _db, ProfileService _profileService, IWebHostEnvironment _webHostEnvironment)
+        public ProfileController(DatabaseContext _db, AccountService _account, ServiceAccountService _serviceAccountService, ProfileService _profileService, IWebHostEnvironment _webHostEnvironment)
         {
            
             db = _db;
             profileService = _profileService;
+            serviceAccountService = _serviceAccountService;
             webHostEnvironment = _webHostEnvironment;
+            account = _account;
         }
 
         [Route("profile/{id}")]
@@ -90,8 +92,13 @@ namespace IceCream.Controllers
             //        g.FirstOrDefault().TenDV,
             //        g.FirstOrDefault().NHANVIENs.Count
             //    });
-
-
+            ServiceAccount serviceAccount = serviceAccountService.FindAccId(id);
+            DateTime accEnd = DateTime.Parse(serviceAccount.SerAccEnd.ToString());
+            TimeSpan date = accEnd.Subtract(DateTime.Now);
+            Debug.WriteLine("aaaaaaaaaaaa: " + accEnd);
+            Debug.WriteLine("aaaaaaaaaaaa: " + DateTime.Now);
+            int days = date.Days;
+             ViewBag.timeend = days.ToString();
             return View("profile");
         }
         [HttpGet]
