@@ -153,6 +153,19 @@
                     </script>
                     HttpContextAccessor.HttpContext.Session.Remove("msgSignUp");
                 }
+                else if (@HttpContextAccessor.HttpContext.Session.GetString("msgPostrecipe") == "s")
+                {
+                    <script type="text/javascript">
+                        Swal.fire({
+                            icon: 'success',
+                            title: ' Post created successfully',
+                            text: ' Sent to Admin waiting for approval',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                    </script>
+                    HttpContextAccessor.HttpContext.Session.Remove("msgPostrecipe");
+                }
             </div>
             <div class="overlay-containerr">
                 <div class="overlay">
