@@ -60,7 +60,7 @@ namespace IceCream.Controllers
                                                     //ConLai = (x.Soluong - y.Soluong)
 
                                                 }).ToList();
-                ViewBag.accountfeedback = (from f in db.Formulas
+            var feedback = (from f in db.Formulas
                                                 join fb in db.FeedbackFormulas on f.ForId equals fb.FormulaId
                                                 join a in db.Accounts on fb.AccId equals a.AccId
                                                 where (a.AccId == id)
@@ -85,6 +85,8 @@ namespace IceCream.Controllers
 
                                                 }).ToList();
 
+            ViewBag.accountfeedback = feedback;
+            ViewBag.accountfeedbackCount = feedback.Count();
             ViewBag.SLct = db.Formulas.Where(f => f.ForContributors == id && f.ForStatus == 1).Count();
             ViewBag.SLfb = db.FeedbackFormulas.Where(fb => fb.AccId == id).Count();
             //ViewBag.donvi = db.Formulas.GroupBy(s => s.MaDV)

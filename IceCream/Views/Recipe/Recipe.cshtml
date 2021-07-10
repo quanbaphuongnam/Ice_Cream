@@ -36,8 +36,10 @@
                             @if (@HttpContextAccessor.HttpContext.Session.GetString("username") != null)
                             {
 
-                        <button id="contact" onclick="location.href='#';" class="custom-btn btn-12"><span>Create!</span><span>New post</span></button>}
-
+                            <a class="popup-with-zoom-anim" href="#contact">
+                                <button class="custom-btn btn-12"><span>Create!</span><span>New post</span></button>
+                            </a>
+                            }
                         </div>
                     </div>
                 </div>
@@ -57,8 +59,15 @@
                                     {
                     <div>
                         <br /><div style=" font-size: 14px ;text-align:right">
-                            by: <a asp-controller="profile" asp-action="profile" asp-route-id="@newrecipe.AccId">@newrecipe.AccUsername</a>&ensp;
-                        </div>@*}*@
+                        @if (newrecipe.AccUsername == "IceCream")
+                        {
+                                  <p>by: @newrecipe.AccUsername&ensp;</p>
+                        }
+                        else
+                        {
+                            <p>by: <a asp-controller="profile" asp-action="profile" asp-route-id="@newrecipe.AccId">@newrecipe.AccUsername</a>&ensp;</p>
+                        }
+                    </div>@*}*@
                         <h3>@newrecipe.ForName</h3>
                         <a class="custom-btn btn-8" asp-controller="recipe" asp-action="recipedetail" asp-route-id="@newrecipe.ForId">See now</a>
                     </div> }
@@ -67,7 +76,14 @@
                     <div>
                         <h4>@newrecipe.ForCondition</h4>
                         <br /><div style=" font-size: 14px ;text-align:right">
-                            by: <a asp-controller="profile" asp-action="profile" asp-route-id="@newrecipe.AccId">@newrecipe.AccUsername</a>&ensp;
+                            @if (newrecipe.AccUsername == "IceCream")
+                            {
+                                  <p>by: @newrecipe.AccUsername&ensp;</p>
+                            }
+                            else
+                            {
+                              <p>by: <a asp-controller="profile" asp-action="profile" asp-route-id="@newrecipe.AccId">@newrecipe.AccUsername</a>&ensp;</p>
+                        }
                         </div>
                         <h3>@newrecipe.ForName</h3>
                         <a class="custom-btn btn-8">Just Member</a>
@@ -78,8 +94,15 @@
                     <div>
                         <h4>@newrecipe.ForCondition</h4>
                         <br /><div style=" font-size: 14px ;text-align:right">
-                            by: <a asp-controller="profile" asp-action="profile" asp-route-id="@newrecipe.AccId">@newrecipe.AccUsername</a>&ensp;
-                        </div>
+                        @if (newrecipe.AccUsername == "IceCream")
+                        {
+                                  <p>by: @newrecipe.AccUsername&ensp;</p>
+                        }
+                        else
+                        {
+                              <p>by: <a asp-controller="profile" asp-action="profile" asp-route-id="@newrecipe.AccId">@newrecipe.AccUsername</a>&ensp;</p>
+                    }
+                    </div>
                         <h3>@newrecipe.ForName</h3>
                         <a class="custom-btn btn-8" asp-controller="recipe" asp-action="recipedetail" asp-route-id="@newrecipe.ForId">See now</a>
                     </div>
@@ -106,8 +129,15 @@
                 <div>
 
                     <br /><div style=" font-size: 14px ;text-align:right">
-                        by: <a asp-controller="profile" asp-action="profile" asp-route-id="@recipe.AccId">@recipe.AccUsername</a>&ensp;
-                    </div>@*}*@
+                            @if (recipe.AccUsername == "IceCream")
+                            {
+                              <p>by: @recipe.AccUsername&ensp;</p>
+                            }
+                            else
+                            {
+                          <p>by: <a asp-controller="profile" asp-action="profile" asp-route-id="@recipe.AccId">@recipe.AccUsername</a>&ensp;</p>
+                        }
+                        </div>@*}*@
                     <h3>@recipe.ForName</h3>
                     <a class="custom-btn btn-8" asp-controller="recipe" asp-action="recipedetail" asp-route-id="@recipe.ForId">See now</a>
                 </div> }
@@ -116,7 +146,15 @@
                 <div>
                     <h4>@recipe.ForCondition</h4>
                     <br /><div style=" font-size: 14px ;text-align:right">
-                        by: <a asp-controller="profile" asp-action="profile" asp-route-id="@recipe.AccId">@recipe.AccUsername</a>&ensp;
+                        @if (recipe.AccUsername == "IceCream")
+                        {
+                              <p>by: @recipe.AccUsername&ensp;</p>
+                        }
+                        else
+                        {
+                          <p>by: <a asp-controller="profile" asp-action="profile" asp-route-id="@recipe.AccId">@recipe.AccUsername</a>&ensp;</p>
+                        }
+
                     </div>
                     <h3>@recipe.ForName</h3>
                     <a class="custom-btn btn-8">Just Member</a>
@@ -126,7 +164,14 @@
                 <div>
                     <h4>@recipe.ForCondition</h4>
                     <br /><div style=" font-size: 14px ;text-align:right">
-                        by: <a asp-controller="profile" asp-action="profile" asp-route-id="@recipe.AccId">@recipe.AccUsername</a>&ensp;
+                        @if (recipe.AccUsername == "IceCream")
+                        {
+                              <p>by: @recipe.AccUsername&ensp;</p>
+                        }
+                        else
+                        {
+                          <p>by: <a asp-controller="profile" asp-action="profile" asp-route-id="@recipe.AccId">@recipe.AccUsername</a>&ensp;</p>
+                    }
                     </div>
                     <h3>@recipe.ForName</h3>
                     <a class="custom-btn btn-8" asp-controller="recipe" asp-action="recipedetail" asp-route-id="@recipe.ForId">See now</a>
@@ -241,8 +286,8 @@ https://codyhouse.co/gem/simple-confirmation-popup/
 
 
 
-<div class="cd-popup contact" >
-    <form  method="post"  asp-controller="recipe" asp-action="postrecipe" enctype="multipart/form-data" class="contact-form">
+<div class="zoom-anim-dialog mfp-hide" id="contact">
+    <form  method="post"  asp-controller="recipe" asp-action="postrecipe" enctype="multipart/form-data" id="contactform" class="contact-form">
         <div class="cd-popup-container" style="">
             <p style="">
                 <a href="" class="cd-popup-close cd-close-button">

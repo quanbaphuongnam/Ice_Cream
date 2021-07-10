@@ -229,6 +229,7 @@ namespace IceCream.Controllers
             
             recipeService.CreateFormula(formula);
             ViewBag.messenge = 1;
+            HttpContext.Session.SetString("msgPostrecipe", "s");
             return RedirectToAction("recipe");
         }
 
